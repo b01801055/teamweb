@@ -26,10 +26,10 @@ public class MyRegister extends HttpServlet {
 		//input_email		Email
 		//inputPassword1	密碼
 		//inputPassword2	確認密碼
-		String name = request.getParameter("name");
+		String name = request.getParameter("inputLnam");
 		String account = request.getParameter("account");
-		String email = request.getParameter("email");
-		String passwd = request.getParameter("pw");
+		String email = request.getParameter("input_email");
+		String passwd = request.getParameter("inputPassword1");
 //		out.print(name + account + email + passwd);
 		String sql = "";
 //		sql+="CREATE DATABASE IF NOT EXISTS teamweb2020 CHARACTER SET UTF8 COLLATE UTF8_BIN;";
