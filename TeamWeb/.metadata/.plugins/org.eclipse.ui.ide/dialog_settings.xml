@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\0429\teamweb\TeamWeb"/>
 			<item value="E:\newdrive\OneDrive\TeamWeb"/>
 			<item value="D:\newdrive\OneDrive\TeamWeb"/>
 		</list>
@@ -25,6 +26,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\0429\teamweb\TeamWeb"/>
 			<item value="D:\newdrive\OneDrive\TeamWeb"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
