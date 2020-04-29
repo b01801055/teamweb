@@ -1,0 +1,121 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexhei.css);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/* font-family:'Montserrat', 'cwTeXHei', sans-serif; */
+
+
+/* CSS reset & default ======================================================= */
+* { padding:0; margin:0; }
+:focus { outline:none; }
+img { border:none; vertical-align:middle; }
+body { font-size:15px; letter-spacing:1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, STHeiti, "Microsoft JhengHei", 微軟正黑體, sans-serif; }
+ul,ol,li { list-style:none; margin:0; }
+a { text-decoration:none; display:inline-block; padding:0 3px;
+  font-family:'Montserrat', 'cwTeXHei', sans-serif; color:#0054A4; }
+a:hover { color:#9C00E1; }
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; }
+
+
+/* header ===================================================================== */
+header { position:relative; }
+header .container { height:120px; position:relative;
+  background:url(images/header.png) no-repeat left bottom; }
+
+#logo a { background:url(images/logo.png) no-repeat; text-indent:-9999px;
+  width:260px; height:50px; display:block; margin-top:10px; }
+
+#searchForm { position:absolute; left:30px; top:90px; }
+
+#loginInfo { position:absolute; right:60px; bottom:10px; z-index:9999; }
+
+#cartInfo { position:absolute; right:0; bottom:0; width:50px; height:65px; 
+  background:url(images/cart.png) right bottom no-repeat; background-size:contain;
+  text-align:center; font-weight:bold; color:#e54f00; font-size: 20px; }
+
+@media(max-width:700px){ 
+  #loginInfo { right: auto; bottom: auto; left: 10px; top: 60px; } 
+  #cartInfo { right: auto; left: 280px; }
+}
+
+
+/* w3-bar ======================================================================== */
+.w3-grey, .w3-hover-grey:hover, .w3-gray, .w3-hover-gray:hover {
+  color: #fff!important;
+  background-color: #bbb!important;
+}
+.w3-button:hover {
+  color: #fff!important;
+  background-color: #000!important;
+}
+.w3-bar .w3-bar-item { float: none; display: inline-block; }
+.w3-bar .w3-bar-item.w3-right { font-size: 20px; padding: 5px 10px; }
+
+@media(max-width:700px){ .w3-bar .w3-bar-item { padding: 8px; } }
+
+
+/* #main ========================================================================= */
+#main{ overflow:hidden; position:relative; padding:20px 15px; }
+#main>h1, .formArea>h1 { background:url(images/h2line.gif) no-repeat center bottom;
+  font-family:'Montserrat', 'cwTeXHei', sans-serif; font-size:24px; text-align:center; 
+  margin-bottom:15px; padding-bottom:30px; }
+h2 { font-family:'Montserrat', 'cwTeXHei', sans-serif;
+  color:#B5548A; font-size:16px; text-align:center; padding:0 0 15px 0; }
+h3{ font-size:16px; color:#B5548A; }
+
+
+/* footer ======================================================================== */
+footer { padding:20px 0; text-align:center; border-top:1px solid #999; font-size:12px; }
+
+
+/* other =========================================================================== */
+.w100p  { width: 100%; }
+.w85p   { width: 85%; }
+.w60p   { width: 60%; }
+
+.w100   { width: 100px; }
+.w50    { width: 50px; }
+
+.padding5 { padding: 5px;}
+.padding15 { padding: 15px;}
+
+.textCenter { text-align: center; }
+.textLeft { text-align: left; }
+.textRight { text-align: right; }
+.marginCenter { margin: 0 auto; }
+.floatRight { float: right; }
+.clearBoth { clear: both; }
+.overflowH { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cursorP { cursor: pointer; }
+
+.pager .current { display: inline-block; padding: 3px 5px; color: deeppink; font-size: 1.2em; font-weight: bold; vertical-align: middle; }
+
+.formArea input, .formArea textarea { margin: 5px 0; }
+
+.w3-button { padding: 3px 8px; }
+
+
+
+/* 後台管理系統 admin ================================================================= */
+.admin .container-fluid { height:20px; }
+.admin .indexBtn, .admin .logoutBtn { 
+  position:absolute; display:block; padding:10px 20px; top:0px; z-index:9999;
+  color:#999; cursor:pointer; font-family:'Montserrat', 'cwTeXHei', sans-serif;
+}
+
+.admin .indexBtn { left:0px; }
+.admin .logoutBtn { right:0px; }
+.admin .indexBtn:hover, .admin .logoutBtn:hover { color:#F00; }
+
+.admin header { height:100px; }
+.admin header a { display:block; margin:0 auto; }
+.admin header .container { height: 100px;
+  background:url(images/logo_admin.png) center 20px no-repeat; background-size:90% auto; 
+}
+@media (min-width:768px){ .admin header .container { background-size:auto; }  }
+
+#aboutdiv {
+  background:url(images/admin_about.jpg) center bottom no-repeat;
+  height:100%; width:100%; left:0; bottom:0; position:fixed; z-index:-1;
+}

@@ -1,0 +1,1 @@
+INDEX VERSION 1.4+D:\newdrive\OneDrive\TeamWeb\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
