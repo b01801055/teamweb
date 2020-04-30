@@ -57,7 +57,7 @@
 				else if(!(re_pw.test(pw1)&(re_pw.test(pw2)&pw1==pw2)))
 					alert("密碼不正確");
 				else
-					window.location.replace("/TeamWeb/doRegister?name="+name+"&account="+account+"&email="+email+"&pw="+pw1);
+					document.registForm.submit();
 			  }
 		</script>
   </head>
@@ -220,12 +220,12 @@
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 	 </div> -->
-	<form class="form-horizontal" >
+	<form name="registForm" class="form-horizontal" method="post" action="/TeamWeb/doRegister">
 		
 		<div class="control-group">
 			<label class="control-label" for="inputLnam">姓名 <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputLnam" placeholder="姓名">
+			  <input type="text" name="name"  id="inputLnam" placeholder="姓名">
 			</div>
 		 </div>
 		 <div class="control-group">
@@ -237,13 +237,13 @@
 		<div class="control-group">
 		<label class="control-label" for="input_email">Email <sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" id="input_email" placeholder="Email">
+		  <input type="text" name="email" id="input_email" placeholder="Email">
 		</div>
 	  </div>	  
 	<div class="control-group">
 		<label class="control-label" for="inputPassword1">密碼 <sup>*</sup></label>
 		<div class="controls">
-		  <input type="password" id="inputPassword1" placeholder="密碼">
+		  <input type="password" name="pw" id="inputPassword1" placeholder="密碼">
 		</div>
 	  </div>	  
 	<div class="control-group">
