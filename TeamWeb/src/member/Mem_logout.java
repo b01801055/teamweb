@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class mem_login
+ * Servlet implementation class mem_logout
  */
-@WebServlet("/login")
-public class mem_login extends HttpServlet {
+@WebServlet("/logout")
+public class Mem_logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mem_login() {
+    public Mem_logout() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import conn.conn;
+import conn.ConnQuery;
 /**
  * Servlet implementation class mem_login_check
  */
 @WebServlet("/logincheck")
-public class mem_login_check extends HttpServlet {
+public class Mem_login_check extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mem_login_check() {
+    public Mem_login_check() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,7 @@ public class mem_login_check extends HttpServlet {
 		String login_email = request.getParameter("inputEmail1");
 		String login_password = request.getParameter("inputPassword1");
 		
-		conn cn=new conn();
+		ConnQuery cn=new ConnQuery();
 		cn.setSql(sql);
 		int num = cn.getQuery_count();
 		ResultSet rs = cn.getRs();
