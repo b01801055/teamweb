@@ -27,13 +27,13 @@ public class MyRegister extends HttpServlet {
 		//^^^基本設定
 		
 		//vvv Field
-		String name = request.getParameter("inputLnam");
+		String name = request.getParameter("name");
 //		String account = request.getParameter("account");
-		String email = request.getParameter("input_email");
-		String passwd = request.getParameter("inputPassword1");
+		String email = request.getParameter("email");
+		String passwd = request.getParameter("pw");
 		//^^^ Field
 		
-		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_email,mem_pwd) VALUE('%s','%s','%s);",name, email, passwd);
+		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd) VALUE('%s','%s','%s');",name, email, passwd);
 		
 //		out.print(name + account + email + passwd);//測試用
 //		out.print(sql);//測試用
