@@ -1,6 +1,8 @@
 package member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +29,14 @@ public class Mem_login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String msg=(String)request.getAttribute("msg");
+		PrintWriter out= response.getWriter();
+		if (msg.equals("1")) {
+			out.println("<h1>==== 輸入的帳號或密碼有誤，請重新登入！ ====</h1>");
+		}
+		
 	}
 
 	/**

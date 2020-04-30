@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +45,7 @@ public class Mem_login_check extends HttpServlet {
 		String sql = "SELECT * FROM teamweb2020.member WHERE mem_mail='login_email' AND mem_pwd='login_password' AND mem_level>1";
 		String login_email = request.getParameter("inputEmail1");
 		String login_password = request.getParameter("inputPassword1");
+		String url="";
 		
 		ConnQuery cn=new ConnQuery();
 		cn.setSql(sql);
@@ -55,13 +57,18 @@ public class Mem_login_check extends HttpServlet {
 				session.setAttribute("mem_id", rs.getInt(1));
 				session.setAttribute("mem_name", rs.getString(2));
 				session.setAttribute("mem_level", rs.getInt(5));
+				url = "../index.jsp";
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				//session失敗
 				e.printStackTrace();
 			}
+		}else {
+			request.setAttribute("msg", "1");
+			url = "/login";
 		}
-		
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/login");
+		dispatcher.forward(request, response);
 	}
 
 }
