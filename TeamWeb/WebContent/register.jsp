@@ -31,7 +31,7 @@
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
 		<!--我的javascript判斷是否符合格式REG-->
-		<script src="check_data.js"></script>
+		<script src="js/check_data.js"></script>
   </head>
 <body>
 <div id="header">
