@@ -31,35 +31,7 @@
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
 		<!--我的javascript判斷是否符合格式REG-->
-		<script language="JavaScript">
-			var name;
-			var account;
-			var email;
-			var pw1;
-			var pw2;
-			function check_Data()
-			  {
-				name = document.getElementById("inputLnam").value;
-				account = document.getElementById("account").value;
-				email = document.getElementById("input_email").value;
-				pw1 = document.getElementById("inputPassword1").value;
-				pw2 = document.getElementById("inputPassword2").value;
-				var re_name=/..+/;
-				var re_account=/\w{5,}/;
-				var re_email=/\w+@\w+\.\w+(\.\w+)*/;
-				var re_pw=/(^.*[a-z].*[A-Z].*$)|(^.*[A-Z].*[a-z].*$)/;
-				if(!re_name.test(name))
-					alert("姓名需填寫");
-				else if(!re_account.test(account))
-					alert("帳號需填寫，5字以上");
-				else if(!re_email.test(email))
-					alert("email無效");
-				else if(!(re_pw.test(pw1)&(re_pw.test(pw2)&pw1==pw2)))
-					alert("密碼不正確");
-				else
-					document.registForm.submit();
-			  }
-		</script>
+		<script src="check_data.js"></script>
   </head>
 <body>
 <div id="header">
