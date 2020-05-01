@@ -201,7 +201,7 @@
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="button" class="btn" onclick="check_data()">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
+				  <button type="button" class="btn" onclick="check_data();">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
 				</div>
 			  </div>
 			</form>

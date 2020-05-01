@@ -33,10 +33,11 @@ public class Mem_login extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String msg=(String)request.getAttribute("msg");
 		PrintWriter out= response.getWriter();
+		String url="index.jsp";
 		if (msg.equals("1")) {
 			out.println("<h1>==== 輸入的帳號或密碼有誤，請重新登入！ ====</h1>");
 		}
-		
+		response.sendRedirect(url);
 	}
 
 	/**
