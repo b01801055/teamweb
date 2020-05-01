@@ -36,7 +36,6 @@ public class MyQueryThisEmailExsitsOrNot extends HttpServlet {
 		/// vvv Driver Connect Statement excuteQuery() 
 		ConnQuery connQry =new ConnQuery();
 		connQry.setSql(sql);
-		connQry.excute();
 		int n=connQry.getQuery_count();
 		out.print(n);//傳回有查到幾條一樣的email  不是0 就是1 或者可能null(發生Exception的話)
 	}

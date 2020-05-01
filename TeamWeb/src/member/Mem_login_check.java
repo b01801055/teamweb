@@ -35,7 +35,6 @@ public class Mem_login_check extends HttpServlet {
 		String url="";
 		ConnQuery cn=new ConnQuery();
 		cn.setSql(sql);
-		cn.excute();
 		int num = cn.getQuery_count();
 		ResultSet rs = cn.getRs();
 		if(num>=1) {

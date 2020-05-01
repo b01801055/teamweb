@@ -19,9 +19,6 @@ public class ConnQuery implements Serializable {
 	private int query_count;
 	
 	//vvv設定Bean的set get
-	//sql
-	public String getSql() {return sql;}
-	public void setSql(String sql) {this.sql = sql;}
 	//Driver
 	public void setsDriver(String sDriver) {this.sDriver = sDriver;}
 	public String getsDriver() {return sDriver;}
@@ -33,14 +30,15 @@ public class ConnQuery implements Serializable {
 	//URL
 	public void setUrl(String url) {this.url = url;}
 	public String getUrl() {return url;}
-	//ResultSet
-	public ResultSet getRs() {return rs;}
+	
 	//query_count
 	public int getQuery_count() {return query_count;}
-	//^^^設定Bean的set get
-	
-	//excute()	//建立連線、查詢、設定ResultSet
-	public void excute() {
+	//ResultSet
+	public ResultSet getRs() {return rs;}
+	// sql
+	public String getSql() {return sql;}
+	public void setSql(String sql) {
+		this.sql = sql;
 		try {
 			Class.forName(sDriver);
 		} catch (Exception e) {
@@ -81,5 +79,8 @@ public class ConnQuery implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
+	//^^^設定Bean的set get
+	
+	
 
 }

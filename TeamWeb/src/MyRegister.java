@@ -40,7 +40,6 @@ public class MyRegister extends HttpServlet {
 		
 		ConnUpdate connUp =new ConnUpdate();
 		connUp.setSql(sql);
-		connUp.excute();
 		
 	}
 

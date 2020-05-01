@@ -19,9 +19,6 @@ public class ConnUpdate implements Serializable{
 	
 	
 	//vvv設定Bean的set get
-	//sql
-	public String getSql() {return sql;}
-	public void setSql(String sql) {this.sql = sql;}
 	//Driver
 	public void setsDriver(String sDriver) {this.sDriver = sDriver;}
 	public String getsDriver() {return sDriver;}
@@ -35,39 +32,36 @@ public class ConnUpdate implements Serializable{
 	public String getUrl() {return url;}
 	//n
 	public int getN() {return n;}
-	
-	// excute()
-	public void excute() {
-		try {
-			Class.forName(sDriver);
-		} catch (Exception e) {
-			System.out.println("找不到Driver");
-			System.out.println(e.getMessage());
-		}
+	//sql
+		public String getSql() {return sql;}
+		public void setSql(String sql) {
+			this.sql = sql;
+			try {
+				Class.forName(sDriver);
+			} catch (Exception e) {
+				System.out.println("找不到Driver");
+				System.out.println(e.getMessage());
+			}
 
-		try {
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
-			System.out.println("Connection物件建立失敗!");
-			System.out.println(e.getMessage());
-		}
+			try {
+				conn = DriverManager.getConnection(url, user, password);
+			} catch (SQLException e) {
+				System.out.println("Connection物件建立失敗!");
+				System.out.println(e.getMessage());
+			}
 
-		try {
-			stmt = conn.prepareStatement(sql);
-		} catch (SQLException e) {
-			System.out.println("Statement物件建立失敗!");
-			System.out.println(e.getMessage());
-		}
+			try {
+				stmt = conn.prepareStatement(sql);
+			} catch (SQLException e) {
+				System.out.println("Statement物件建立失敗!");
+				System.out.println(e.getMessage());
+			}
 
-		try {
-			n = stmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("sql語法執行失敗");
-			System.out.println(e.getMessage());
-		}
-	}
-	
-	
-	
-	
+			try {
+				n = stmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("sql語法執行失敗");
+				System.out.println(e.getMessage());
+			}			
+		}	
 }
