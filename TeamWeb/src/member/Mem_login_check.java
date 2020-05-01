@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,42 +14,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import conn.ConnQuery;
-/**
- * Servlet implementation class mem_login_check
- */
+
 @WebServlet("/logincheck")
 public class Mem_login_check extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Mem_login_check() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String sql = "SELECT * FROM teamweb2020.member WHERE mem_mail='login_email' AND mem_pwd='login_password' AND mem_level>1";
-		String login_email = request.getParameter("inputEmail1");
-		String login_password = request.getParameter("inputPassword1");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String login_email = request.getParameter("login_email");
+		String login_password = request.getParameter("login_password");
+		String sql = String.format("SELECT * FROM teamweb2020.member WHERE mem_mail='%s' AND mem_pwd='%s' AND mem_level>1;", login_email,login_password);
 		String url="";
-		
 		ConnQuery cn=new ConnQuery();
 		cn.setSql(sql);
+		cn.excute();
 		int num = cn.getQuery_count();
 		ResultSet rs = cn.getRs();
 		if(num>=1) {
@@ -57,18 +44,22 @@ public class Mem_login_check extends HttpServlet {
 				session.setAttribute("mem_id", rs.getInt(1));
 				session.setAttribute("mem_name", rs.getString(2));
 				session.setAttribute("mem_level", rs.getInt(5));
-				url = "../index.jsp";
+				url = "/index.jsp";
+				RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+				dispatcher.forward(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				//session失敗
-				e.printStackTrace();
+				out.print("Session設參數失敗");
+				System.out.println(e.getMessage());
 			}
 		}else {
 			request.setAttribute("msg", "1");
-			url = "/login";
+			url = "/login.jsp";
+			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		}
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/login");
-		dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher=request.getRequestDispatcher("/login");
+//		dispatcher.forward(request, response);
 	}
 
 }

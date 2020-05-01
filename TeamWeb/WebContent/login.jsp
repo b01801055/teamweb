@@ -32,6 +32,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
+	<script src="checkLogin.js"></script>
   </head>
 <body>
 <div id="header">
@@ -185,22 +186,22 @@
 		<div class="span4">
 			<div class="well">
 			<h5>登入會員</h5>
-			<form method="post" action="http://localhost:8080/TeamWeb/logincheck">
+			<form name="loginFrm" method="post" action="http://localhost:8080/TeamWeb/logincheck">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email">
+				  <input class="span3"  type="text" name="login_email" id="inputEmail1" placeholder="Email">
 				</div>
 			  </div>
 			  <div class="control-group">
 				<label class="control-label" for="inputPassword1">密碼</label>
 				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" placeholder="密碼">
+				  <input type="password" class="span3" name="login_password" id="inputPassword1" placeholder="密碼">
 				</div>
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="submit" class="btn">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
+				  <button type="button" class="btn" onclick="check_data()">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
 				</div>
 			  </div>
 			</form>
