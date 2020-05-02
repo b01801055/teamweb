@@ -2,8 +2,9 @@
 <%@page pageEncoding="utf-8"%>
 <%
 	String mem_name = (String) session.getAttribute("mem_name");
-	if (mem_name == "") {
-		request.setAttribute("msg", "2");
+	int mem_level = Integer.parseInt((String)session.getAttribute("mem_level"));
+	if (mem_name == "" || mem_level < 9) {
+		request.setAttribute("msg", "3");
 		String url = "/login";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 	}
