@@ -1,3 +1,4 @@
+package member;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import conn.ConnUpdate;
 
 
 @WebServlet("/doRegister")
-public class MyRegister extends HttpServlet {
+public class Mem_addmem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     

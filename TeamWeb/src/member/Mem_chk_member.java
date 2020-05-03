@@ -1,3 +1,4 @@
+package member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -11,7 +12,7 @@ import conn.ConnQuery;
 
 
 @WebServlet("/doQueryEmail")
-public class MyQueryThisEmailExsitsOrNot extends HttpServlet {
+public class Mem_chk_member extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
