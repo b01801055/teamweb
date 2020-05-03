@@ -27,11 +27,8 @@ public class Mem_logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if (request.getSession() != null) {
-			request.getSession().invalidate();
-			response.sendRedirect("index.jsp");
-		}
-		
+		request.getSession().invalidate();
+		response.sendRedirect("index.jsp");
 	}
 
 	/**

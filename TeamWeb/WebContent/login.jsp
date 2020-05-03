@@ -32,7 +32,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
-	<script src="js/checkLogin.js"></script>
+	<script src="checkLogin.js"></script>
   </head>
 <body>
 <div id="header">
@@ -201,7 +201,7 @@
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="button" class="btn" onclick="check_data();">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
+				  <button type="button" class="btn" onclick="check_data()">登入</button> <a href="forgetpass.jsp">忘記密碼?</a>
 				</div>
 			  </div>
 			</form>

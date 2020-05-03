@@ -43,19 +43,22 @@ public class Mem_login_check extends HttpServlet {
 				session.setAttribute("mem_id", rs.getInt(1));
 				session.setAttribute("mem_name", rs.getString(2));
 				session.setAttribute("mem_level", rs.getInt(5));
-				url = "index.jsp";				
-				response.sendRedirect(url);
+				url = "/index.jsp";
+				RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+				dispatcher.forward(request, response);
 			} catch (SQLException e) {
 				//session失敗
 				out.print("Session設參數失敗");
-				out.println(e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}else {
 			request.setAttribute("msg", "1");
-			url = "/login";
+			url = "/login.jsp";
 			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
+//		RequestDispatcher dispatcher=request.getRequestDispatcher("/login");
+//		dispatcher.forward(request, response);
 	}
 
 }
