@@ -197,25 +197,25 @@
 		<div class="control-group">
 			<label class="control-label" for="inputLnam">姓名 <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" name="name"  id="inputLnam" placeholder="請輸入真實姓名">
+			  <input type="text" name="name"  id="inputLnam" placeholder="姓名">
 			</div>
 		 </div>
 		 <div class="control-group">
 			<label class="control-label" for="account">帳號 <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="account" placeholder="長度5個字元以上">
+			  <input type="text" id="account" placeholder="帳號">
 			</div>
 		 </div>
 		<div class="control-group">
 		<label class="control-label" for="input_email">Email <sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" name="email" id="input_email" placeholder="請輸入真實Email">
+		  <input type="text" name="email" id="input_email" placeholder="Email">
 		</div>
 	  </div>	  
 	<div class="control-group">
 		<label class="control-label" for="inputPassword1">密碼 <sup>*</sup></label>
 		<div class="controls">
-		  <input type="password" name="pw" id="inputPassword1" placeholder="需包含英文大小寫至少各一">
+		  <input type="password" name="pw" id="inputPassword1" placeholder="密碼">
 		</div>
 	  </div>	  
 	<div class="control-group">
