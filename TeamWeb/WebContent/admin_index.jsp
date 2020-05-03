@@ -1,5 +1,16 @@
-﻿<%@page contentType="text/html; charset=utf-8"%>
+<%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%
+	if (session.getAttribute("mem_level") != null) {
+	String mem_name = (String) session.getAttribute("mem_name");
+	int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
+	if (mem_name == "" || mem_level < 9) {
+		request.setAttribute("msg", "3");
+		String url = "/login";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+	}
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,8 +50,6 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
-<!--我的javascript判斷是否符合格式REG-->
-<script src="js/check_member.js"></script>
 </head>
 <body>
 	<div id="header">
@@ -96,7 +105,7 @@
 								role="dialog" aria-labelledby="login" aria-hidden="false">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
+										aria-hidden="true">X</button>
 									<h3>Login Block</h3>
 								</div>
 								<div class="modal-body">
@@ -124,190 +133,63 @@
 		</div>
 	</div>
 	<!-- Header End====================================================================== -->
-	<div id="mainBody">
-		<div class="container">
-			<div class="row">
-				<!-- Sidebar ================================================== -->
-				<div id="sidebar" class="span3">
-					<div class="well well-small">
-						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart">3 Items in your
-							cart <span class="badge badge-warning pull-right">$155.00</span></a>
-					</div>
-					<ul id="sideManu" class="nav nav-tabs nav-stacked">
-						<li class="subMenu open"><a> ELECTRONICS [230]</a>
-							<ul>
-								<li><a class="active" href="products.jsp"><i
-										class="icon-chevron-right"></i>Cameras (100) </a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Computers, Tablets & laptop
-										(30)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Sound & Vision (15)</a></li>
-							</ul></li>
-						<li class="subMenu"><a> CLOTHES [840] </a>
-							<ul style="display: none">
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Women's Clothing (45)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Women's Shoes (8)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Women's Hand Bags (5)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Men's Clothings (45)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Men's Shoes (6)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Kids Clothing (5)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Kids Shoes (3)</a></li>
-							</ul></li>
-						<li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
-							<ul style="display: none">
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Angoves (35)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Bouchard Aine & Fils (8)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>French Rabbit (5)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Louis Bernard (45)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>BIB Wine (Bag in Box) (8)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Other Liquors & Wine (5)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Garden (3)</a></li>
-								<li><a href="products.jsp"><i
-										class="icon-chevron-right"></i>Khao Shong (11)</a></li>
-							</ul></li>
-						<li><a href="products.jsp">HEALTH & BEAUTY [18]</a></li>
-						<li><a href="products.jsp">SPORTS & LEISURE [58]</a></li>
-						<li><a href="products.jsp">BOOKS & ENTERTAINMENTS [14]</a></li>
-					</ul>
-					<br />
-					<div class="thumbnail">
-						<img src="themes/images/products/panasonic.jpg"
-							alt="Bootshop panasonoc New camera" />
-						<div class="caption">
-							<h5>Panasonic</h5>
-							<h4 style="text-align: center">
-								<a class="btn" href="product_details.jsp"> <i
-									class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-									class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-									href="#">$222.00</a>
-							</h4>
-						</div>
-					</div>
-					<br />
-					<div class="thumbnail">
-						<img src="themes/images/products/kindle.png"
-							title="Bootshop New Kindel" alt="Bootshop Kindel">
-						<div class="caption">
-							<h5>Kindle</h5>
-							<h4 style="text-align: center">
-								<a class="btn" href="product_details.jsp"> <i
-									class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-									class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-									href="#">$222.00</a>
-							</h4>
-						</div>
-					</div>
-					<br />
-					<div class="thumbnail">
-						<img src="themes/images/payment_methods.png"
-							title="Bootshop Payment Methods" alt="Payments Methods">
-						<div class="caption">
-							<h5>Payment Methods</h5>
-						</div>
-					</div>
-				</div>
-				<!-- Sidebar end=============================================== -->
-				<div class="span9">
-					<ul class="breadcrumb">
-						<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-						<li class="active">Registration</li>
-					</ul>
-					<h3>註冊會員</h3>
-					<div class="well">
-						<!--
-	<div class="alert alert-info fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div>
-	<div class="alert fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div>
-	 <div class="alert alert-block alert-error fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div> -->
-						<form name="registForm" class="form-horizontal" method="post"
-							action="/TeamWeb/doRegister">
+	<div class="row">
 
-							<div class="control-group">
-								<label class="control-label" for="inputLnam">姓名 <sup>*</sup></label>
-								<div class="controls">
-									<input type="text" name="name" id="inputLnam" placeholder="姓名">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="account">帳號 <sup>*</sup></label>
-								<div class="controls">
-									<input type="text" id="account" placeholder="帳號">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input_email">Email <sup>*</sup></label>
-								<div class="controls">
-									<input type="text" name="email" id="input_email"
-										placeholder="Email">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword1">密碼 <sup>*</sup></label>
-								<div class="controls">
-									<input type="password" name="pw" id="inputPassword1"
-										placeholder="密碼">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword2">確認密碼 <sup>*</sup></label>
-								<div class="controls">
-									<input type="password" id="inputPassword2" placeholder="確認密碼">
-								</div>
-							</div>
-							<div class="control-group">
-								<div id="chkcodeimg" class="control-label">
-									<img src="check_code_image/createpng.php" alt="">
-									<p>
-										<a href="javascript:;" id="re_chkcode">重讀驗證碼</a>
-								</div>
-								<div class="controls">
-									<input type="text" name="chkcode" id="chkcode"
-										placeholder="請輸入0-9的驗證碼" required>
-								</div>
-							</div>
-							<p>
-								<sup>*</sup>必填欄位
-							</p>
-							<div class="control-group">
-								<div class="controls">
-									<input type="hidden" name="MM_insert" value="addMember">
-									<input class="btn btn-large btn-success" type="button" value="註冊會員"onclick="check_Data()" /> 
-									<input class="btn btn-large btn-success" type="reset" value="全部清除" />
-								</div>
-							</div>
-						</form>
-					</div>
-
-				</div>
+		<div class="span3">
+			<div class="control-group">
+				<img src="images/img00_title01.gif" width="230" height="25">
 			</div>
+			<ul>
+				<li><a href="#">查訂單</a></li>
+				<li><a href="#">退訂 / 退款查詢</a></li>
+				<li><a href="#">換貨 / 查詢</a></li>
+				<li><a href="#">買過商品清單</a></li>
+			</ul>
 		</div>
+
+		<div class="span3">
+			<div class="control-group">
+				<img src="images/img00_title02.gif" width="230" height="25">
+			</div>
+			<ul>
+				<li><a href="#">現金積點查詢說明</a><a href="#" target="_blank">說明</a><a
+					href="#"></a></li>
+				<li><a href="#">信用卡分期付款紀錄</a></li>
+				<li><a href="#">行銷活動規則查詢</a><a href="#"></a></li>
+				<li><a href="#">最近瀏覽紀錄</a></li>
+			</ul>
+		</div>
+
+		<div class="span3">
+			<div class="control-group">
+				<img src="images/img00_title03.gif" width="230" height="25">
+			</div>
+			<ul>
+				<li><a href="#">會員基本資料</a><a href="#"></a></li>
+				<li><a href="#">密碼查詢 </a> / <a href="#">修改</a><a href="#"></a></li>
+				<li><a href="#">收貨人通訊錄管理</a><a href="#"></a></li>
+				<li><a href="#">商品追蹤清單</a></li>
+			</ul>
+		</div>
+
+		<div class="span3">
+			<div class="control-group">
+				<img src="images/img00_title04.gif" width="230" height="25">
+			</div>
+			<ul>
+				<li><a href="#">新手上路</a><a href="#"></a></li>
+				<li><a href="#">購物流程 </a> / <a href="#">付款說明</a><a href="#"></a></li>
+				<li><a href="#" target="_blank">本站紀事</a><a href="#"></a></li>
+				<li><a href="#">常見問題 Q &amp; A</a><a href="#"></a></li>
+			</ul>
+		</div>
+
 	</div>
+
+
+
+	</div>
+
 	<!-- MainBody End ============================= -->
 	<!-- Footer ================================================================== -->
 	<div id="footerSection">

@@ -1,7 +1,4 @@
-/Conn.class
-/conn/
 /member/
-<<<<<<< HEAD
-=======
+/Mem_chk_member.class
 /MyRegister.class
->>>>>>> parent of b76da22... Revert "Revert "修正資料""
+/Mem_addmem.class
