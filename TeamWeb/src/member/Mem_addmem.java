@@ -33,11 +33,16 @@ public class Mem_addmem extends HttpServlet {
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("pw");
 		//^^^ Field
-		
 		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd) VALUE('%s','%s','%s');",name, email, passwd);
+		String mem_chkcode="";
+		int mem_chkcode_lenString=6;
+		String stuff="0123456789";
+		int stuff_len = stuff.length()-1;
 		
 //		out.print(name + account + email + passwd);//測試用
 //		out.print(sql);//測試用
+		
+		
 		
 		ConnUpdate connUp =new ConnUpdate();
 		connUp.setSql(sql);

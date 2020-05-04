@@ -1,12 +1,13 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
 <%
-	String mem_name = (String) session.getAttribute("mem_name");
+	if(session.getAttribute("mem_name") != null){
+	String mem_name =  session.getAttribute("mem_name").toString();
 	if (mem_name == "") {
 		request.setAttribute("msg", "2");
 		String url = "/login";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-	}
+	}}
 %>
 <!DOCTYPE html>
 <html lang="en">
