@@ -282,9 +282,7 @@
 							</div>
 							<div class="control-group">
 								<div id="chkcodeimg" class="control-label">
-									<img src="check_code_image/createpng.php" alt="">
-									<p>
-										<a id="re_chkcode" onclick="createCaptcha()">重讀驗證碼</a>
+										<input class="btn btn-sm btn-info" type="button" value="重讀驗證碼"onclick="createCaptcha()" />
 								</div>
 								<div class="controls">
 									<input type="text" name="chkcode" id="chkcode"
