@@ -3,7 +3,8 @@ var account;
 var email;
 var pw1;
 var pw2;
-function check_Data()
+var Captcha="" ; //驗證碼
+function check_Data()//正則檢驗格式
   {
 	name = document.getElementById("inputLnam").value;
 	account = document.getElementById("account").value;
@@ -23,11 +24,37 @@ function check_Data()
 	else if(!(re_pw.test(pw1)&(re_pw.test(pw2)&pw1==pw2)))
 		alert("密碼不正確");
 	else
-		//document.registForm.submit();
-		queryEmail();
+		validateIt();//進行驗證碼
 }
 
-function queryEmail(){
+function createCaptcha(){
+	Captcha = "";//歸零
+	document.getElementById("Captcha").placeholder="";//歸零
+	var arr = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','j','k','l','m','n','p','q','r','s','t','u','v','w','x','y','z');//驗證碼宇集合
+	for(var i=0;i<4;i++) {//設4碼驗證碼
+	  	var thisChar = Math.floor(Math.random()*(26*2+10));//隨機亂數取哪個
+	 	Captcha+=arr[thisChar];//將驗證碼串起
+	}
+	if(Captcha.length!=4){
+		Captcha="";
+		createCaptcha();
+	}else{
+		document.getElementById("Captcha").placeholder = Captcha;//將驗證碼插入空位
+	}
+}
+function validateIt() {//驗證驗證碼
+	Captcha=Captcha.toUpperCase();
+	var inputNum = document.getElementById("chkcode").value.toUpperCase();
+	if(inputNum.length!=4 || inputNum!=Captcha) {//4是驗證碼長度 驗證失敗就警告
+		alert("驗證碼錯誤！");
+		createCaptcha();
+	}else{
+		//document.registForm.submit();
+		queryEmail();
+	}
+}
+
+  function queryEmail(){//檢查email是否重複註冊
 	var xmlhttp;//創立一個空物件 等著被用來製作成XMLHttpRequest的實體物件 (這物件之後會把Request包起來 傳出去 到時候收到的回應也會被包進物件裡面)
 	if(window.ActiveXObject)//判斷瀏覽器如果是用這種類別傳送 那就建立這種類別的物件 這邊是IE6版以前用的類別
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
