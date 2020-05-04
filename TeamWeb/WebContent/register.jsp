@@ -40,9 +40,9 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 <!--我的javascript判斷是否符合格式REG-->
-<script src="js/check_member1.js"></script>
+<script src="js/check_member.js"></script>
 </head>
-<body onload="createCaptcha()">
+<body>
 	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
@@ -246,7 +246,7 @@
 		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 	 </div> -->
 						<form name="registForm" class="form-horizontal" method="post"
-							action="doRegister">
+							action="/TeamWeb/doRegister">
 
 							<div class="control-group">
 								<label class="control-label" for="inputLnam">姓名 <sup>*</sup></label>
@@ -284,17 +284,11 @@
 								<div id="chkcodeimg" class="control-label">
 									<img src="check_code_image/createpng.php" alt="">
 									<p>
-										<a id="re_chkcode" onclick="createCaptcha()">重讀驗證碼</a>
+										<a href="javascript:;" id="re_chkcode">重讀驗證碼</a>
 								</div>
 								<div class="controls">
 									<input type="text" name="chkcode" id="chkcode"
-										placeholder="請輸入驗證碼" required>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="Captcha">驗證碼<sup></sup></label>
-								<div class="controls">
-									<input type="text" id="Captcha" readonly="true" placeholder="Captcha">
+										placeholder="請輸入0-9的驗證碼" required>
 								</div>
 							</div>
 							<p>

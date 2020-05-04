@@ -131,7 +131,7 @@
 								</div>
 								<div class="modal-body">
 									<form class="form-horizontal loginFrm" method="post"
-										action="logincheck">
+										action="/TeamWeb/logincheck">
 										<div class="control-group">
 											<input name="login_email" type="text" id="inputEmail" placeholder="Email">
 										</div>
