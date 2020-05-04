@@ -40,7 +40,7 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 <!--我的javascript判斷是否符合格式REG-->
-<script src="js/check_member1.js"></script>
+<script src="js/check_member.js"></script>
 </head>
 <body onload="createCaptcha()">
 	<div id="header">
