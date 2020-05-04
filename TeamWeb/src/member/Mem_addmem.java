@@ -22,36 +22,47 @@ public class Mem_addmem extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//vvv基本設定
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/mtml;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		
 		//^^^基本設定
 		
 		//vvv Field
-		String name = request.getParameter("name");
-//		String account = request.getParameter("account");
-		String email = request.getParameter("email");
-		String passwd = request.getParameter("pw");
+		
 		//^^^ Field
-		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd) VALUE('%s','%s','%s');",name, email, passwd);
-		String mem_chkcode="";
-		int mem_chkcode_lenString=6;
-		String stuff="0123456789";
-		int stuff_len = stuff.length()-1;
+		
 		
 //		out.print(name + account + email + passwd);//測試用
 //		out.print(sql);//測試用
-		
-		
-		
-		ConnUpdate connUp =new ConnUpdate();
-		connUp.setSql(sql);
-		
+			
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/mtml;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		String name = request.getParameter("name");
+		String account = request.getParameter("account");
+		String email = request.getParameter("email");
+		String passwd = request.getParameter("pw");
+		
+		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd) VALUE('%s','%s','%s');",name, email, passwd);
+		
+		String mem_chkcode="";
+		int mem_chkcode_len=6;
+		String stuff="0123456789";
+		int stuff_len = stuff.length()-1;
+		for(int i=0;i<mem_chkcode_len;i++) {
+//			mem_chkcode+=stuff.substring(Math.random(), 1);
+		}
+		
+		ConnUpdate connUp =new ConnUpdate();
+		connUp.setSql(sql);
+		int n=connUp.getN();
+		if (n>=1) {
+			
+		}
+		
 	}
 
 }
