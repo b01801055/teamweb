@@ -186,7 +186,7 @@
 		<div class="span4">
 			<div class="well">
 			<h5>登入會員</h5>
-			<form name="loginFrm" method="post" action="http://localhost:8080/TeamWeb/logincheck">
+			<form name="loginFrm" method="post" action="/TeamWeb/logincheck">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">

@@ -45,19 +45,29 @@
 		<div class="container">
 			<div id="welcomeLine" class="row">
 				<div class="span6">
-					Welcome!<strong> User</strong>
+					<%
+						if(session.getAttribute("mem_id")!=null){
+					%>
+					Welcome!<strong> <%out.print((String)session.getAttribute("mem_name"));%>!!</strong>
+					<%
+						}else{
+					%>
+					Sing in! Hurry!!
+					<%
+						}
+					%>
 				</div>
 				<div class="span6">
 					<div class="pull-right">
 						<%
 							if (session.getAttribute("mem_level") != null) {
 							int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
-							if (mem_level >= 9) {
+								if (mem_level >= 9) {
 						%>
 						<a href="admin_index.jsp"><span class="">#### 後台管理 ####</span></a>
 						<%
+								}
 							}
-						}
 						%>
 						<span class="btn btn-mini">En</span> <a href="product_summary.jsp"><span>&pound;</span></a>
 						<span class="btn btn-mini">$155.00</span> <a
@@ -98,17 +108,20 @@
 						<li class="">
 							<%
 								String mem_name = (String) session.getAttribute("mem_name");
-							if (mem_name != "") {
-							%> <a href="/logout" role="button" data-toggle="modal"
+								if (mem_name != null) {
+							%>
+								<a href="/TeamWeb/logout" role="button" data-toggle="modal"
 							style="padding-right: 0"><span
-								class="btn btn-large btn-success">登出</span></a> <%
- 	} else {
- %> <a
-							href="#login" role="button" data-toggle="modal"
+								class="btn btn-large btn-success">登出</span></a> 
+							<%
+								} else {
+							%> 
+									<a	href="#login" role="button" data-toggle="modal"
 							style="padding-right: 0"><span
-								class="btn btn-large btn-success">登入</span></a> <%
- 	}
- %>
+								class="btn btn-large btn-success">登入</span></a> 
+							<%
+								}
+							%>
 							<div id="login" class="modal hide fade in" tabindex="-1"
 								role="dialog" aria-labelledby="login" aria-hidden="false">
 								<div class="modal-header">
@@ -118,12 +131,12 @@
 								</div>
 								<div class="modal-body">
 									<form class="form-horizontal loginFrm" method="post"
-										action="http://localhost:8080/TeamWeb/logincheck">
+										action="/TeamWeb/logincheck">
 										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email">
+											<input name="login_email" type="text" id="inputEmail" placeholder="Email">
 										</div>
 										<div class="control-group">
-											<input type="password" id="inputPassword"
+											<input name="login_password" type="password" id="inputPassword"
 												placeholder="Password">
 										</div>
 										<div class="control-group">
@@ -131,9 +144,10 @@
 												記住我
 											</label>
 										</div>
+										<button type="submit" class="btn btn-success">登入</button>
+										<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
 									</form>
-									<button type="submit" class="btn btn-success">登入</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
+									
 								</div>
 							</div>
 						</li>
