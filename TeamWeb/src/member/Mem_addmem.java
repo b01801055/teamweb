@@ -57,7 +57,7 @@ public class Mem_addmem extends HttpServlet {
 			sMail.setTo(email);
 			sMail.setSubject("網站會員功能啟用通知");
 			sMail.setContent(name+"您好，感謝申請會員!!<br>"+"會員帳號功能啟用通知<br>"+
-					"請點選<a href='TeamWeb/login?mailOK=1&mem_mail='"+email
+					"請點選<a href='http://localhost:8080/TeamWeb/login?mailOK=1&mem_mail="+email
 					+"&mem_chkcode="+mem_chkcode+"'>此連結回覆確認信箱</a><br>"+
 					"此信件為系統自動發送, 請勿點選回覆信件");
 			sMail.execute();
