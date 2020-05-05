@@ -255,12 +255,6 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="account">帳號 <sup>*</sup></label>
-								<div class="controls">
-									<input type="text" id="account" placeholder="長度至少5字元">
-								</div>
-							</div>
-							<div class="control-group">
 								<label class="control-label" for="input_email">Email <sup>*</sup></label>
 								<div class="controls">
 									<input type="text" name="email" id="input_email"
