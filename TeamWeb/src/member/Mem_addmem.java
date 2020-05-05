@@ -41,7 +41,8 @@ public class Mem_addmem extends HttpServlet {
 			int location=(int)(Math.random()*stuff_len);//產生隨機位置
 			mem_chkcode+=stuff.substring(location, location+1);//取宇集中該位置
 		}
-		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd,mem_chkcode) VALUE('%s','%s','%s','%s');",name, email, passwd,mem_chkcode);
+		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd,mem_chkcode) "
+				+ "VALUE('%s','%s','%s','%s');",name, email, passwd,mem_chkcode);
 		
 		ConnUpdate connUp =new ConnUpdate();
 		connUp.setSql(sql);
@@ -50,7 +51,7 @@ public class Mem_addmem extends HttpServlet {
 			SendMail sMail = new SendMail();
 			sMail.setTo("lab3300552@gmail.com");
 			sMail.setSubject("hi");
-			sMail.setContent("hi");
+			sMail.setContent("hello");
 			sMail.execute();
 			
 		}

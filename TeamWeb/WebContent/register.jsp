@@ -275,18 +275,18 @@
 								</div>
 							</div>
 							<div class="control-group">
+								<label class="control-label" for="Captcha">驗證碼<sup></sup></label>
+								<div class="controls">
+									<input type="text" id="Captcha" readonly="true" placeholder="Captcha">
+								</div>
+							</div>
+							<div class="control-group">
 								<div id="chkcodeimg" class="control-label">
 										<input class="btn btn-sm btn-info" type="button" value="重讀驗證碼"onclick="createCaptcha()" />
 								</div>
 								<div class="controls">
 									<input type="text" name="chkcode" id="chkcode"
 										placeholder="請輸入驗證碼" required>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="Captcha">驗證碼<sup></sup></label>
-								<div class="controls">
-									<input type="text" id="Captcha" readonly="true" placeholder="Captcha">
 								</div>
 							</div>
 							<p>
