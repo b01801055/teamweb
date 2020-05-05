@@ -1,5 +1,4 @@
 var name;
-var account;
 var email;
 var pw1;
 var pw2;
@@ -45,7 +44,6 @@ function validateIt() {//驗證驗證碼
 		alert("驗證碼錯誤！");
 		createCaptcha();
 	}else{
-		//document.registForm.submit();
 		queryEmail();
 	}
 }

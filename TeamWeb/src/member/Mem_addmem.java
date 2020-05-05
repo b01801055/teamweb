@@ -28,12 +28,13 @@ public class Mem_addmem extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/mtml;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
+		//vvv參數
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("pw");
-		
-		String mem_chkcode="";//驗證信箱的驗證碼
+		//^^^參數
+		//vvv產生驗證Email用的驗證碼
+		String mem_chkcode="";//Email驗證碼
 		int mem_chkcode_len=6;//驗證碼長度
 		String stuff="0123456789";//宇集合
 		int stuff_len = stuff.length();//宇集長度 10
@@ -41,6 +42,9 @@ public class Mem_addmem extends HttpServlet {
 			int location=(int)(Math.random()*stuff_len);//產生隨機位置
 			mem_chkcode+=stuff.substring(location, location+1);//取宇集中該位置
 		}
+		//^^^產生驗證Email用的驗證碼
+		
+		//vvv INSERT INTO
 		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd,mem_chkcode) "
 				+ "VALUE('%s','%s','%s','%s');",name, email, passwd,mem_chkcode);
 		
@@ -53,7 +57,7 @@ public class Mem_addmem extends HttpServlet {
 			sMail.setSubject("hi");
 			sMail.setContent("hello");
 			sMail.execute();
-			
+		//^^^ INSERT INTO
 		}
 		
 	}
