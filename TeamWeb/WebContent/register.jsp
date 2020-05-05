@@ -230,8 +230,30 @@
 						<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
 						<li class="active">Registration</li>
 					</ul>
-					<h3>註冊會員</h3>
-					<div class="well">
+					<%
+						if(request.getParameter("msg")!=null){
+							String msg=request.getParameter("msg");
+							String prt="";
+							switch(msg){
+								case "1":
+									prt="目前系統可能因忙碌而產生會員申請失敗，請過些時候再重新申請會員！";
+									break;
+								case "2":
+									prt="目前系統可能因忙碌而產生發送確認信件失敗，請過些時候前往 [客服中心]=>[已申請會員,重發確認信]。";
+									break;
+								case "3":
+									prt="感謝您註冊新會員成功！請前往郵件信箱收信！點選驗證連結再回到網站！";
+							}
+					%>
+						<h3>註冊會員<span style="font-weight: normal;color:red;font-size: 0.6em;font-family:'Noto Serif TC', serif;">&nbsp;&nbsp;<%out.print(prt);%></span></h3>
+					<%
+						}else{
+					%>
+						<h3>註冊會員</h3>
+					<%
+						}
+					%>
+						<div class="well">
 						<!--
 	<div class="alert alert-info fade in">
 		<button type="button" class="close" data-dismiss="alert">×</button>
