@@ -1,17 +1,22 @@
 package member;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class SendMail implements Serializable{
 	/**
@@ -59,6 +64,7 @@ public class SendMail implements Serializable{
 		port=587;
 		username="teamweb2021@gmail.com";
 		password="109java01";
+		from=username;
 		
 		props = new Properties();
 	    props.put("mail.smtp.host", host);
@@ -67,7 +73,7 @@ public class SendMail implements Serializable{
 	    props.put("mail.smtp.port", port);
 	}
      
-    public void execute() {
+    public void execute() throws UnsupportedEncodingException {
     	try {
             Message message = createMessage(from, to, subject, content);
             Transport.send(message);  
@@ -79,21 +85,32 @@ public class SendMail implements Serializable{
     
     private Message createMessage(
             String from, String to, String subject, String content)
-                              throws MessagingException {
+                              throws MessagingException, UnsupportedEncodingException {
         Session session = Session.getInstance(props, new Authenticator() {  
             protected PasswordAuthentication getPasswordAuthentication() {  
                 return new PasswordAuthentication(username, password);  
             }} 
         );  
         
+        Multipart multiPart = multiPart(content);
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(from));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject(subject);
         message.setSentDate(new Date());
-        message.setText(content);
+        message.setContent(multiPart);
         
         return message;
     }
-    
+    private Multipart multiPart(String content)
+            throws MessagingException, UnsupportedEncodingException {
+        Multipart multiPart = new MimeMultipart();
+        
+        MimeBodyPart htmlPart = new MimeBodyPart(); 
+        htmlPart.setContent(content, "text/html;charset=UTF-8");
+        multiPart.addBodyPart(htmlPart);
+        
+        
+        return multiPart;
+    }
 }

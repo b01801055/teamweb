@@ -51,6 +51,21 @@ public class Mem_addmem extends HttpServlet {
 		int n=connUp.getN();
 		if (n>=1) {
 			SendMail sMail = new SendMail();
+			sMail.setTo("lab3300552@gmail.com");
+			sMail.setSubject("hi");
+			sMail.setContent("<!DOCTYPE html>\r\n" + 
+					"<html lang=\"en\">\r\n" + 
+					"<head>\r\n" + 
+					"    <meta charset=\"UTF-8\">\r\n" + 
+					"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n" + 
+					"    <title>Document</title>\r\n" + 
+					"</head>\r\n" + 
+					"<body>\r\n" + 
+					"    <h1>hello</h1>\r\n" + 
+					"    <a href=\"http://tw.yahoo.com\">click me</a>\r\n" + 
+					"</body>\r\n" + 
+					"</html>");
+			sMail.execute();
 			
 		}
 		
