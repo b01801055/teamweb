@@ -53,9 +53,10 @@ public class Mem_addmem extends HttpServlet {
 		int n=connUp.getN();
 		if (n>=1) {
 			SendMail sMail = new SendMail();
-			sMail.setTo("lab3300552@gmail.com");
+			sMail.setTo(email);
 			sMail.setSubject("hi");
-			sMail.setContent("hello");
+			sMail.setContent(name+"您好，感謝申請會員<br>"+"會員功能啟用通知<br>"+
+			"請點選<a href='TeamWeb/'");
 			sMail.execute();
 		//^^^ INSERT INTO
 		}
