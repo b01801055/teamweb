@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import javax.mail.Transport;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,11 +55,17 @@ public class Mem_addmem extends HttpServlet {
 		if (n>=1) {
 			SendMail sMail = new SendMail();
 			sMail.setTo(email);
-			sMail.setSubject("hi");
-			sMail.setContent(name+"您好，感謝申請會員<br>"+"會員功能啟用通知<br>"+
-			"請點選<a href='TeamWeb/'");
+			sMail.setSubject("網站會員功能啟用通知");
+			sMail.setContent(name+"您好，感謝申請會員!!<br>"+"會員帳號功能啟用通知<br>"+
+					"請點選<a href='TeamWeb/login?mailOK=1&mem_mail='"+email
+					+"&mem_chkcode="+mem_chkcode+"'>此連結回覆確認信箱</a><br>"+
+					"此信件為系統自動發送, 請勿點選回覆信件");
 			sMail.execute();
-		//^^^ INSERT INTO
+			String msg=sMail.getMsg();
+			if (!msg.equals("3") && !msg.equals("2")) {
+				msg="1";
+			}
+			response.sendRedirect("register.jsp?msg="+msg);
 		}
 		
 	}

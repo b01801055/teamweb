@@ -32,8 +32,10 @@ public class SendMail implements Serializable{
     private String to;
     private String subject;
     private String content;
+    private String msg;
     
-    public String getTo() {
+
+	public String getTo() {
 		return to;
 	}
 
@@ -78,11 +80,15 @@ public class SendMail implements Serializable{
             Message message = createMessage(from, to, subject, content);
             Transport.send(message);  
             System.out.println("郵件傳送成功");
+            msg="3";
         } catch (MessagingException e) {
+        	msg="2";
             throw new RuntimeException(e);
         }
     }
-    
+    public String getMsg() {
+		return msg;
+	}
     private Message createMessage(
             String from, String to, String subject, String content)
                               throws MessagingException, UnsupportedEncodingException {
