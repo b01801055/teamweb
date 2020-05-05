@@ -81,23 +81,13 @@
 				<div class="navbar-inner">
 					<a class="brand" href="index.jsp"><img
 						src="themes/images/logo.png" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post"
-						action="products.jsp">
-						<input id="srchFld" class="srchTxt" type="text" /> <select
-							class="srchTxt">
-							<option>All</option>
-							<option>CLOTHES</option>
-							<option>FOOD AND BEVERAGES</option>
-							<option>HEALTH & BEAUTY</option>
-							<option>SPORTS & LEISURE</option>
-							<option>BOOKS & ENTERTAINMENTS</option>
-						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="special_offer.jsp">Specials Offer</a></li>
-						<li class=""><a href="normal.jsp">Delivery</a></li>
-						<li class=""><a href="contact.jsp">Contact</a></li>
+						<li class=""><a href="#">圖像管理</a></li>
+						<li class=""><a href="#">商品新增</a></li>
+						<li class=""><a href="#">商品管理</a></li>
+						<li class=""><a href="#">類別管理</a></li>
+						<li class=""><a href="#">公告管理</a></li>
+						<li class=""><a href="#">會員管理</a></li>
 						<li class=""><a href="#login" role="button"
 							data-toggle="modal" style="padding-right: 0"><span
 								class="btn btn-large btn-success">Login</span></a>
@@ -133,62 +123,7 @@
 		</div>
 	</div>
 	<!-- Header End====================================================================== -->
-	<div class="row">
-
-		<div class="span3">
-			<div class="control-group">
-				<img src="images/img00_title01.gif" width="230" height="25">
-			</div>
-			<ul>
-				<li><a href="#">查訂單</a></li>
-				<li><a href="#">退訂 / 退款查詢</a></li>
-				<li><a href="#">換貨 / 查詢</a></li>
-				<li><a href="#">買過商品清單</a></li>
-			</ul>
-		</div>
-
-		<div class="span3">
-			<div class="control-group">
-				<img src="images/img00_title02.gif" width="230" height="25">
-			</div>
-			<ul>
-				<li><a href="#">現金積點查詢說明</a><a href="#" target="_blank">說明</a><a
-					href="#"></a></li>
-				<li><a href="#">信用卡分期付款紀錄</a></li>
-				<li><a href="#">行銷活動規則查詢</a><a href="#"></a></li>
-				<li><a href="#">最近瀏覽紀錄</a></li>
-			</ul>
-		</div>
-
-		<div class="span3">
-			<div class="control-group">
-				<img src="images/img00_title03.gif" width="230" height="25">
-			</div>
-			<ul>
-				<li><a href="#">會員基本資料</a><a href="#"></a></li>
-				<li><a href="#">密碼查詢 </a> / <a href="#">修改</a><a href="#"></a></li>
-				<li><a href="#">收貨人通訊錄管理</a><a href="#"></a></li>
-				<li><a href="#">商品追蹤清單</a></li>
-			</ul>
-		</div>
-
-		<div class="span3">
-			<div class="control-group">
-				<img src="images/img00_title04.gif" width="230" height="25">
-			</div>
-			<ul>
-				<li><a href="#">新手上路</a><a href="#"></a></li>
-				<li><a href="#">購物流程 </a> / <a href="#">付款說明</a><a href="#"></a></li>
-				<li><a href="#" target="_blank">本站紀事</a><a href="#"></a></li>
-				<li><a href="#">常見問題 Q &amp; A</a><a href="#"></a></li>
-			</ul>
-		</div>
-
-	</div>
-
-
-
-	</div>
+	
 
 	<!-- MainBody End ============================= -->
 	<!-- Footer ================================================================== -->
