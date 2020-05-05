@@ -31,26 +31,39 @@ public class Mem_login_check extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String login_email = request.getParameter("login_email");
 		String login_password = request.getParameter("login_password");
-		String sql = String.format("SELECT * FROM teamweb2020.member WHERE mem_mail='%s' AND mem_pwd='%s' AND mem_level>1;", login_email,login_password);
+		String sql = String.format("SELECT * FROM teamweb2020.member WHERE mem_mail='%s' AND mem_pwd='%s' AND mem_level>0;", login_email,login_password);
 		String url="";
 		ConnQuery cn=new ConnQuery();
 		cn.setSql(sql);
 		int num = cn.getQuery_count();
 		ResultSet rs = cn.getRs();
 		if(num>=1) {
-			HttpSession session = request.getSession();
+			int level=0;
 			try {
-				session.setAttribute("mem_id", rs.getInt(1));
-				session.setAttribute("mem_name", rs.getString(2));
-				session.setAttribute("mem_level", rs.getInt(5));
-				url = "index.jsp";				
-				response.sendRedirect(url);
-			} catch (SQLException e) {
-				//session失敗
-				out.print("Session設參數失敗");
-				out.println(e.getMessage());
+				level=rs.getInt(5);
+			} catch (SQLException e1) {
+				System.out.println("rs問題");
 			}
-		}else {
+			if (level >= 2) {//註冊且驗證
+				HttpSession session = request.getSession();
+				try {
+					session.setAttribute("mem_id", rs.getInt(1));
+					session.setAttribute("mem_name", rs.getString(2));
+					session.setAttribute("mem_level", rs.getInt(5));
+					url = "index.jsp";
+					response.sendRedirect(url);
+				} catch (SQLException e) {
+					// session失敗
+					out.print("Session設參數失敗");
+					out.println(e.getMessage());
+				}
+			}else if(level==1){//有註冊但未驗證
+				request.setAttribute("msg", "4");
+				url = "/login";
+				RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+				dispatcher.forward(request, response);
+			}
+		}else {//沒有找到的話
 			request.setAttribute("msg", "1");
 			url = "/login";
 			RequestDispatcher dispatcher=request.getRequestDispatcher(url);

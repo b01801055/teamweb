@@ -65,6 +65,10 @@ public class Mem_login extends HttpServlet {
 			out.println("<h1>==== 非管理者不能進入管理介面！ ====</h1>");
 			response.sendRedirect(url+"?msg=3");
 		}
+		if (msg.equals("4")) {
+			out.println("<h1>==== 帳號未驗證，請先驗證再行登入！ ====</h1>");
+			response.sendRedirect(url+"?msg=4");
+		}
 		}
 		
 	}
