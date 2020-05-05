@@ -38,9 +38,9 @@ public class Mem_login extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		
 		if (request.getParameter("mailOK") != null) {
-			String mem_mail = request.getParameter("mem_mail");
-			String mem_chkcode = request.getParameter("mem_chkcode");
-			String sql="UPDATE teamweb2020.member SET mem_level=2 WHERE mem_mail='mem_mail' AND mem_chkcode='mem_chkcode'";
+			String mem_mail = (String)request.getParameter("mem_mail");
+			String mem_chkcode = (String)request.getParameter("mem_chkcode");
+			String sql="UPDATE teamweb2020.member SET mem_level=2 WHERE mem_mail='"+mem_mail+"' AND mem_chkcode='"+mem_chkcode+"'";
 			ConnUpdate connUp =new ConnUpdate();
 			connUp.setSql(sql);
 			int n=connUp.getN();
