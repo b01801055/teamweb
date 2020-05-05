@@ -36,13 +36,15 @@ public class Mem_addmem extends HttpServlet {
 		
 		String sql = String.format("INSERT INTO teamweb2020.member(mem_name,mem_mail,mem_pwd) VALUE('%s','%s','%s');",name, email, passwd);
 		
-		String mem_chkcode="";
-		int mem_chkcode_len=6;
-		String stuff="0123456789";
-		int stuff_len = stuff.length()-1;
-		for(int i=0;i<mem_chkcode_len;i++) {
-//			mem_chkcode+=stuff.substring(Math.random(), 1);
+		String mem_chkcode="";//驗證信箱的驗證碼
+		int mem_chkcode_len=6;//驗證碼長度
+		String stuff="0123456789";//宇集合
+		int stuff_len = stuff.length();//宇集長度 10
+		for(int i=0;i<mem_chkcode_len;i++) {//跑5次randon
+			int location=(int)(Math.random()*stuff_len);//產生隨機位置
+			mem_chkcode+=stuff.substring(location, location+1);//取宇集中該位置
 		}
+		
 		
 		ConnUpdate connUp =new ConnUpdate();
 		connUp.setSql(sql);
