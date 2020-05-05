@@ -176,38 +176,42 @@
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+		
 		<li class="active">Login</li>
-    </ul>
-	<h3> Login</h3>	
+	
+	</ul>
+	<%
+		if(request.getParameter("msg")!=null){
+			String msg=request.getParameter("msg");
+			String prt="";
+			switch(msg){
+				case "1":
+					prt="輸入的帳號或密碼有誤，請重新登入！";
+					break;
+				case "2":
+					prt="請先登入會員再進入！";
+					break;
+				case "3":
+					prt="非管理者不能進入管理介面！";
+			}
+	%>
+	<h3> Login<span style="font-weight: normal;font-size: 0.8em;color:red">(<%out.print(prt);%>)</span></h3>
+	<%
+		}else{
+	%>
+			<h3> Login</h3>
+	<%
+		}
+	%>
+	
+	
 	<hr class="soft"/>
 	
 	<div class="row">
 
 		<div class="span4">
 			<div class="well">
-				<%
-					if(request.getParameter("msg")!=null){
-						String msg=request.getParameter("msg");
-						String prt="";
-						switch(msg){
-							case "1":
-								prt="輸入的帳號或密碼有誤，請重新登入！";
-								break;
-							case "2":
-								prt="請先登入會員再進入！";
-								break;
-							case "3":
-								prt="非管理者不能進入管理介面！";
-						}
-				%>
-				<h5>登入會員<p style="font-weight: normal;font-size: 0.5em;">(<%out.print(prt);%>)</p></h5>
-				<%
-					}else{
-				%>
-			<h5>登入會員</h5>
-				<%
-					}
-				%>
+				<h5>登入會員</h5>
 			<form name="loginFrm" method="post" action="logincheck">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
