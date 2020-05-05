@@ -7,7 +7,7 @@
     <title>Bootshop online Shopping cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="author" content="">
 <!--Less styles -->
    <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -32,6 +32,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400&display=swap" rel="stylesheet">
 	<script src="js/checkLogin.js"></script>
   </head>
 <body>
@@ -195,7 +196,7 @@
 					prt="非管理者不能進入管理介面！";
 			}
 	%>
-	<h3> Login<span style="font-weight: normal;font-size: 0.8em;color:red">(<%out.print(prt);%>)</span></h3>
+	<h3> Login<span style="font-weight: normal;color:red;font-style: italic;font-size: 0.6em;font-family:'Noto Serif TC', serif;">&nbsp;&nbsp;<%out.print(prt);%></span></h3>
 	<%
 		}else{
 	%>
