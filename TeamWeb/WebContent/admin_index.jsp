@@ -87,7 +87,7 @@
 						<li class=""><a href="#">商品管理</a></li>
 						<li class=""><a href="#">類別管理</a></li>
 						<li class=""><a href="#">公告管理</a></li>
-						<li class=""><a href="#">會員管理</a></li>
+						<li class=""><a href="admin_member.jsp">會員管理</a></li>
 						<li class=""><a href="#login" role="button"
 							data-toggle="modal" style="padding-right: 0"><span
 								class="btn btn-large btn-success">Login</span></a>
