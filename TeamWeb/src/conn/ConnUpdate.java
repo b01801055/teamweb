@@ -21,15 +21,12 @@ public class ConnUpdate implements Serializable{
 	//vvv設定Bean的set get
 	//Driver
 	public void setsDriver(String sDriver) {this.sDriver = sDriver;}
-	public String getsDriver() {return sDriver;}
 	//User
 	public void setUser(String user) {this.user = user;}
-	public String getUser() {return user;}
 	//password
 	public void setPassword(String password) {this.password = password;}
 	//URL
 	public void setUrl(String url) {this.url = url;}
-	public String getUrl() {return url;}
 	//n
 	public int getN() {return n;}
 	//sql

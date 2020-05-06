@@ -45,10 +45,11 @@
 		<div class="container">
 			<div id="welcomeLine" class="row">
 				<div class="span6">
+					<%-- vvv插入歡迎使用者名稱 --%>
 					<%
 						if(session.getAttribute("mem_id")!=null){
 					%>
-					Welcome!<strong> <%out.print((String)session.getAttribute("mem_name"));%>!!</strong>
+					Welcome!<strong> <%=(String)session.getAttribute("mem_name")%>!!</strong>
 					<%
 						}else{
 					%>
@@ -56,6 +57,20 @@
 					<%
 						}
 					%>
+					<%-- ^^^插入歡迎使用者名稱 --%>
+					&nbsp;&nbsp;
+					<%-- vvv插入受訪人數 --%> 
+					<% String ip=request.getRemoteAddr(); %>
+					<jsp:useBean id="viewCount" scope="session" class="classes.Mem_visit_count"/>
+					<%  if(session.getAttribute("mem_id")!=null){ 
+							int id=(int)session.getAttribute("mem_id");%>
+					<jsp:setProperty property="viewId" name="viewCount" value="<%=id%>"/>
+					<jsp:setProperty property="viewIp" name="viewCount" value="<%=ip%>"/>
+					<jsp:setProperty property="viewN" name="viewCount" value="1"/>
+					<%  }   %>
+					本站受訪次數:
+					<jsp:getProperty property="viewN" name="viewCount"/>
+					<%-- ^^^插入受訪人數 --%>
 				</div>
 				<div class="span6">
 					<div class="pull-right">
