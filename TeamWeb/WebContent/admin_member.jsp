@@ -1,4 +1,4 @@
-<%@page import="java.sql.*"%>
+<%@page import="java.sql.*" %>
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
 <%@page import="conn.*"%>
@@ -8,6 +8,15 @@
 	cn.setSql(sql);
 	ResultSet rs=cn.getRs();
 	int query_count = cn.getQuery_count();
+	
+	if(request.getParameter("mem_level")!=null){
+		ConnUpdate connUp = new ConnUpdate();
+		int mem_id=Integer.parseInt(request.getParameter("mem_id"));
+		int mem_level=Integer.parseInt(request.getParameter("mem_level"));		
+		sql=String.format("UPDATE teamweb2020.member SET mem_level=%d WHERE mem_id = %d",mem_level,mem_id);
+		connUp.setSql(sql);
+		response.sendRedirect("admin_member.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,16 +67,6 @@
 </div>
 
 <% } 
-
-if(request.getParameter("mem_level")!=null){
-	request.setCharacterEncoding("utf-8");
-	ConnUpdate connUp = new ConnUpdate();
-	int mem_id=Integer.parseInt(request.getParameter("mem_id"));
-	int mem_level=Integer.parseInt(request.getParameter("mem_level"));
-	sql = "UPDATE teamweb2020.member SET mem_level="+mem_level+"WHERE mem_id ="+mem_id;
-	connUp.setSql(sql);
-	response.sendRedirect("admin_member.jsp");
-}
 %>
 
 
