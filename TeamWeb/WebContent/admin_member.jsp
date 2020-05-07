@@ -41,7 +41,7 @@
 </div>
 
 
-<% rs.first(); while(rs.next()){ %>
+<% do{ %>
 <div class="w3-row w3-border-bottom textCenter">
   <div class="w3-col m3 textLeft overflowH">
 	[<%=rs.getInt(1)%>]<%=rs.getString(2)%>
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<% } 
+<% }while(rs.next());
 %>
 
 
