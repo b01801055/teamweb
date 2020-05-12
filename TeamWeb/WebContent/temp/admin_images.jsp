@@ -25,17 +25,23 @@
 <body>
     <h1>商品上傳</h1>
 
-<form name="imgUpload" id="imgUpload" enctype="multipart/form-data" method="post" action="">
-  選擇要上傳的影像：
-  <input type="file" name="imgFile[]" id="imgFile" style="width:400px; color:#000;" multiple="multiple" required>
-
+<form name="imgUpload" id="imgUpload" enctype="multipart/form-data" method="post" action="/TeamWeb/doUploadGoods">
+商品名稱<input type="text" name="goodName"  style="width:100px; color:#000;" required><br>
+庫存數量<input type="num" name="goodLeftNum" style="width:100px; color:#000;" required><br>
+商品價格<input type="text" name="goodPrice" style="width:100px; color:#000;" required><br>
+商品簡介<input type="text" name="goodIntro" style="width:100px; color:#000;" required><br>
+   選擇要上傳的影像：
+  <input type="file" name="imgFile" id="imgFile" style="width:400px; color:#000;" required>
   <input type="submit" id="btnSubmit" value="確定上傳">
   <span style="color:red; font-size:12px;"> (上傳的檔案名稱請符合英數字及減號或底線....) </span>
 </form>
 
+<%String name="會員0503AC-留言系統AC.jpg";%>
 <div class="imgContainer">
     <div class="fileItem">
         <h3><?php echo $fileName; ?></h3>
+        <h3>${name}</h3>
+        <img src="file:\\/C:/uploaded/123.jpg">
         <input type="button" class="delImgBtn" value="刪除影像" title="<?php echo $file; ?>">
         <img src="<?php echo $file; ?>">
       </div>   
