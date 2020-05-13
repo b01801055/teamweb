@@ -41,7 +41,7 @@
     <div class="fileItem">
         <h3><?php echo $fileName; ?></h3>
         <h3>${name}</h3>
-        <img src="file:\\/C:/uploaded/123.jpg">
+        <img src="../uploadedIMG/aa1.jpg">
         <input type="button" class="delImgBtn" value="刪除影像" title="<?php echo $file; ?>">
         <img src="<?php echo $file; ?>">
       </div>   

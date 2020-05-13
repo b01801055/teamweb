@@ -38,15 +38,21 @@ public class UploadGood extends HttpServlet {
     		out.print("商品簡介: "+intro+"<br>");
     		out.print("圖片檔名: "+imgName+"<br>");
     		//===
-    		String mypath=request.getServletContext().getRealPath("/");
+    		String mypath=("..\\workspace\\teamweb\\TeamWeb\\WebContent");
+    		String tmppath=request.getServletContext().getRealPath("/");
     		try {
+    			String imgFileName="aa1";
     		InputStream is=img.getInputStream();
-    		OutputStream os=new FileOutputStream(mypath+"\\uploaded\\"+img.getSubmittedFileName());
+    		OutputStream os=new FileOutputStream(mypath+"\\uploadedIMG\\"+imgFileName+".jpg");
+    		OutputStream ostmp=new FileOutputStream(tmppath+"\\uploadedIMG\\"+imgFileName+".jpg");
     		byte [] byteArr=new byte[(int) img.getSize()];
     		is.read(byteArr);
     		os.write(byteArr);
     		is.close();
     		os.close();
+    		//暫存區也存
+    		ostmp.write(byteArr);
+    		ostmp.close();
     		}catch(Exception e) {out.print(e);}
     	}
 

@@ -28,7 +28,8 @@ public class Test extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(this.getClass().getClassLoader().getResource("/").getPath());
+		out.print(mypath);
+//		out.print(this.getClass().getClassLoader().getResource("/").getPath());
 //		String mypath=request.getServletContext().getRealPath("");
 //		String mypath=request.getServletContext().getContextPath();
 //		out.print(mypath);
