@@ -1,5 +1,6 @@
 package Control;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -28,11 +29,20 @@ public class Test extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(mypath);
+		
 //		out.print(this.getClass().getClassLoader().getResource("/").getPath());
-//		String mypath=request.getServletContext().getRealPath("");
+		String mypath=request.getServletContext().getRealPath("");
 //		String mypath=request.getServletContext().getContextPath();
-//		out.print(mypath);
+		out.print(mypath);
+		
+		
+//		File currentDirFile = new File(".");
+//		String helper = currentDirFile.getAbsolutePath();
+//		String currentDir = helper.substring(0, helper.length() - currentDirFile.getCanonicalPath().length());
+//		System.out.println(helper);
+		
+//		String mypath1=getServletContext().getInitParameter("myProjectLocation");
+//		out.print(mypath1);
 	}
 
 	

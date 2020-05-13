@@ -30,30 +30,35 @@ public class UploadGood extends HttpServlet {
     		String price=request.getParameter("goodPrice");
     		String intro=request.getParameter("goodIntro");
     		Part img=request.getPart("imgFile");
-    		String imgName=img.getSubmittedFileName();
+    		String imgOldName=img.getSubmittedFileName();
+    		String mypath=getServletContext().getInitParameter("myProjectLocation");
+    		String tmppath=request.getServletContext().getRealPath("/");
+    		//===
+    		int imgId=1;
+    		int imgHowMany=10;
+    		//===
+    		String imgNewName=String.valueOf(imgId);
     		//===
     		out.print("商品名稱: "+name+"<br>");
     		out.print("庫存數量: "+leftNum+"<br>");
     		out.print("商品價格: "+price+"<br>");
     		out.print("商品簡介: "+intro+"<br>");
-    		out.print("圖片檔名: "+imgName+"<br>");
+    		out.print("圖片檔名: "+imgOldName+"<br>");
     		//===
-    		String mypath=("..\\workspace\\teamweb\\TeamWeb\\WebContent");
-    		String tmppath=request.getServletContext().getRealPath("/");
     		try {
-    			String imgFileName="aa1";
-    		InputStream is=img.getInputStream();
-    		OutputStream os=new FileOutputStream(mypath+"\\uploadedIMG\\"+imgFileName+".jpg");
-    		OutputStream ostmp=new FileOutputStream(tmppath+"\\uploadedIMG\\"+imgFileName+".jpg");
-    		byte [] byteArr=new byte[(int) img.getSize()];
-    		is.read(byteArr);
-    		os.write(byteArr);
-    		is.close();
-    		os.close();
-    		//暫存區也存
-    		ostmp.write(byteArr);
-    		ostmp.close();
+    			InputStream is=img.getInputStream();
+    			OutputStream os=new FileOutputStream(mypath+"\\WebContent\\uploadedIMG\\"+imgNewName+".jpg");
+    			OutputStream ostmp=new FileOutputStream(tmppath+"\\uploadedIMG\\"+imgNewName+".jpg");
+    			byte [] byteArr=new byte[(int) img.getSize()];
+    			is.read(byteArr);
+    			os.write(byteArr);
+    			is.close();
+    			os.close();
+    			//===
+    			ostmp.write(byteArr);
+    			ostmp.close();
     		}catch(Exception e) {out.print(e);}
+    		response.sendRedirect("temp/admin_images.jsp?imgHowMany="+imgHowMany);
     	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
