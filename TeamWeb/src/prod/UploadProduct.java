@@ -1,4 +1,4 @@
-package Control;
+package prod;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,8 +21,8 @@ import conn.ConnQuery;
 import conn.ConnUpdate;
 
 @MultipartConfig
-@WebServlet("/doUploadGoods")
-public class UploadGood extends HttpServlet {
+@WebServlet("/doUploadProducts")
+public class UploadProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,10 +34,10 @@ public class UploadGood extends HttpServlet {
     		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     		response.setDateHeader("Expires", -1);
     		//====
-    		String name=request.getParameter("goodName");
-    		int leftNum=Integer.parseInt(request.getParameter("goodLeftNum"));
-    		int price=Integer.parseInt(request.getParameter("goodPrice"));
-    		String intro=request.getParameter("goodIntro");
+    		String name=request.getParameter("productName");
+    		int leftNum=Integer.parseInt(request.getParameter("productLeftNum"));
+    		int price=Integer.parseInt(request.getParameter("productPrice"));
+    		String intro=request.getParameter("productIntro");
     		Part img=request.getPart("imgFile");
     		String imgOldName=img.getSubmittedFileName();
     		String mypath=getServletContext().getInitParameter("myProjectLocation");
@@ -47,12 +47,12 @@ public class UploadGood extends HttpServlet {
     		//===
     		String imgNewName;
     		//===DB Update
-    			String sql=String.format("INSERT INTO teamweb2020.product(prod_name,prod_price,prod_introduction,prod_size_stock,prod_img) VALUE('%s',%d,'%s',%d,'%s')",name,price,intro,leftNum,mypath);
+    			String sql=String.format("INSERT INTO teamweb2020.product(prod_name,prod_price,prod_introduction,prod_size_stock,prod_img,prod_view) VALUE('%s',%d,'%s',%d,'%s',%d)",name,price,intro,leftNum,mypath,1);
     			ConnUpdate connUp= new ConnUpdate();
     			connUp.setSql(sql);
     		//===DB_Query
         		ConnQuery connQry=new ConnQuery();
-        		connQry.setSql("Select * from teamweb2020.product;");
+        		connQry.setSql("Select * from teamweb2020.product WHERE prod_view=1;");
         		ResultSet rs = connQry.getRs();
         		try {
 					rs.last();
@@ -62,11 +62,11 @@ public class UploadGood extends HttpServlet {
 				}
         		imgNewName=String.valueOf(imgId);
     		//===
-    		out.print("商品名稱: "+name+"<br>");
-    		out.print("庫存數量: "+leftNum+"<br>");
-    		out.print("商品價格: "+price+"<br>");
-    		out.print("商品簡介: "+intro+"<br>");
-    		out.print("圖片檔名: "+imgOldName+"<br>");
+    		System.out.print("商品名稱: "+name+"<br>");
+    		System.out.print("庫存數量: "+leftNum+"<br>");
+    		System.out.print("商品價格: "+price+"<br>");
+    		System.out.print("商品簡介: "+intro+"<br>");
+    		System.out.print("圖片檔名: "+imgOldName+"<br>");
     		//===
     		try {
     			InputStream is=img.getInputStream();
