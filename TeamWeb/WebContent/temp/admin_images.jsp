@@ -46,28 +46,34 @@
 <body>
     <h1>商品上傳</h1>
 
-<form name="imgUpload" id="imgUpload" enctype="multipart/form-data" method="post" action="/TeamWeb/doUploadGoods">
-商品名稱<input type="text" name="goodName"  style="width:100px; color:#000;" required><br>
-庫存數量<input type="num" name="goodLeftNum" style="width:100px; color:#000;" required><br>
-商品價格<input type="text" name="goodPrice" style="width:100px; color:#000;" required><br>
-商品簡介<input type="text" name="goodIntro" style="width:100px; color:#000;" required><br>
+<form name="imgUpload" id="imgUpload" enctype="multipart/form-data" method="post" action="/TeamWeb/doUploadProducts">
+商品名稱<input type="text" name="productName"  style="width:100px; color:#000;" required><br>
+庫存數量<input type="num" name="productLeftNum" style="width:100px; color:#000;" required><br>
+商品價格<input type="text" name="productPrice" style="width:100px; color:#000;" required><br>
+商品簡介<input type="text" name="productIntro" style="width:100px; color:#000;" required><br>
    選擇要上傳的影像：
   <input type="file" name="imgFile" id="imgFile" style="width:400px; color:#000;" required>
   <input type="submit" id="btnSubmit" value="確定上傳">
   <span style="color:red; font-size:12px;"> (上傳的檔案名稱請符合英數字及減號或底線....) </span>
 </form>
 
+<form method="post" action=""></form>
 	<div class="imgContainer">
 	<%
 		//vvv DB
-		String sql="SELECT * FROM TEAMWEB2020.PRODUCT;";
+		String sql="SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
 		ConnQuery connQry=new ConnQuery();
 		connQry.setSql(sql);
 		int queryCount=connQry.getQuery_count();
 		ResultSet rs=connQry.getRs();
-		int[] arr=new int[queryCount];
+		int[][] intArr=new int[queryCount][3];
+		String[][] strArr=new String[queryCount][2];
 		for(int i=0;i<queryCount;i++){
-			arr[i]=rs.getInt(1);
+			intArr[i][0]=rs.getInt(1);//id
+			intArr[i][1]=rs.getInt(3);//price
+			intArr[i][2]=rs.getInt(5);//leftNum
+			strArr[i][0]=rs.getString(2);//name
+			strArr[i][1]=rs.getString(4);//intro
 			rs.next();
 		}
 		rs.first();
@@ -78,37 +84,26 @@
 		int imgHowMany=queryCount;//Query數量
 		for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
 	%>
-		<div class="fileItem<%=i%>">
-     	 	<h3><?php echo $fileName; ?></h3>
-     		<h3>${name}</h3>
-       		<img src="../uploadedIMG/<%=arr[i]%>.jpg?sa=<%=(int)(Math.random()*100)%>" width=250;>
-        	<input type="button" class="delImgBtn" value="刪除影像" title="<?php echo $file; ?>">
-      	</div>
+		<form method="post" action="/TeamWeb/doDelImages">
+			<div class="fileItem<%=i%>">
+     	 		<h3><?php echo $fileName; ?></h3>
+     			<h3>${name}</h3>
+       			<img src="../uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=350;><br>
+        		<input type="hidden" name="imgId" value="<%=intArr[i][0]%>">
+        		商品名稱:&nbsp;<%=strArr[i][0]%><br>
+        		商品介紹:&nbsp;<%=strArr[i][1]%><br>
+        		商品價格:&nbsp;<%=intArr[i][1]%><br>
+        		庫存數量:&nbsp;<%=intArr[i][2]%><br>
+        		<input type="submit" class="delImgBtn<%=i%>" value="刪除影像" style="width:350px">
+      		</div>
+      	</form>
+      	
+      	
 	<%
-		}
 		//^^^呈現圖片
+		}
 	%>
-    	
-      <?php
-      ?>
-    
+	    
     </div>
 </body>
 </html>
-
-<script src="../js/jquery-1.8.3.min.js"></script>
-<script>
-  $('.delImgBtn').click(function(){
-    var $file = $(this).attr('title');  console.log($file);
-
-    if( confirm('確定刪除？') ){
-      $.ajax({
-        url:'admin_images_delete.php'
-        ,type:'post'
-        ,data:{ file: $file }
-      }).done(function(msg){
-        if(msg==1){ window.location.reload(); }
-      });
-    }
-  });
-</script>
