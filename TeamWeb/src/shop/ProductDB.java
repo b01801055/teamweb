@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import conn.ConnQuery;
+import conn.ConnUpdate;
 
 public class ProductDb implements Serializable{
 	private String sql;
@@ -79,17 +80,19 @@ public class ProductDb implements Serializable{
 	}
 	
 	public synchronized void buyProducts(Cart cart) throws SQLException{
-		Connection conn=null;
-		PreparedStatement stmt=null;
+		ConnUpdate con = new ConnUpdate();
 		Iterator<CartItem> it = cart.getItems().iterator();
-		sql="UPDATE product set prod_size_stock= prod_size_stock-"
-				+q
+			
+			while (it.hasNext()) {
+				con.
+				CartItem item = (CartItem) it.next();
+				Product product = item.getProduct();
+				int prod_id = product.getProd_id();
+				int quantity = item.getQuanity();
+				sql="UPDATE teamweb2020.product SET prod_size_stock="
+						+ "prod_size_stock=-"+quantity+"WHERE prod_id ="+prod_id;
+				
+			}
 		
-		while (it.hasNext()) {
-			CartItem item = (CartItem) it.next();
-			Product product = item.getProduct();
-			int prod_id = product.getProd_id();
-			int quantity = item.getQuanity();
-		}
 	}
 }
