@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import conn.ConnQuery;
+import conn.ConnUpdate;
+
 @MultipartConfig
 @WebServlet("/doUploadGoods")
 public class UploadGood extends HttpServlet {
@@ -24,10 +29,14 @@ public class UploadGood extends HttpServlet {
     		request.setCharacterEncoding("utf-8");
     		response.setContentType("text/html;charset=utf-8");
     		PrintWriter out = response.getWriter();
+    		//===
+    		response.setHeader("Pragma", "no-cache");
+    		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    		response.setDateHeader("Expires", -1);
     		//====
     		String name=request.getParameter("goodName");
     		int leftNum=Integer.parseInt(request.getParameter("goodLeftNum"));
-    		String price=request.getParameter("goodPrice");
+    		int price=Integer.parseInt(request.getParameter("goodPrice"));
     		String intro=request.getParameter("goodIntro");
     		Part img=request.getPart("imgFile");
     		String imgOldName=img.getSubmittedFileName();
@@ -35,9 +44,23 @@ public class UploadGood extends HttpServlet {
     		String tmppath=request.getServletContext().getRealPath("/");
     		//===
     		int imgId=1;
-    		int imgHowMany=10;
     		//===
-    		String imgNewName=String.valueOf(imgId);
+    		String imgNewName;
+    		//===DB Update
+    			String sql=String.format("INSERT INTO teamweb2020.product(prod_name,prod_price,prod_introduction,prod_size_stock,prod_img) VALUE('%s',%d,'%s',%d,'%s')",name,price,intro,leftNum,mypath);
+    			ConnUpdate connUp= new ConnUpdate();
+    			connUp.setSql(sql);
+    		//===DB_Query
+        		ConnQuery connQry=new ConnQuery();
+        		connQry.setSql("Select * from teamweb2020.product;");
+        		ResultSet rs = connQry.getRs();
+        		try {
+					rs.last();
+					imgId=rs.getInt(1);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+        		imgNewName=String.valueOf(imgId);
     		//===
     		out.print("商品名稱: "+name+"<br>");
     		out.print("庫存數量: "+leftNum+"<br>");
@@ -58,7 +81,7 @@ public class UploadGood extends HttpServlet {
     			ostmp.write(byteArr);
     			ostmp.close();
     		}catch(Exception e) {out.print(e);}
-    		response.sendRedirect("temp/admin_images.jsp?imgHowMany="+imgHowMany);
+    		response.sendRedirect("temp/admin_images.jsp");
     	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
