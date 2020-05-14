@@ -36,17 +36,23 @@
   <span style="color:red; font-size:12px;"> (上傳的檔案名稱請符合英數字及減號或底線....) </span>
 </form>
 
-<%String name="會員0503AC-留言系統AC.jpg";%>
-<div class="imgContainer">
-    <div class="fileItem">
-        <h3><?php echo $fileName; ?></h3>
-        <h3>${name}</h3>
-        <img src="file:\\/C:/uploaded/123.jpg">
-        <input type="button" class="delImgBtn" value="刪除影像" title="<?php echo $file; ?>">
-        <img src="<?php echo $file; ?>">
-      </div>   
-      <?php        
-      }
+	<div class="imgContainer">
+	<%
+		int imgHowMany=10;
+		//imgHowMany = Integer.parseInt(request.getParameter("imgHowMany"));
+		for(int i=1;i<=imgHowMany;i++){
+	%>
+		<div class="fileItem<%=i%>">
+     	 	<h3><?php echo $fileName; ?></h3>
+     		<h3>${name}</h3>
+       		<img src="../uploadedIMG/<%=i%>.jpg" width=250;>
+        	<input type="button" class="delImgBtn" value="刪除影像" title="<?php echo $file; ?>">
+      	</div>
+	<%
+		} 
+	%>
+    	
+      <?php
       ?>
     
     </div>
