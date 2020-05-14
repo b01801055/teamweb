@@ -19,8 +19,8 @@ public class Product implements Serializable{
 		this.prod_img=prod_img;
 	}
 	
-	public void setProd_id(int prod_id) {
-		this.prod_id = prod_id;
+	public int getProd_id() {
+		return prod_id;
 	}
 	public String getProd_name() {
 		return prod_name;
