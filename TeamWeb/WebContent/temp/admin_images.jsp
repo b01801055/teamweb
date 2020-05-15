@@ -57,7 +57,6 @@
   <span style="color:red; font-size:12px;"> (上傳的檔案名稱請符合英數字及減號或底線....) </span>
 </form>
 
-<form method="post" action=""></form>
 	<div class="imgContainer">
 	<%
 		//vvv DB
@@ -84,17 +83,19 @@
 		int imgHowMany=queryCount;//Query數量
 		for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
 	%>
-		<form method="post" action="/TeamWeb/doDelImages">
+		<form name="updateForm<%=i%>" method="get" action="/TeamWeb/doUpdateImages">
 			<div class="fileItem<%=i%>">
      	 		<h3><?php echo $fileName; ?></h3>
      			<h3>${name}</h3>
-       			<img src="../uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=350;><br>
+       			<img src="../uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=50%;><br>
+        		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=strArr[i][0]%>><br>
+        		商品介紹:&nbsp;<input type="text" name="prodIntro" value=<%=strArr[i][1]%>><br>
+        		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=intArr[i][1]%>><br>
+        		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=intArr[i][2]%>><br>
         		<input type="hidden" name="imgId" value="<%=intArr[i][0]%>">
-        		商品名稱:&nbsp;<%=strArr[i][0]%><br>
-        		商品介紹:&nbsp;<%=strArr[i][1]%><br>
-        		商品價格:&nbsp;<%=intArr[i][1]%><br>
-        		庫存數量:&nbsp;<%=intArr[i][2]%><br>
-        		<input type="submit" class="delImgBtn<%=i%>" value="刪除影像" style="width:350px">
+        		<input type="hidden" name=doWhat id="doWhat_<%=i%>" value="<%=i%>">
+        		<input type="submit" name="updateBtn" value="修改" style="width:40%">
+        		<input type="submit" name="updateBtn" value="刪除" style="width:10%">
       		</div>
       	</form>
       	
