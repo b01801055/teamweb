@@ -79,7 +79,7 @@
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã¯Â¿Â½</button>
 			<h3>Login Block</h3>
 		  </div>
 		  <div class="modal-body">
@@ -183,31 +183,41 @@
 	<div class="row">
 		<div class="span9" style="min-height:900px">
 			<div class="well">
-			
-			
-			<% if(request.getParameter("msg")!=null){
-			%>
-			<h5>Reset your password<span style="font-weight: normal;color:red;font-style: italic;font-size: 1.6em;font-family:'Noto Serif TC', serif;">&nbsp;&nbsp;Please check your email</span></h5>
-			<% 
-				}else{
-			%>
-			<h5>Reset your password</h5>
-			<%
-				}
-			%>
-			<br/>
-			Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.<br/><br/><br/>
-			<form name="myForm" method="post" action="/TeamWeb/doForgetPasswordSendMail">
+			<h5>Reset your password</h5><br/>
+			Please enter the new password for your account.<br/><br/><br/>
+			<form name="myForm" method="post" action="/TeamWeb/doForgetPasswordRenewPwd">
 			  <div class="control-group">
-				<label class="control-label" for="inputEmail1">E-mail address</label>
+				<label class="control-label" for="inputEmail1">New password</label>
 				<div class="controls">
-				  <input class="span3"  type="text" name="inputEmail" id="inputEmail1" placeholder="Email">
+				  <input class="span3" type="text" name="inputpwd" id="inputpwd1" placeholder="大小寫至少各一">
+				</div>
+				<label class="control-label" for="inputEmail1">Double check</label>
+				<div class="controls">
+				  <input class="span3" type="text" name="inputpwd2" id="inputpwd2" placeholder="再次輸入密碼">
 				</div>
 			  </div>
 			  <div class="controls">
-			  <button type="submit" class="btn block">Submit</button>
+			  <input type="hidden" name="enc" value="<%=request.getParameter("enc")%>">
+			  <button type="button" class="btn block" onclick="doCheck()">Submit</button>
 			  </div>
 			</form>
+			<script>
+				function doCheck(){
+					var pwd=document.myForm.inputpwd.value;
+					var pwd1=document.myForm.inputpwd2.value;
+					
+					var re_pwd=/(^.*[A-Z].*[a-z].*$)|(^.*[a-z].*[A-Z].*$)/;
+					if(!re_pwd.test(pwd)){
+						alert("密碼須包含大小寫各一");
+					}
+					else if(pwd!=pwd1){	
+						alert(pwd1);
+						alert("兩次密碼不符");
+					}else{
+						document.myForm.submit();
+					}
+				}
+			</script>
 		</div>
 		</div>
 	</div>	

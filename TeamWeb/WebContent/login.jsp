@@ -197,6 +197,9 @@
 					break;
 				case "4":
 					prt="帳號未驗證，請先驗證再行登入！";
+					break;
+				case "5":
+					prt="密碼更新完成，請用新密碼登入！";
 			}
 	%>
 	<h3> Login<span style="font-weight: normal;color:red;font-style: italic;font-size: 0.6em;font-family:'Noto Serif TC', serif;">&nbsp;&nbsp;<%out.print(prt);%></span></h3>
