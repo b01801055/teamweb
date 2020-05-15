@@ -84,13 +84,14 @@ public class ProductDb implements Serializable{
 		Iterator<CartItem> it = cart.getItems().iterator();
 			
 			while (it.hasNext()) {
-				con.
+				
 				CartItem item = (CartItem) it.next();
 				Product product = item.getProduct();
 				int prod_id = product.getProd_id();
 				int quantity = item.getQuanity();
 				sql="UPDATE teamweb2020.product SET prod_size_stock="
 						+ "prod_size_stock=-"+quantity+"WHERE prod_id ="+prod_id;
+				con.setSql(sql);
 				
 			}
 		
