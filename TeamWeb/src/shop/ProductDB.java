@@ -12,7 +12,7 @@ import java.util.Iterator;
 import conn.ConnQuery;
 import conn.ConnUpdate;
 
-public class ProductDB implements Serializable{
+public class ProductDb implements Serializable{
 	private String sql;
 	private ConnQuery conn= new ConnQuery();
 	private ResultSet rs;
