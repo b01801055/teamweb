@@ -198,6 +198,7 @@
 			  </div>
 			  <div class="controls">
 			  <input type="hidden" name="enc" value="<%=request.getParameter("enc")%>">
+			  <input type="hidden" name="email" value="<%=request.getParameter("email")%>">
 			  <button type="button" class="btn block" onclick="doCheck()">Submit</button>
 			  </div>
 			</form>
