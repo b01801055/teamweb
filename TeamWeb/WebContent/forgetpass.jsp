@@ -183,7 +183,7 @@
 			<div class="well">
 			<h5>Reset your password</h5><br/>
 			Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.<br/><br/><br/>
-			<form>
+			<form name="">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">E-mail address</label>
 				<div class="controls">
