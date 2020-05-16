@@ -28,7 +28,7 @@ public class UpdateImages extends HttpServlet {
 			String sql = String.format("UPDATE teamweb2020.product SET prod_view=0 WHERE prod_id = %d;", imgId);
 			ConnUpdate connUp = new ConnUpdate();
 			connUp.setSql(sql);
-			response.sendRedirect("temp/admin_images.jsp");
+			response.sendRedirect("admin_images.jsp");
 		}else if(doWhat.equals("修改")) {
 			int imgId = Integer.parseInt(request.getParameter("imgId"));
 			String prodName = request.getParameter("prodName");
@@ -38,9 +38,9 @@ public class UpdateImages extends HttpServlet {
 			String sql = String.format("UPDATE teamweb2020.product SET prod_name='%s',prod_introduction='%s',prod_price=%s,prod_size_stock=%s WHERE prod_id = %d;", prodName,prodIntro,prodPrice,prodLeftNum,imgId);
 			ConnUpdate connUp = new ConnUpdate();
 			connUp.setSql(sql);
-			response.sendRedirect("temp/admin_images.jsp");
+			response.sendRedirect("admin_images.jsp");
 		}else {
-			response.sendRedirect("temp/admin_images.jsp");
+			response.sendRedirect("admin_images.jsp");
 			}
 	}
 

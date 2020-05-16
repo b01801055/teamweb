@@ -81,7 +81,7 @@ public class UploadProducts extends HttpServlet {
     			ostmp.write(byteArr);
     			ostmp.close();
     		}catch(Exception e) {out.print(e);}
-    		response.sendRedirect("temp/admin_images.jsp");
+    		response.sendRedirect("admin_images.jsp");
     	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

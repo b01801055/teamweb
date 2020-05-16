@@ -82,10 +82,10 @@
 					<a class="brand" href="index.jsp"><img
 						src="themes/images/logo.png" alt="Bootsshop" /></a>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="#">圖像管理</a></li>
-						<li class=""><a href="upLoad.jsp">商品新增</a></li>
-						<li class=""><a href="#">商品管理</a></li>
-						<li class=""><a href="#">類別管理</a></li>
+						
+						
+						<li class=""><a href="admin_images.jsp">商品上架管理</a></li>
+						
 						<li class=""><a href="#">公告管理</a></li>
 						<li class=""><a href="admin_member.jsp">會員管理</a></li>
 						<li class=""><a href="#login" role="button"
