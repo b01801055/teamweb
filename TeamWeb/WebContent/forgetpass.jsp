@@ -185,7 +185,7 @@
 			<div class="well">
 			
 			
-			<% if(request.getParameter("msg")!=null){
+			<% if(request.getParameter("msg")!=null && request.getParameter("msg").equals("1")){
 			%>
 			<h5>Reset your password<span style="font-weight: normal;color:red;font-style: italic;font-size: 1.6em;font-family:'Noto Serif TC', serif;">&nbsp;&nbsp;Please check your email</span></h5>
 			<% 

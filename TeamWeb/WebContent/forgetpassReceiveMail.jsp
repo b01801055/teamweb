@@ -189,11 +189,11 @@
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">New password</label>
 				<div class="controls">
-				  <input class="span3" type="text" name="inputpwd" id="inputpwd1" placeholder="大小寫至少各一">
+				  <input class="span3" type="password" name="inputpwd" id="inputpwd1" placeholder="大小寫至少各一">
 				</div>
 				<label class="control-label" for="inputEmail1">Double check</label>
 				<div class="controls">
-				  <input class="span3" type="text" name="inputpwd2" id="inputpwd2" placeholder="再次輸入密碼">
+				  <input class="span3" type="password" name="inputpwd2" id="inputpwd2" placeholder="再次輸入密碼">
 				</div>
 			  </div>
 			  <div class="controls">
