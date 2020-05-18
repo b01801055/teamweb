@@ -8,7 +8,13 @@
 		request.setAttribute("msg", "3");
 		String url = "/login";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
 	}
+}else{
+	request.setAttribute("msg", "2");
+	String url = "/login";
+	RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+	dispatcher.forward(request, response);
 }
 %>
 <!DOCTYPE html>

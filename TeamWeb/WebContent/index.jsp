@@ -1,5 +1,6 @@
 ﻿<%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%@page import="conn.ConnQuery,java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,68 +188,48 @@
 						</div>
 					</div>
 				</div>
-				<div class="item">
-					<div class="container">
-						<a href="register.jsp"><img style="width: 100%"
-							src="themes/images/carousel/2.png" alt="" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="container">
-						<a href="register.jsp"><img src="themes/images/carousel/3.png"
-							alt="" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
+				<!---->
+					<%
+						//vvv DB
+						String sql="SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
+						ConnQuery connQry=new ConnQuery();
+						connQry.setSql(sql);
+						int queryCount=connQry.getQuery_count();
+						ResultSet rs=connQry.getRs();
+						int[][] intArr=new int[queryCount][3];
+						String[][] strArr=new String[queryCount][2];
+						for(int i=0;i<queryCount;i++){
+							intArr[i][0]=rs.getInt(1);//id
+							intArr[i][1]=rs.getInt(3);//price
+							intArr[i][2]=rs.getInt(5);//leftNum
+							strArr[i][0]=rs.getString(2);//name
+							strArr[i][1]=rs.getString(4);//intro
+							rs.next();
+						}
+						rs.first();
+						//^^^DB
 
-					</div>
-				</div>
-				<div class="item">
-					<div class="container">
-						<a href="register.jsp"><img src="themes/images/carousel/4.png"
-							alt="" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
+						//vvv呈現圖片
+						int imgHowMany=queryCount;//Query數量
+						for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
+					%>
+						  <div class="item">
+							<div class="container">
+								<a href="register.jsp">
+								<img style="width: 40%; float:left;" src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+								<div style="font-family: 'Noto Serif TC', serif;">
+									<h4><%=strArr[i][0]%></h4>
+									<p><%=strArr[i][1]%></p>
+								</div>
+							</div>
 						</div>
-
-					</div>
-				</div>
-				<div class="item">
-					<div class="container">
-						<a href="register.jsp"><img src="themes/images/carousel/5.png"
-							alt="" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="container">
-						<a href="register.jsp"><img src="themes/images/carousel/6.png"
-							alt="" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
-					</div>
-				</div>
+					<%
+						//^^^呈現圖片
+						}
+					%>
+				
+				<!--^^^-->
+				
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 			<a class="right carousel-control" href="#myCarousel"

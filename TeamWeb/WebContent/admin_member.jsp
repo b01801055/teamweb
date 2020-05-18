@@ -3,6 +3,23 @@
 <%@page pageEncoding="utf-8"%>
 <%@page import="conn.*"%>
 <%
+	if (session.getAttribute("mem_level") != null) {
+		String mem_name = (String) session.getAttribute("mem_name");
+		int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
+	
+		if (mem_name == "" || mem_level < 9) {
+			request.setAttribute("msg", "3");
+			String url = "/login";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
+		}
+	}else{
+		request.setAttribute("msg", "2");
+		String url = "/login";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
+	}
+
 	String sql = "SELECT * FROM teamweb2020.member ORDER BY mem_id ASC";
 	ConnQuery cn = new ConnQuery();
 	cn.setSql(sql);
@@ -32,7 +49,9 @@
 <body>
 	<h1><strong>會員管理</strong></h1>
 <p class="w3-center">會員總人數：<%=query_count %>人</p>
-
+<form method="post" action="admin_index.jsp"">
+	<input type="submit" id="btnQuit" value="離開" style="float:right;font-family:DFKai-sb;width:3%;">
+</form>
 <div class="w3-row w3-gray textCenter">
   <div class="w3-col m3">會員[id]名稱</div>
   <div class="w3-col m4">會員帳號</div>
