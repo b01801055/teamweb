@@ -85,9 +85,9 @@
 	%>
 		<form name="updateForm<%=i%>" method="get" action="/TeamWeb/doUpdateImages">
 			<div class="fileItem<%=i%>">
-     	 		<h3><?php echo $fileName; ?></h3>
+     	 		
      			<h3>${name}</h3>
-       			<img src="../uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=50%;><br>
+       			<img src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=50%;><br>
         		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=strArr[i][0]%>><br>
         		商品介紹:&nbsp;<input type="text" name="prodIntro" value=<%=strArr[i][1]%>><br>
         		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=intArr[i][1]%>><br>
