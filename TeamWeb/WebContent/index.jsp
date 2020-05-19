@@ -1,6 +1,5 @@
 ﻿<%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
-<%@page import="conn.ConnQuery,java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,53 +172,37 @@
 		</div>
 	</div>
 	<!-- Header End====================================================================== -->
+	
+	<!--vvv 使用Bean查詢商品數量 -->
+	<jsp:useBean id="myBean" scope="page" class="model.ProductBean"></jsp:useBean>
+	<!--^^^ 使用Bean查詢商品數量 -->	
 	<div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="item active">	
 					<div class="container">
-						<a href="register.jsp"><img style="width: 100%"
-							src="themes/images/carousel/1.png" alt="special offers" /></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
+					<!-- vvv等著被抽換 -->
+						<a href="register.jsp">
+						<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=myBean.getIdList().get(myBean.getQueryCount()-1)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+						<div style="font-family: 'Noto Serif TC', serif;margin-left: 50%;max-width:40%;">
+							<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=myBean.getNameList().get(myBean.getQueryCount()-1)%></h4>
+							<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=myBean.getIntroList().get(myBean.getQueryCount()-1)%></p>
 						</div>
+					<!-- ^^^等著被抽換 -->
 					</div>
 				</div>
 				<!---->
+				
 					<%
-						//vvv DB
-						String sql="SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
-						ConnQuery connQry=new ConnQuery();
-						connQry.setSql(sql);
-						int queryCount=connQry.getQuery_count();
-						ResultSet rs=connQry.getRs();
-						int[][] intArr=new int[queryCount][3];
-						String[][] strArr=new String[queryCount][2];
-						for(int i=0;i<queryCount;i++){
-							intArr[i][0]=rs.getInt(1);//id
-							intArr[i][1]=rs.getInt(3);//price
-							intArr[i][2]=rs.getInt(5);//leftNum
-							strArr[i][0]=rs.getString(2);//name
-							strArr[i][1]=rs.getString(4);//intro
-							rs.next();
-						}
-						rs.first();
-						//^^^DB
-
-						//vvv呈現圖片
-						int imgHowMany=queryCount;//Query數量
-						for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
+						for(int i=myBean.getQueryCount()-2;i>=0;i--){//要改用Array[Qurery數量]
 					%>
 						<div class="item">
 							<div class="container">
 								<a href="register.jsp">
-								<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+								<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=myBean.getIdList().get(i)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div style="font-family: 'Noto Serif TC', serif;margin-left: 50%;max-width:40%;">
-									<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=strArr[i][0]%></h4>
-									<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=strArr[i][1]%></p>
+									<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=myBean.getNameList().get(i)%></h4>
+									<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=myBean.getIntroList().get(i)%></p>
 								</div>
 							</div>
 						</div>
@@ -343,15 +326,15 @@
 					<h4>Latest Products</h4>
 					<ul class="thumbnails">
 					<%
-						for(int i=imgHowMany-1;i>=0;i--){
+						for(int i=myBean.getQueryCount()-1;i>=0;i--){
 					%>
 						<li class="span3">
 							<div class="thumbnail">
 								<a href="product_details.jsp">
-									<img src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+									<img src="uploadedIMG/<%=myBean.getIdList().get(i)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div class="caption">
-									<h5><%=strArr[i][0]%></h5><!--name-->
-									<p><%=strArr[i][1]%></p><!--intro-->
+									<h5><%=myBean.getNameList().get(i)%></h5><!--name-->
+									<!--  <p><%=myBean.getIntroList().get(i) %></p>--><!--intro-->  
 
 									<h4 style="text-align: center">
 										<a class="btn" href="product_details.jsp"> 
@@ -361,7 +344,7 @@
 											<i class="icon-shopping-cart"></i>
 										</a> 
 										<a class="btn btn-primary" href="#">
-											$<%=intArr[i][1]%><!--price-->
+											$<%=myBean.getPriceList().get(i)%><!--price-->
 										</a>
 									</h4>
 								</div>

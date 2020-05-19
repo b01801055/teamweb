@@ -1,3 +1,15 @@
+<%@page contentType="text/html; charset=utf-8"%>
+<%@page pageEncoding="utf-8"%>
+<%
+int prodId= 0;
+	if(request.getParameter("prod")==null){
+		System.out.print("未指定產品或產品不存在");
+		response.sendRedirect("index.jsp");
+	}else{
+		prodId=Integer.parseInt((request.getParameter("prod")));
+	}
+	model.ProductBean myBean = new model.ProductBean(prodId);
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -77,7 +89,7 @@
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>
 			<h3>Login Block</h3>
 		  </div>
 		  <div class="modal-body">
@@ -176,13 +188,18 @@
     <li><a href="products.jsp">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
     </ul>	
-	<div class="row">	  
+	<div class="row">
+		
 			<div id="gallery" class="span3">
-            <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="themes/images/products/large/3.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+				
+				<!--vvv-->	  
+            <a href="uploadedIMG/<%=prodId%>.jpg" title="<%= myBean.getName() %>">
+				<img src="uploadedIMG/<%=prodId%>.jpg" style="width:200%; max-width: 100%;" alt="Fujifilm FinePix S2950 Digital Camera"/>
             </a>
 			<div id="differentview" class="moreOptopm carousel slide">
+<!--  =============================
                 <div class="carousel-inner">
+					
                   <div class="item active">
                    <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""/></a>
                    <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""/></a>
@@ -193,10 +210,12 @@
                    <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""/></a>
                    <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""/></a>
                   </div>
-                </div>
+				</div>
+=================================  -->
+			<!--^^^-->
               <!--  
-			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-              <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a> 
+			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">â¹</a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">âº</a> 
 			  -->
               </div>
 			  
@@ -212,12 +231,12 @@
 			</div>
 			</div>
 			<div class="span6">
-				<h3>Fujifilm FinePix S2950 Digital Camera  </h3>
-				<small>- (14MP, 18x Optical Zoom) 3-inch LCD</small>
+				<h3><%=myBean.getName() %>  </h3>
+				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>$222.00</span></label>
+					<label class="control-label"><span>$<%= myBean.getPrice() %></span></label>
 					<div class="controls">
 					<input type="number" class="span1" placeholder="Qty."/>
 					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
@@ -226,7 +245,7 @@
 				</form>
 				
 				<hr class="soft"/>
-				<h4>100 items in stock</h4>
+				<h4><%=myBean.getLeftNum()%> items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Color</span></label>
@@ -242,9 +261,7 @@
 				</form>
 				<hr class="soft clr"/>
 				<p>
-				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. 
-				Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. 
-				Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).
+				<%= myBean.getIntro() %>
 				
 				</p>
 				<a class="btn btn-small pull-right" href="#detail">More Details</a>
@@ -274,7 +291,7 @@
 				
 				<h5>Features</h5>
 				<p>
-				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br/>
+				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 Ã81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br/>
 				OND363338
 				</p>
 
@@ -286,7 +303,7 @@
 
 				<h5>Electric powered Fujinon 18x zoom lens</h5>
 				<p>
-				The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you're at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.
+				The S2950 sports an impressive 28mm â 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you're at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.
 				</p>
 				<h5>Impressive panoramas</h5>
 				<p>

@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
-<%@page import="conn.ConnQuery,java.sql.ResultSet" %>
 <%
 	//Directs caches not to store the page under any circumstance
 	response.setDateHeader("Expires", -1);
@@ -78,41 +77,22 @@
 
 
 	<div class="imgContainer">
-	<%
-		//vvv DB
-		String sql="SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
-		ConnQuery connQry=new ConnQuery();
-		connQry.setSql(sql);
-		int queryCount=connQry.getQuery_count();
-		ResultSet rs=connQry.getRs();
-		int[][] intArr=new int[queryCount][3];
-		String[][] strArr=new String[queryCount][2];
-		for(int i=0;i<queryCount;i++){
-			intArr[i][0]=rs.getInt(1);//id
-			intArr[i][1]=rs.getInt(3);//price
-			intArr[i][2]=rs.getInt(5);//leftNum
-			strArr[i][0]=rs.getString(2);//name
-			strArr[i][1]=rs.getString(4);//intro
-			rs.next();
-		}
-		rs.first();
-		//^^^
-	%>	
 	</div>
+	<!-- QueryProduct -->
+	<jsp:useBean id="myBean" scope="page" class="model.ProductBean"></jsp:useBean>
 	<%
 		//vvv呈現圖片
-		int imgHowMany=queryCount;//Query數量
-		for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
+		for(int i=myBean.getQueryCount()-1;i>=0;i--){//要改用Array[Qurery數量]
 	%>
 		<form name="updateForm<%=i%>" method="get" action="/TeamWeb/doUpdateImages">
 			<div class="fileItem" style="float:left;">
      	 		
-       			<img src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=200%;><br>
-        		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=strArr[i][0]%>><br>
-        		商品介紹:&nbsp;<textarea name="prodIntro" style="height:100px;"><%=strArr[i][1]%></textarea><br>
-        		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=intArr[i][1]%>><br>
-        		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=intArr[i][2]%>><br>
-        		<input type="hidden" name="imgId" value="<%=intArr[i][0]%>">
+       			<img src="uploadedIMG/<%=myBean.getIdList().get(i) %>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=200%;><br>
+        		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=myBean.getNameList().get(i)%>><br>
+        		商品介紹:&nbsp;<textarea name="prodIntro" style="height:100px;"><%=myBean.getIntroList().get(i)%></textarea><br>
+        		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=myBean.getPriceList().get(i)%>><br>
+        		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=myBean.getLeftNumList().get(i)%>><br>
+        		<input type="hidden" name="imgId" value="<%=myBean.getIdList().get(i)%>">
         		<input type="hidden" name=doWhat id="doWhat_<%=i%>" value="<%=i%>">
         		<input type="submit" name="updateBtn" value="修改"  style="width:70%">
         		<input type="submit" name="updateBtn" value="刪除"  class="delImgBtn">
