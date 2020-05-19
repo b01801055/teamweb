@@ -54,7 +54,7 @@
 					<%
 						}else{
 					%>
-					Sing in! Hurry!!
+					Sign in! Hurry!!
 					<%
 						}
 					%>
@@ -78,7 +78,7 @@
 						<%
 							if (session.getAttribute("mem_level") != null) {
 							int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
-								if (mem_level >= 9) {
+								if (mem_level == 9) {
 						%>
 						<a href="admin_index.jsp"><span class="">#### 後台管理 ####</span></a>
 						<%
@@ -213,13 +213,13 @@
 						int imgHowMany=queryCount;//Query數量
 						for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
 					%>
-						  <div class="item">
+						<div class="item">
 							<div class="container">
 								<a href="register.jsp">
-								<img style="width: 40%; float:left;" src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
-								<div style="font-family: 'Noto Serif TC', serif;">
-									<h4><%=strArr[i][0]%></h4>
-									<p><%=strArr[i][1]%></p>
+								<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+								<div style="font-family: 'Noto Serif TC', serif;margin-left: 50%;max-width:40%;">
+									<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=strArr[i][0]%></h4>
+									<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=strArr[i][1]%></p>
 								</div>
 							</div>
 						</div>

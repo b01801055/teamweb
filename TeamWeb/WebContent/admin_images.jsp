@@ -17,14 +17,16 @@
 	if(session.getAttribute("mem_level") != null){
 		int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
 		if (mem_level != 9) {
-%>
-			<jsp:forward page="login.jsp?msg=3"></jsp:forward>
-<% 
+			request.setAttribute("msg", "3");
+			String url = "/login";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		}
 	}else{
-%>
-			<jsp:forward page="login.jsp?msg=2"></jsp:forward>
-<%
+		request.setAttribute("msg", "2");
+		String url = "/login";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
 	}
 %>
 
@@ -107,7 +109,7 @@
      	 		
        			<img src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=200%;><br>
         		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=strArr[i][0]%>><br>
-        		商品介紹:&nbsp;<input type="text" name="prodIntro" value=<%=strArr[i][1]%>><br>
+        		商品介紹:&nbsp;<textarea name="prodIntro" style="height:100px;"><%=strArr[i][1]%></textarea><br>
         		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=intArr[i][1]%>><br>
         		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=intArr[i][2]%>><br>
         		<input type="hidden" name="imgId" value="<%=intArr[i][0]%>">
