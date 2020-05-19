@@ -1,3 +1,6 @@
+<%@page contentType="text/html; charset=utf-8"%>
+<%@page pageEncoding="utf-8"%>
+<%@page import="conn.ConnQuery,java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -377,78 +380,57 @@
 
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
+		<%
+			//vvv DB
+			String sql="SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
+			ConnQuery connQry=new ConnQuery();
+			connQry.setSql(sql);
+			int queryCount=connQry.getQuery_count();
+			ResultSet rs=connQry.getRs();
+			int[][] intArr=new int[queryCount][3];
+			String[][] strArr=new String[queryCount][2];
+			for(int i=0;i<queryCount;i++){
+				intArr[i][0]=rs.getInt(1);//id
+				intArr[i][1]=rs.getInt(3);//price
+				intArr[i][2]=rs.getInt(5);//leftNum
+				strArr[i][0]=rs.getString(2);//name
+				strArr[i][1]=rs.getString(4);//intro
+				rs.next();
+			}
+			rs.first();
+			//^^^DB
+
+			//vvv呈現圖片
+			int imgHowMany=queryCount;//Query數量
+			for(int i=imgHowMany-1;i>=0;i--){//要改用Array[Qurery數量]
+		%>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
+				<a href="product_details.jsp"><img src="uploadedIMG/<%=intArr[i][0]%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt=""/></a>
 				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
+				  <h5><%=strArr[i][0]%></h5><!--name-->
 				  <p> 
-					I'm a paragraph. Click here 
+					<%=strArr[i][1]%> <!--intro-->
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center">
+						<a class="btn" href="product_details.jsp"> 
+							<i class="icon-zoom-in"></i>
+						</a> 
+						<a class="btn" href="#">
+							Add to 
+							<i class="icon-shopping-cart"></i>
+						</a>
+						<a class="btn btn-primary" href="#">
+							$<%=intArr[i][1]%><!--price-->
+						</a>
+					</h4>
 				</div>
 			  </div>
 			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					I'm a paragraph. Click here 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					I'm a paragraph. Click here 
-				  </p>
-				    <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					I'm a paragraph. Click here 
-				  </p>
-				    <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					I'm a paragraph. Click here 
-				  </p>
-				    <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					I'm a paragraph. Click here 
-				  </p>
-				    <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
+		<%
+			//^^^呈現圖片
+			}
+		%>
 		  </ul>
 	<hr class="soft"/>
 	</div>
