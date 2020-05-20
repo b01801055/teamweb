@@ -1,5 +1,7 @@
-﻿<%@page contentType="text/html; charset=utf-8"%>
+﻿<%@page import="shop.Product"%>
+<%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList,shop.Product" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +63,7 @@
 					&nbsp;&nbsp;
 					<%-- vvv插入受訪人數 --%> 
 					<% String ip=request.getRemoteAddr(); %>
-					<jsp:useBean id="viewCount" scope="session" class="member.Mem_visit_count"/>
+					<jsp:useBean id="viewCount" scope="page" class="member.Mem_visit_count"/>
 					<%  if(session.getAttribute("mem_id")!=null){ 
 							int id=(int)session.getAttribute("mem_id");%>
 					<jsp:setProperty property="viewId" name="viewCount" value="<%=id%>"/>
@@ -174,7 +176,8 @@
 	<!-- Header End====================================================================== -->
 	
 	<!--vvv 使用Bean查詢商品數量 -->
-	<jsp:useBean id="myBean" scope="page" class="model.ProductBean"></jsp:useBean>
+	<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"></jsp:useBean>
+	<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 	<!--^^^ 使用Bean查詢商品數量 -->	
 	<div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
@@ -183,10 +186,10 @@
 					<div class="container">
 					<!-- vvv等著被抽換 -->
 						<a href="register.jsp">
-						<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=myBean.getIdList().get(myBean.getQueryCount()-1)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+						<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=arrP.get(myBean.getQuery_count()-1).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 						<div style="font-family: 'Noto Serif TC', serif;margin-left: 50%;max-width:40%;">
-							<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=myBean.getNameList().get(myBean.getQueryCount()-1)%></h4>
-							<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=myBean.getIntroList().get(myBean.getQueryCount()-1)%></p>
+							<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=arrP.get(myBean.getQuery_count()-1).getProd_name()%></h4>
+							<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=arrP.get(myBean.getQuery_count()-1).getProd_introduction()%></p>
 						</div>
 					<!-- ^^^等著被抽換 -->
 					</div>
@@ -194,15 +197,15 @@
 				<!---->
 				
 					<%
-						for(int i=myBean.getQueryCount()-2;i>=0;i--){//要改用Array[Qurery數量]
+						for(int i=myBean.getQuery_count()-2;i>=0;i--){//要改用Array[Qurery數量]
 					%>
 						<div class="item">
 							<div class="container">
 								<a href="register.jsp">
-								<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=myBean.getIdList().get(i)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+								<img style="width: 40%; float:left;overflow:hidden;" src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div style="font-family: 'Noto Serif TC', serif;margin-left: 50%;max-width:40%;">
-									<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=myBean.getNameList().get(i)%></h4>
-									<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=myBean.getIntroList().get(i)%></p>
+									<h4 style="font-size:250%;text-align:left;padding-top: 5%;padding-bottom: 5%;"><%=arrP.get(i).getProd_name()%></h4>
+									<p style="font-size:150%;text-align:left;text-indent:2em;line-height:2em;"><%=arrP.get(i).getProd_introduction()%></p>
 								</div>
 							</div>
 						</div>
@@ -326,15 +329,15 @@
 					<h4>Latest Products</h4>
 					<ul class="thumbnails">
 					<%
-						for(int i=myBean.getQueryCount()-1;i>=0;i--){
+						for(int i=myBean.getQuery_count()-1;i>=0;i--){
 					%>
 						<li class="span3">
 							<div class="thumbnail">
 								<a href="product_details.jsp">
-									<img src="uploadedIMG/<%=myBean.getIdList().get(i)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
+									<img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div class="caption">
-									<h5><%=myBean.getNameList().get(i)%></h5><!--name-->
-									<!--  <p><%=myBean.getIntroList().get(i) %></p>--><!--intro-->  
+									<h5><%=arrP.get(i).getProd_name()%></h5><!--name-->
+									<!--  <p><%=arrP.get(i).getProd_introduction()%></p>--><!--intro-->  
 
 									<h4 style="text-align: center">
 										<a class="btn" href="product_details.jsp"> 
@@ -344,7 +347,7 @@
 											<i class="icon-shopping-cart"></i>
 										</a> 
 										<a class="btn btn-primary" href="#">
-											$<%=myBean.getPriceList().get(i)%><!--price-->
+											$<%=arrP.get(i).getProd_price()%><!--price-->
 										</a>
 									</h4>
 								</div>

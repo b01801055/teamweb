@@ -37,6 +37,12 @@ public class Mem_login_check extends HttpServlet {
 		cn.setSql(sql);
 		int num = cn.getQuery_count();
 		ResultSet rs = cn.getRs();
+		try {
+			rs.first();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		if(num>=1) {
 			int level=0;
 			try {

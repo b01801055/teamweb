@@ -18,13 +18,15 @@ public class ProductDb implements Serializable{
 	private ResultSet rs;
 	private int query_count=0;
 	
+	public int getQuery_count() {return this.query_count;}
 	public Collection<Product> getProducts() throws SQLException{
 		rs=null;
-		sql="SELECT * FROM teamweb2020.product";
+		sql="SELECT * FROM teamweb2020.product WHERE prod_view=1";
 		ArrayList<Product> prodList = new ArrayList<Product>();
 		
 		conn.setSql(sql);
 		rs=conn.getRs();
+		this.query_count=conn.getQuery_count();
 		while(rs.next()) {
 			Product product = new Product(rs.getInt(1), rs.getString(2),
 					rs.getInt(3), rs.getString(4),
@@ -35,9 +37,10 @@ public class ProductDb implements Serializable{
 	}
 	public Product getProduct(int prod_id) throws SQLException{
 		rs=null;
-		sql="SELECT * FROM teamweb2020.product WHERE prod_id="+prod_id;
+		sql="SELECT * FROM teamweb2020.product WHERE prod_view=1 AND prod_id="+prod_id;
 		conn.setSql(sql);
 		rs=conn.getRs();
+		this.query_count=conn.getQuery_count();
 		Product product=null;
 		if (rs.next()) {
 			product = new Product(rs.getInt(1), rs.getString(2),

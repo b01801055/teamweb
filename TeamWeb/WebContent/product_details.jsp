@@ -1,14 +1,16 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList,shop.Product" %>
 <%
-int prodId= 0;
+int prod_id= 0;
 	if(request.getParameter("prod")==null){
 		System.out.print("未指定產品或產品不存在");
 		response.sendRedirect("index.jsp");
 	}else{
-		prodId=Integer.parseInt((request.getParameter("prod")));
+		prod_id=Integer.parseInt((request.getParameter("prod")));
 	}
-	model.ProductBean myBean = new model.ProductBean(prodId);
+	shop.ProductDb myBean = new shop.ProductDb();
+	Product myProd=myBean.getProduct(prod_id);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -193,8 +195,8 @@ int prodId= 0;
 			<div id="gallery" class="span3">
 				
 				<!--vvv-->	  
-            <a href="uploadedIMG/<%=prodId%>.jpg" title="<%= myBean.getName() %>">
-				<img src="uploadedIMG/<%=prodId%>.jpg" style="width:200%; max-width: 100%;" alt="Fujifilm FinePix S2950 Digital Camera"/>
+            <a href="uploadedIMG/<%=myProd.getProd_id()%>.jpg" title="<%= myProd.getProd_name() %>">
+				<img src="uploadedIMG/<%=myProd.getProd_id()%>.jpg" style="width:200%; max-width: 100%;" alt="Fujifilm FinePix S2950 Digital Camera"/>
             </a>
 			<div id="differentview" class="moreOptopm carousel slide">
 <!--  =============================
@@ -231,12 +233,12 @@ int prodId= 0;
 			</div>
 			</div>
 			<div class="span6">
-				<h3><%=myBean.getName() %>  </h3>
+				<h3><%=myProd.getProd_name() %>  </h3>
 				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>$<%= myBean.getPrice() %></span></label>
+					<label class="control-label"><span>$<%= myProd.getProd_price() %></span></label>
 					<div class="controls">
 					<input type="number" class="span1" placeholder="Qty."/>
 					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
@@ -245,7 +247,7 @@ int prodId= 0;
 				</form>
 				
 				<hr class="soft"/>
-				<h4><%=myBean.getLeftNum()%> items in stock</h4>
+				<h4><%=myProd.getProd_size_stock()%> items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Color</span></label>
@@ -261,7 +263,7 @@ int prodId= 0;
 				</form>
 				<hr class="soft clr"/>
 				<p>
-				<%= myBean.getIntro() %>
+				<%= myProd.getProd_introduction() %>
 				
 				</p>
 				<a class="btn btn-small pull-right" href="#detail">More Details</a>

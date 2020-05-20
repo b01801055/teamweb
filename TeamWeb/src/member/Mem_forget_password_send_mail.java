@@ -34,6 +34,7 @@ public class Mem_forget_password_send_mail extends HttpServlet {
 		try {
 			if (connQry.getQuery_count() > 0) {
 				ResultSet rs = connQry.getRs();
+				rs.first();
 				String name = rs.getString(2);
 				String id = String.valueOf(rs.getInt(1));
 				//===
