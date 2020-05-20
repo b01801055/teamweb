@@ -2,15 +2,16 @@
 <%@page pageEncoding="utf-8"%>
 <%@page import="java.util.ArrayList,shop.Product" %>
 <%
-int prod_id= 0;
-	if(request.getParameter("prod")==null){
-		System.out.print("未指定產品或產品不存在");
-		response.sendRedirect("index.jsp");
-	}else{
-		prod_id=Integer.parseInt((request.getParameter("prod")));
-	}
+
+if(request.getParameter("prod")==null){
+	System.out.print("未指定產品或產品不存在");
+	response.sendRedirect("index.jsp");
+}else{
+	int prod_id=Integer.parseInt((request.getParameter("prod")));
+	
 	shop.ProductDb myBean = new shop.ProductDb();
 	Product myProd=myBean.getProduct(prod_id);
+	//括號"}"在</html>後面
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -693,3 +694,6 @@ int prod_id= 0;
 <span id="themesBtn"></span>
 </body>
 </html>
+<%
+}
+%>

@@ -333,7 +333,8 @@
 					%>
 						<li class="span3">
 							<div class="thumbnail">
-								<a href="product_details.jsp">
+								<a href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"
+								>
 									<img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div class="caption">
 									<h5><%=arrP.get(i).getProd_name()%></h5><!--name-->
