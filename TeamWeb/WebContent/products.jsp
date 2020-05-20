@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList,shop.Product" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -379,18 +380,19 @@
 
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
-		<jsp:useBean id="myBean" scope="page" class="model.ProductBean"/>
+		<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"/>
+		<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 		<%
 			//vvv呈現圖片
-			for(int i=myBean.getQueryCount()-1;i>=0;i--){//要改用Array[Qurery數量]
+			for(int i=myBean.getQuery_count()-1;i>=0;i--){//要改用Array[Qurery數量]
 		%>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.jsp?prod=<%=myBean.getIdList().get(i)%>"><img src="uploadedIMG/<%=myBean.getIdList().get(i)%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt=""/></a>
+				<a href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"><img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt=""/></a>
 				<div class="caption">
-				  <h5><%=myBean.getNameList().get(i)%></h5><!--name-->
+				  <h5><%=arrP.get(i).getProd_name()%></h5><!--name-->
 				  <p> 
-					<!--  <%=myBean.getIntroList().get(i) %> --> <!--intro-->
+					<!--  <%=arrP.get(i).getProd_introduction()%> --> <!--intro-->
 				  </p>
 				   <h4 style="text-align:center">
 						<a class="btn" href="product_details.jsp"> 
@@ -401,7 +403,7 @@
 							<i class="icon-shopping-cart"></i>
 						</a>
 						<a class="btn btn-primary" href="#">
-							$<%=myBean.getPriceList().get(i)%><!--price-->
+							$<%=arrP.get(i).getProd_price()%><!--price-->
 						</a>
 					</h4>
 				</div>

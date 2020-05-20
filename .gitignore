@@ -3,3 +3,6 @@
 TeamWeb/WebContent/WEB-INF/web.xml
 *.xml
 TeamWeb/WebContent/WEB-INF/web.xml
+*.class
+*.class
+*.xml

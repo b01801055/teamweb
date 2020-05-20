@@ -20,10 +20,10 @@ public class Test extends HttpServlet {
 	String mypath;
 	
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		   super.init(config);
-		   mypath=getServletContext().getRealPath("/");
-	}
+//	public void init(ServletConfig config) throws ServletException {
+//		   super.init(config);
+//		   mypath=getServletContext().getRealPath("/");
+//	}
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -31,7 +31,7 @@ public class Test extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 //		out.print(this.getClass().getClassLoader().getResource("/").getPath());
-		String mypath=request.getServletContext().getRealPath("");
+		String mypath=request.getServletContext().getRealPath("/Control");
 //		String mypath=request.getServletContext().getContextPath();
 		out.print(mypath);
 		

@@ -26,7 +26,9 @@ public class ProductBean implements Serializable{
 		connQry.setSql(sql);
 		queryCount = connQry.getQuery_count();
 		ResultSet rs = connQry.getRs();
+		
 		try {
+			rs.first();
 			for (int i = 0; i < queryCount; i++) {
 
 				idList.add(i, rs.getInt(1));// id
@@ -48,15 +50,15 @@ public class ProductBean implements Serializable{
 		connQry.setSql(sql);
 		queryCount = connQry.getQuery_count();
 		ResultSet rs = connQry.getRs();
-		try {
 		
+		try {
+				rs.first();
 				id=rs.getInt(1);// id
 				price=rs.getInt(3);// price
 				leftNum=rs.getInt(5);// leftNum
 				name=rs.getString(2);// name
 				intro=rs.getString(4);// intro
 
-			rs.first();
 		} catch (SQLException e) {
 			System.out.print(e);
 		}

@@ -33,6 +33,7 @@ public class Mem_forget_password_renew_pwd extends HttpServlet {
 		try {
 			if (connQry.getQuery_count() > 0) {
 				ResultSet rs = connQry.getRs();
+				rs.first();
 				//===
 				String id = String.valueOf(rs.getInt(1));
 				int encDB = Integer.parseInt((rs.getString(6)));

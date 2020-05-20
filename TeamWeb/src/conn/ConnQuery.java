@@ -69,7 +69,7 @@ public class ConnQuery implements Serializable {
 			while (rs.next()) {
 				++query_count;
 			}
-			rs.first();
+			rs.beforeFirst();
 		} catch (SQLException e) {
 			System.out.print("query_count出問題");
 			System.out.println(e.getMessage());

@@ -24,6 +24,7 @@
 	ConnQuery cn = new ConnQuery();
 	cn.setSql(sql);
 	ResultSet rs=cn.getRs();
+	rs.first();
 	int query_count = cn.getQuery_count();
 	
 	if(request.getParameter("mem_level")!=null){
