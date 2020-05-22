@@ -53,7 +53,7 @@ public class ProductDb implements Serializable{
 	public Collection<Product> searchProd(String keyboard) throws SQLException{
 		rs=null;
 		ArrayList<Product> prodList = new ArrayList<Product>();
-		sql="SELECT * FROM teamweb2020.product WHERE prod_name LIKE '%"+keyboard
+		sql="SELECT * FROM teamweb2020.product WHERE prod_view=1 AND prod_name LIKE '%"+keyboard
 				+"%'";
 		conn.setSql(sql);
 		rs=conn.getRs();

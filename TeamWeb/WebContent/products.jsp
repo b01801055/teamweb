@@ -33,6 +33,57 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			doAjax();
+			$("#srchBtn").click(function(){
+				doAjax();
+			});
+		});
+		function doAjax(){
+			var htmlStr="";
+			var aj=$.ajax({
+				url:"productSrch",
+				type:"post",
+				cache:false,
+				data:{
+					keyWord: $("#keyWord").val(),
+				},
+				dataType:"json",
+				
+				success:function(result){
+					for(var i=Object.keys(result).length-1;i>=0;i--){
+						htmlStr+="<li class='span3'>";
+						htmlStr+="<div class='thumbnail'>";
+						htmlStr+="<a href='product_details.jsp?prod="+result[i].prod_id+"'><img src='uploadedIMG/"+result[i].prod_id+".jpg?sa="+Math.floor(Math.random()*10000)+"' alt=''/></a>";
+						htmlStr+="<div class='caption'>";
+						htmlStr+="<h5>"+result[i].prid_name+"</h5><!--name-->";
+						htmlStr+="<h4 style='text-align:center'>";
+						htmlStr+="<a class='btn' href='product_details.jsp'>";
+						htmlStr+="<i class='icon-zoom-in'></i>";
+						htmlStr+="</a>";
+						htmlStr+="<a class='btn' href='#'>";
+						htmlStr+="Add to ";
+						htmlStr+="<i class='icon-shopping-cart'></i>";
+						htmlStr+="</a>";
+						htmlStr+="<a class='btn btn-primary' href='#'>";
+						htmlStr+="$"+result[i].prod_price+"<!--price-->";
+						htmlStr+="</a>";
+						htmlStr+="</h4>";
+						htmlStr+="</div>";
+						htmlStr+="</div>";
+						htmlStr+="</li>";
+					}
+					$("#ajaxHere").html(htmlStr);
+				},
+				error:function(){
+					alert("ajax出錯了");
+				}
+			});
+		}
+			
+	</script>
   </head>
 <body>
 <div id="header">
@@ -60,8 +111,8 @@
 </a>
   <div class="navbar-inner">
     <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-		<form class="form-inline navbar-search" method="post" action="products.jsp" >
-		<input id="srchFld" class="srchTxt" type="text" />
+		<form name="srchForm" class="form-inline navbar-search" method="post" action="products.jsp" >
+		<input name="keyWord" id="keyWord" class="srchTxt" type="text" />
 		  <select class="srchTxt">
 			<option>All</option>
 			<option>CLOTHES </option>
@@ -70,7 +121,7 @@
 			<option>SPORTS & LEISURE </option>
 			<option>BOOKS & ENTERTAINMENTS </option>
 		</select> 
-		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+		  <button type="button" id="srchBtn" class="btn btn-primary">Go</button>
     </form>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="special_offer.jsp">Specials Offer</a></li>
@@ -380,39 +431,7 @@
 
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
-		<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"/>
-		<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
-		<%
-			//vvv呈現圖片
-			for(int i=myBean.getQuery_count()-1;i>=0;i--){//要改用Array[Qurery數量]
-		%>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"><img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt=""/></a>
-				<div class="caption">
-				  <h5><%=arrP.get(i).getProd_name()%></h5><!--name-->
-				  <p> 
-					<!--  <%=arrP.get(i).getProd_introduction()%> --> <!--intro-->
-				  </p>
-				   <h4 style="text-align:center">
-						<a class="btn" href="product_details.jsp"> 
-							<i class="icon-zoom-in"></i>
-						</a> 
-						<a class="btn" href="#">
-							Add to 
-							<i class="icon-shopping-cart"></i>
-						</a>
-						<a class="btn btn-primary" href="#">
-							$<%=arrP.get(i).getProd_price()%><!--price-->
-						</a>
-					</h4>
-				</div>
-			  </div>
-			</li>
-		<%
-			//^^^呈現圖片
-			}
-		%>
+			<div id="ajaxHere"></div>
 		  </ul>
 	<hr class="soft"/>
 	</div>

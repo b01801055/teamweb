@@ -19,8 +19,8 @@ public class ProductBean implements Serializable{
 	private int leftNum;
 	private String name;
 	private String intro;
-	
-	public ProductBean(){
+	//回傳所有產品的List
+	public void AllProducts(){
 		String sql = "SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1;";
 		ConnQuery connQry = new ConnQuery();
 		connQry.setSql(sql);
@@ -44,7 +44,9 @@ public class ProductBean implements Serializable{
 			System.out.print(e);
 		}
 	}
-	public ProductBean(int id){
+	
+	//指定某id的產品
+	public void ProductById(int id){
 		String sql = "SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_id="+id+" AND prod_view=1;";
 		ConnQuery connQry = new ConnQuery();
 		connQry.setSql(sql);
@@ -59,6 +61,32 @@ public class ProductBean implements Serializable{
 				name=rs.getString(2);// name
 				intro=rs.getString(4);// intro
 
+		} catch (SQLException e) {
+			System.out.print(e);
+		}
+	}
+	
+	//搜尋產品名稱關鍵字====
+	public void serchProducts(String keyWord) {
+		String sql = "SELECT * FROM TEAMWEB2020.PRODUCT WHERE prod_view=1 AND prod_name LIKE '%"+keyWord+"%';";
+		ConnQuery connQry = new ConnQuery();
+		connQry.setSql(sql);
+		queryCount = connQry.getQuery_count();
+		ResultSet rs = connQry.getRs();
+		
+		try {
+			rs.first();
+			for (int i = 0; i < queryCount; i++) {
+
+				idList.add(i, rs.getInt(1));// id
+				priceList.add(i, rs.getInt(3));// price
+				leftNumList.add(i, rs.getInt(5));// leftNum
+				nameList.add(i, rs.getString(2));// name
+				introList.add(i, rs.getString(4));// intro
+
+				rs.next();
+			}
+			rs.first();
 		} catch (SQLException e) {
 			System.out.print(e);
 		}
