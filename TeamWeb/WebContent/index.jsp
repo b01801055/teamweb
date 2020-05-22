@@ -105,9 +105,9 @@
 				<div class="navbar-inner">
 					<a class="brand" href="index.jsp"><img
 						src="themes/images/logo.png" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post"
-						action="products.jsp">
-						<input id="srchFld" class="srchTxt" type="text" /> <select
+					<form class="form-inline navbar-search" method="get"
+						action="search.jsp">
+						<input id="srchFld" class="srchTxt" type="text" name="keyword"/> <select
 							class="srchTxt">
 							<option>All</option>
 							<option>CLOTHES</option>

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="shop.Product"%>
+<%@page import="java.util.Collection"%>
 <jsp:useBean id="productdb" scope="application" class=shop.ProductDb/>
-<jsp:useBean id="cart" scope="session" class=shop.Cart/>    
+<jsp:useBean id="cart" scope="session" class=shop.Cart/>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,9 +49,9 @@
 		<a href="product_summary.jsp"><span class="">Es</span></a>
 		<span class="btn btn-mini">En</span>
 		<a href="product_summary.jsp"><span>&pound;</span></a>
-		<span class="btn btn-mini">$155.00</span>
+		<span class="btn btn-mini"><%=cart.getTotalPrice() %></span>
 		<a href="product_summary.jsp"><span class="">$</span></a>
-		<a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
+		<a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i><%=cart.getNumOfItems() %>Itemes in your cart </span> </a> 
 	</div>
 	</div>
 </div>
@@ -81,7 +84,7 @@
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
 			<h3>Login Block</h3>
 		  </div>
 		  <div class="modal-body">
@@ -114,7 +117,7 @@
 	<div class="row">
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
+		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems() %> Items in your cart  <span class="badge badge-warning pull-right"><%=cart.getTotalPrice() %></span></a></div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			<li class="subMenu open"><a> ELECTRONICS [230]</a>
 				<ul>
@@ -177,127 +180,103 @@
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-		<li class="active"> SHOPPING CART</li>
+		<li class="active">Products Name</li>
     </ul>
-	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.jsp" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
 	<hr class="soft"/>
-	<table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th>Quantity/Update</th>
-				  <th>Price</th>
-                  <th>Discount</th>
-                  <th>Tax</th>
-                  <th>Total</th>
-				</tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
-                  <td>MASSA AST<br/>Color : black, Material : metal</td>
-				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
-				  </td>
-                  <td>$120.00</td>
-                  <td>$25.00</td>
-                  <td>$15.00</td>
-                  <td>$110.00</td>
-                </tr>
-				<tr>
-                  <td> <img width="60" src="themes/images/products/8.jpg" alt=""/></td>
-                  <td>MASSA AST<br/>Color : black, Material : metal</td>
-				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
-				  </td>
-                  <td>$7.00</td>
-                  <td>--</td>
-                  <td>$1.00</td>
-                  <td>$8.00</td>
-                </tr>
-				<tr>
-                  <td> <img width="60" src="themes/images/products/3.jpg" alt=""/></td>
-                  <td>MASSA AST<br/>Color : black, Material : metal</td>
-				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
-				  </td>
-                  <td>$120.00</td>
-                  <td>$25.00</td>
-                  <td>$15.00</td>
-                  <td>$110.00</td>
-                </tr>
-				
-                <tr>
-                  <td colspan="6" style="text-align:right">Total Price:	</td>
-                  <td> $228.00</td>
-                </tr>
-				 <tr>
-                  <td colspan="6" style="text-align:right">Total Discount:	</td>
-                  <td> $50.00</td>
-                </tr>
-                 <tr>
-                  <td colspan="6" style="text-align:right">Total Tax:	</td>
-                  <td> $31.00</td>
-                </tr>
-				 <tr>
-                  <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
-                  <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
-                </tr>
-				</tbody>
-            </table>
-		
-		
-            <table class="table table-bordered">
-			<tbody>
-				 <tr>
-                  <td> 
-				<form class="form-horizontal">
-				<div class="control-group">
-				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
-				<div class="controls">
-				<input type="text" class="input-medium" placeholder="CODE">
-				<button type="submit" class="btn"> ADD </button>
-				</div>
-				</div>
-				</form>
-				</td>
-                </tr>
-				
-			</tbody>
-			</table>
-			
-			<table class="table table-bordered">
-			 <tr><th>ESTIMATE YOUR SHIPPING </th></tr>
-			 <tr> 
-			 <td>
-				<form class="form-horizontal">
-				  <div class="control-group">
-					<label class="control-label" for="inputCountry">Country </label>
-					<div class="controls">
-					  <input type="text" id="inputCountry" placeholder="Country">
-					</div>
-				  </div>
-				  <div class="control-group">
-					<label class="control-label" for="inputPost">Post Code/ Zipcode </label>
-					<div class="controls">
-					  <input type="text" id="inputPost" placeholder="Postcode">
-					</div>
-				  </div>
-				  <div class="control-group">
-					<div class="controls">
-					  <button type="submit" class="btn">ESTIMATE </button>
-					</div>
-				  </div>
-				</form>				  
-			  </td>
-			  </tr>
-            </table>		
-	<a href="products.jsp" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.jsp" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
-	
+	<p>
+		Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
+	</p>
+	<hr class="soft"/>
+	<form class="form-horizontal span6">
+		<div class="control-group">
+		  <label class="control-label alignL">Sort By </label>
+			<select>
+              <option>Priduct name A - Z</option>
+              <option>Priduct name Z - A</option>
+              <option>Priduct Stoke</option>
+              <option>Price Lowest first</option>
+            </select>
+		</div>
+	  </form>
+	  
+<div id="myTab" class="pull-right">
+ <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
 </div>
-</div></div>
+<br class="clr"/>
+<jsp:include page="additem.jsp" flush="false" />
+<%
+	String strKeyword = request.getParameter("keyword");
+	if(strKeyword == null || strKeyword.equals("")){
+		response.sendRedirect("products.jsp");
+		return;
+	}
+	Collection<Product> sh = productdb.searchProd(strKeyword);
+	if(sh.size()<=0){
+		out.println("非常抱歉，沒有找到符合的商品");
+		out.println("<a href='index.jsp'>回首頁</a>");
+		return;
+	}
+	
+	Iterator<Product> it = sh.iterator();
+	
+%>
+<div class="tab-content">
+	<div class="tab-pane" id="listView">
+<% 
+	while(it.hasNext()){ 
+	Product product = (Product)it.next();
+	String prod_name = product.getProd_name();
+	int prod_id = product.getProd_id();
+	int prod_price = product.getProd_price();
+%>
+		<div class="row">	  
+			<div class="span2">
+				<img src="themes/images/products/3.jpg" alt=""/>
+			</div>
+			<div class="span4">				
+				<hr class="soft"/>
+				<h5><%=prod_name %></h5>
+				<p>
+				Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
+				that is why our goods are so popular..
+				</p>
+				<a class="btn btn-small pull-right" href="product_details.jsp?prod=<%=prod_id %>">View Details</a>
+				<br class="clr"/>
+			</div>
+			<div class="span3 alignR">
+			<form class="form-horizontal qtyFrm">
+			<h3><%=prod_price %></h3>
+			<label class="checkbox">
+				<input type="checkbox">  Adds product to compair
+			</label><br/>
+			
+			  <a href="search.jsp?keyword=<%=strKeyword %>&add=<%=prod_id %>" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+			  
+				</form>
+			</div>
+		</div>
+		<hr class="soft"/>
+<% } %>		
+	</div>
+</div>
+
+	<a href="compair.jsp" class="btn btn-large pull-right">Compair Product</a>
+	<div class="pagination">
+			<ul>
+			<li><a href="#">&lsaquo;</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">&rsaquo;</a></li>
+			</ul>
+			</div>
+			<br class="clr"/>
+</div>
+</div>
+</div>
 </div>
 <!-- MainBody End ============================= -->
 <!-- Footer ================================================================== -->
