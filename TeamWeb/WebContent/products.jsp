@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
-<%@page import="java.util.ArrayList,shop.Product" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,8 +33,13 @@
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
 	<script src="js/jquery-1.8.3.min.js"></script>
-	<script>
+	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
+			var keyWord=new URLSearchParams(window.location.search).get('keyWord');
+			console.log(keyWord);
+			if(keyWord!=null){
+				$("#keyWord").val(keyWord);
+			}
 			doAjax();
 			$("#srchBtn").click(function(){
 				doAjax();

@@ -106,8 +106,8 @@
 					<a class="brand" href="index.jsp"><img
 						src="themes/images/logo.png" alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="get"
-						action="search.jsp">
-						<input id="srchFld" class="srchTxt" type="text" name="keyword"/> <select
+						action="products.jsp">
+						<input id="srchFld" class="srchTxt" type="text" name="keyWord"/> <select
 							class="srchTxt">
 							<option>All</option>
 							<option>CLOTHES</option>
@@ -116,7 +116,7 @@
 							<option>SPORTS & LEISURE</option>
 							<option>BOOKS & ENTERTAINMENTS</option>
 						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+						<button  type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
 						<li class=""><a href="mem_index.jsp">會員中心</a></li>
