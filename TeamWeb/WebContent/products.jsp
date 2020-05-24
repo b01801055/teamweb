@@ -36,7 +36,6 @@
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
 			var keyWord=new URLSearchParams(window.location.search).get('keyWord');
-			console.log(keyWord);
 			if(keyWord!=null){
 				$("#keyWord").val(keyWord);
 			}
@@ -62,7 +61,7 @@
 						htmlStr+="<div class='thumbnail'>";
 						htmlStr+="<a href='product_details.jsp?prod="+result[i].prod_id+"'><img src='uploadedIMG/"+result[i].prod_id+".jpg?sa="+Math.floor(Math.random()*10000)+"' alt=''/></a>";
 						htmlStr+="<div class='caption'>";
-						htmlStr+="<h5>"+result[i].prid_name+"</h5><!--name-->";
+						htmlStr+="<h5>"+result[i].prod_name+"</h5><!--name-->";
 						htmlStr+="<h4 style='text-align:center'>";
 						htmlStr+="<a class='btn' href='product_details.jsp'>";
 						htmlStr+="<i class='icon-zoom-in'></i>";

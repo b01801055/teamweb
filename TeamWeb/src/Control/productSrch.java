@@ -26,8 +26,7 @@ public class productSrch extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;utf-8");
-//		response.setContentType("application/json");
+		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		//===========
 		String keyWord = request.getParameter("keyWord");
