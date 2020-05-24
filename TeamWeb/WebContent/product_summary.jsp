@@ -223,9 +223,9 @@
 				  <td>
 					<div class="input-append">
 					<input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"
-					value="<%=cartItem.getQuantity() %>"/>
+					value="<%=cartItem.getQuanity() %>"/>
 					<button class="btn" type="button" onclick=""><i class="icon-minus"></i></button>
-					<button class="btn" type="button" onclick=""><i class="icon-plus"></i></button>
+					<button class="btsn" type="button" onclick=""><i class="icon-plus"></i></button>
 					<button class="btn btn-danger" type="button" onclick=""><i class="icon-remove icon-white"></i></button>
 					刪除
 					</div>
