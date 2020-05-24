@@ -1,11 +1,10 @@
-<%@page import="shop.Product"%>
+<%@page import="shop.*"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="shop.CartItem"%>
 <%@page import="java.util.Collection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="productdb" scope="application" class=shop.ProductDb/>
-<jsp:useBean id="cart" scope="session" class=shop.Cart/>    
+<jsp:useBean id="productdb" scope="application" class="shop.ProductDb"/>
+<jsp:useBean id="cart" scope="session" class="shop.Cart"/>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
