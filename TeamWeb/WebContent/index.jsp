@@ -66,9 +66,9 @@
 					%>
 					<%-- ^^^插入歡迎使用者名稱 --%>
 					&nbsp;&nbsp;
-					<%-- vvv插入受訪人數 --%> 
+					<%-- vvv插入受訪人數 --%>
 					<% String ip=request.getRemoteAddr(); %>
-					<jsp:useBean id="viewCount" scope="page" class="member.Mem_visit_count"/>
+					<jsp:useBean id="viewCount" scope="session" class="member.Mem_visit_count"/>
 					<%  if(session.getAttribute("mem_id")!=null){ 
 							int id=(int)session.getAttribute("mem_id");%>
 					<jsp:setProperty property="viewId" name="viewCount" value="<%=id%>"/>
