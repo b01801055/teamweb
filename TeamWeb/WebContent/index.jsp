@@ -195,9 +195,10 @@
 	<!--vvv 使用Bean查詢商品數量 -->
 	
 	<%
-		shop.ProductDb myBean=new ProductDb();
+	shop.ProductDb myBean=new ProductDb();
+	ArrayList<Product> arrP = (ArrayList)myBean.getProducts();
+	if(myBean.getQuery_count()>0){
 	%>
-	<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 	<!--^^^ 使用Bean查詢商品數量 -->	
 	<div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
@@ -229,10 +230,11 @@
 								</div>
 							</div>
 						</div>
-					<%
+<%
 						//^^^呈現圖片
 						}
-					%>
+	}
+%>
 				
 				<!--^^^-->
 				
@@ -349,6 +351,7 @@
 					<h4>Latest Products</h4>
 					<ul class="thumbnails">
 					<%
+						if(myBean.getQuery_count()>0){
 						for(int i=myBean.getQuery_count()-1;i>=0;i--){
 					%>
 						<li class="span3">
@@ -377,6 +380,7 @@
 
 					<%
 						}
+					}
 					%>
 						
 					</ul>
