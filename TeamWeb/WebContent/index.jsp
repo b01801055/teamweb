@@ -1,11 +1,12 @@
-﻿<%@page import="shop.Product"%>
+﻿<%@page import="shop.ProductDb"%>
+<%@page import="shop.Product"%>
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
 <%@page import="java.util.ArrayList,shop.Product" %>
 <%@page import="java.util.Locale,java.util.ResourceBundle" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
 <meta charset="utf-8">
 <title>Bootshop online Shopping cart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +53,7 @@
 					<%
 						if(session.getAttribute("mem_id")!=null){
 					%>
-					<%	
+					<%
 						Locale locale=Locale.getDefault(); 
 						ResourceBundle res=ResourceBundle.getBundle("msg",locale);
 					%>
@@ -67,16 +68,27 @@
 					<%-- ^^^插入歡迎使用者名稱 --%>
 					&nbsp;&nbsp;
 					<%-- vvv插入受訪人數 --%>
-					<% String ip=request.getRemoteAddr(); %>
-					<jsp:useBean id="viewCount" scope="session" class="member.Mem_visit_count"/>
-					<%  if(session.getAttribute("mem_id")!=null){ 
-							int id=(int)session.getAttribute("mem_id");%>
-					<jsp:setProperty property="viewId" name="viewCount" value="<%=id%>"/>
-					<jsp:setProperty property="viewIp" name="viewCount" value="<%=ip%>"/>
-					<jsp:setProperty property="viewN" name="viewCount" value="1"/>
-					<%  }   %>
+					<% String ip=request.getRemoteAddr(); 
+					%>
+					<%
+						//useBean scope=session
+						member.Mem_visit_count viewCount;
+						if(session.getAttribute("viewCount")==null){
+							viewCount = new member.Mem_visit_count();
+							session.setAttribute("viewCount", viewCount);
+						}else{
+							viewCount=(member.Mem_visit_count)session.getAttribute("viewCount");
+						}
+					%>
+					<%  if(session.getAttribute("mem_id")!=null){
+							int id=(int)session.getAttribute("mem_id");
+							viewCount.setViewId(id);
+							viewCount.setViewIp(ip);
+							viewCount.setViewN(1);
+					}   
+					%>
 					本站受訪次數:
-					<jsp:getProperty property="viewN" name="viewCount"/>
+					<%=viewCount.getViewN()%>
 					<%-- ^^^插入受訪人數 --%>
 				</div>
 				<div class="span6">
@@ -181,7 +193,10 @@
 	<!-- Header End====================================================================== -->
 	
 	<!--vvv 使用Bean查詢商品數量 -->
-	<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"></jsp:useBean>
+	
+	<%
+		shop.ProductDb myBean=new ProductDb();
+	%>
 	<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 	<!--^^^ 使用Bean查詢商品數量 -->	
 	<div id="carouselBlk">
@@ -346,7 +361,7 @@
 									<!--  <p><%=arrP.get(i).getProd_introduction()%></p>--><!--intro-->  
 
 									<h4 style="text-align: center">
-										<a class="btn" href="product_details.jsp"> 
+										<a class="btn" href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"> 
 											<i class="icon-zoom-in"></i>
 										</a> 
 										<a class="btn" href="#">Add to
