@@ -2,6 +2,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
 <%@page import="java.util.ArrayList,shop.Product" %>
+<%@page import="java.util.Locale,java.util.ResourceBundle" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +52,11 @@
 					<%
 						if(session.getAttribute("mem_id")!=null){
 					%>
-					Welcome!<strong> <%=(String)session.getAttribute("mem_name")%>!!</strong>
+					<%	
+						Locale locale=Locale.getDefault(); 
+						ResourceBundle res=ResourceBundle.getBundle("msg",locale);
+					%>
+					<%=res.getString("wel") %><strong> <%=(String)session.getAttribute("mem_name")%>!!</strong>
 					<%
 						}else{
 					%>
