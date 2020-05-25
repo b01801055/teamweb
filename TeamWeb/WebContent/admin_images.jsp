@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList,shop.Product" %>
 <%
 	//Directs caches not to store the page under any circumstance
 	response.setDateHeader("Expires", -1);
@@ -79,21 +80,22 @@
 	<div class="imgContainer">
 	</div>
 	<!-- QueryProduct -->
-	<jsp:useBean id="myBean" scope="page" class="model.ProductBean"></jsp:useBean>
+	<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"></jsp:useBean>
+	<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 	<%
 		//vvv呈現圖片
-		for(int i=myBean.getQueryCount()-1;i>=0;i--){//要改用Array[Qurery數量]
+		for(int i=myBean.getQuery_count()-1;i>=0;i--){//要改用Array[Qurery數量]
 	%>
-		<form name="updateForm<%=i%>" method="get" action="/TeamWeb/doUpdateImages">
+		<form name="updateForm<%=arrP.get(i).getProd_id()%>" method="get" action="/TeamWeb/doUpdateImages">
 			<div class="fileItem" style="float:left;">
      	 		
-       			<img src="uploadedIMG/<%=myBean.getIdList().get(i) %>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=200%;><br>
-        		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=myBean.getNameList().get(i)%>><br>
-        		商品介紹:&nbsp;<textarea name="prodIntro" style="height:100px;"><%=myBean.getIntroList().get(i)%></textarea><br>
-        		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=myBean.getPriceList().get(i)%>><br>
-        		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=myBean.getLeftNumList().get(i)%>><br>
-        		<input type="hidden" name="imgId" value="<%=myBean.getIdList().get(i)%>">
-        		<input type="hidden" name=doWhat id="doWhat_<%=i%>" value="<%=i%>">
+       			<img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" width=200%;><br>
+        		商品名稱:&nbsp;<input type="text" name="prodName" value=<%=arrP.get(i).getProd_name()%>><br>
+        		商品介紹:&nbsp;<textarea name="prodIntro" style="height:100px;"><%=arrP.get(i).getProd_introduction()%></textarea><br>
+        		商品價格:&nbsp;<input type="text" name="prodPrice" value=<%=arrP.get(i).getProd_price()%>><br>
+        		庫存數量:&nbsp;<input type="text" name="prodLeftNum" value=<%=arrP.get(i).getProd_size_stock()%>><br>
+        		<input type="hidden" name="imgId" value="<%=arrP.get(i).getProd_id()%>">
+        		<input type="hidden" name=doWhat id="doWhat_<%=arrP.get(i).getProd_id()%>" value="<%=arrP.get(i).getProd_id()%>">
         		<input type="submit" name="updateBtn" value="修改"  style="width:70%">
         		<input type="submit" name="updateBtn" value="刪除"  class="delImgBtn">
       		</div>
