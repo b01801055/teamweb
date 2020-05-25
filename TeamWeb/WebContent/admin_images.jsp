@@ -80,7 +80,7 @@
 	<div class="imgContainer">
 	</div>
 	<!-- QueryProduct -->
-	<jsp:useBean id="myBean" scope="page" class="shop.ProductDb"></jsp:useBean>
+	<%shop.ProductDb myBean=new shop.ProductDb(); %>
 	<%ArrayList<Product> arrP = (ArrayList)myBean.getProducts();%>
 	<%
 		//vvv呈現圖片
