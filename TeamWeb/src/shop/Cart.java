@@ -38,12 +38,12 @@ public class Cart implements Serializable{
 		return numOfItems;
 	}
 	
-	public synchronized void setItemNum(Integer prod_id, int quanity) {
+	public synchronized void setItemNum(Integer prod_id, int quantity) {
 		CartItem item = (CartItem)items.get(prod_id);
-		if (quanity<=0) {
+		if (quantity<=0) {
 			items.remove(prod_id);
 		}else {
-			item.setQuanity(quanity);
+			item.setQuantity(quantity);
 		}
 	}
 	

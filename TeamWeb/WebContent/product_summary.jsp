@@ -282,7 +282,7 @@
 										<div class="input-append">
 											<input class="span1" style="max-width: 34px" placeholder="1"
 												id="appendedInputButtons" size="16" type="text"
-												value="<%=cartItem.getQuanity()%>" />
+												value="<%=cartItem.getQuantity()%>" />
 											<button class="btn" type="button" onclick="">
 												<i class="icon-minus"></i>
 											</button>

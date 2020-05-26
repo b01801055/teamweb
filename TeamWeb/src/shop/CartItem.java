@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class CartItem implements Serializable{
 	private Product product=null;
-	private int quanity=0;
+	private int quantity=0;
 	
 	public CartItem()
 	{}
 	
 	public CartItem(Product product) {
 		this.product=product;
-		this.quanity=1;
+		this.quantity=1;
 	}
 
 	public Product getProduct() {
@@ -22,15 +22,15 @@ public class CartItem implements Serializable{
 		this.product = product;
 	}
 
-	public int getQuanity() {
-		return quanity;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	public int getItemPrice() {
-		int price = product.getProd_price()*quanity;
+		int price = product.getProd_price()*quantity;
 		return price;
 	}
 }
