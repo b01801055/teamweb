@@ -5,14 +5,14 @@
 	pageEncoding="UTF-8"%>
 <%
 	Cart cart;
-	if(session.getAttribute("cart")!=null){		
-		cart =(Cart)session.getAttribute("cart");
-	}else{
-		cart=new Cart();
-	}
+if (session.getAttribute("cart") != null) {
+	cart = (Cart) session.getAttribute("cart");
+} else {
+	cart = new Cart();
+}
 
-		ProductDb productDb = new ProductDb();
-%>  
+ProductDb productDb = new ProductDb();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javasctipt" charset="utf-8">
+	
+</script>
 <!--Less styles -->
 <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -143,8 +146,8 @@
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart"><%=cart.getTotalQuantity() %> Items in your
-							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
+							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems()%>
+							Items in your cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
@@ -241,32 +244,28 @@
 					request.setCharacterEncoding("utf-8");
 
 				Collection<CartItem> cl = cart.getItems();
-				if (cl.size() <= 0) {
-					out.println("購物車中沒有商品<p>");
-					return;
-				}
+
 				Iterator<CartItem> it = cl.iterator();
 				%>
 				<div class="span9">
 					<ul class="breadcrumb">
 						<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-						<li class="active">SHOPPING CART</li>
+						<li class="active">訂單結帳</li>
 					</ul>
 					<h3>
-						SHOPPING CART<a href="products.jsp"
-							class="btn btn-large pull-right"><i class="icon-arrow-left"></i>
-							Continue Shopping </a>
+						訂單結帳<a href="products.jsp" class="btn btn-large pull-right"><i
+							class="icon-arrow-left"></i> 繼續購物 </a>
 					</h3>
 					<hr class="soft" />
-					<form name="mainForm" action="doCartServlet">
+					
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>Product</th>
-									<th>Description</th>
-									<th>Quantity/Update</th>
-									<th>Price</th>
-									<th>Total</th>
+									<th>商品</th>
+									<th>簡介</th>
+									<th>數量</th>
+									<th>單價</th>
+									<th>小計</th>
 								</tr>
 							</thead>
 							<%
@@ -280,44 +279,52 @@
 								<tr>
 									<td><img width="60" src="uploadedIMG/<%=prod_id%>.jpg"
 										alt="" /></td>
-										<td><%=product.getProd_introduction()%></td>
-									<td>
-										<div class="input-append">
-											<input class="span1" name="quantity_<%=prod_id %>" style="max-width: 34px" value="<%=cart.getItemQuantity(prod_id) %>"
-												id="appendedInputButtons" size="16" type="text"
-												 />
-											<button class="btn" type="button" onclick="">
-												<i class="icon-minus"></i>
-												</button>
-											<button class="btn" type="button" onclick="">
-												<i class="icon-plus"></i>
-											</button>
-											<button class="btn btn-danger" name="delBtn" id="delByn" value="<%=prod_id %>" type="button" onclick="window.location.href='doCartServlet?del_id=<%=prod_id %>'">
-												<i class="icon-remove icon-white"></i>
-											</button>
-											刪除
-										</div>
-									</td>
+									<td><%=product.getProd_introduction()%></td>
+									<td><%=cartItem.getQuantity()%></td>
 									<td><%=product.getProd_price()%></td>
-									<td><%="$"+cart.getTotalPrice() %></td>
+									<td><%=cartItem.getItemPrice()%></td>
 								</tr>
 								<%
 									}
 								%>
 								<tr>
-									<td colspan="6" style="text-align: right">Total Price:</td>
-									<td><%="$"+cart.getTotalPrice()%></td>
+									<td colspan="6" style="text-align: right">總計:</td>
+									<td><%=cart.getTotalPrice()%></td>
 								</tr>
+								
+			 
+								
 							</tbody>
 						</table>
-						<input type="hidden" name="fromWho" value="product_summary.jsp">
-						<input type="submit" name="savingByn" id="savingBtn"  value="保存修改">
-					</form>
-					<a href="products.jsp" class="btn btn-large"><i
-						class="icon-arrow-left"></i> Continue Shopping </a> <a
-						href="checkout.jsp" class="btn btn-large pull-right">進行結帳<i
-						class="icon-arrow-right"></i></a>
-
+						<hr class="soft" />
+						<form action="">
+						收件人姓名：
+						<input name="shop_name" type="text" value="">
+								<br>
+								<br> 
+								
+						收件人手機：
+						<input name="shop_mbphone" type="text" value="">
+								<br>
+								<br> 
+						收件地址：
+								<input name="shop_address" type="text" value="">
+								<br>
+								<br>
+						聯絡信箱：
+						<input name="shop_address" type="email" value="">
+								<br>
+								<br>
+								
+				
+							<a href="product_summary.jsp" class="btn btn-large"><i
+							class="icon-arrow-left"></i> 上一步 </a>
+							<a href="#"
+							class="btn btn-large pull-right">確定結帳<i
+							class="icon-arrow-right"></i></a>
+						</form>
+					
+						
 				</div>
 			</div>
 		</div>
@@ -350,8 +357,8 @@
 					<a href="#"><img width="60" height="60"
 						src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>
 					<a href="#"><img width="60" height="60"
-						src="themes/images/twitter.png" title="twitter" alt="twitter" /></a> <a
-						href="#"><img width="60" height="60"
+						src="themes/images/twitter.png" title="twitter" alt="twitter" /></a>
+					<a href="#"><img width="60" height="60"
 						src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
 				</div>
 			</div>
