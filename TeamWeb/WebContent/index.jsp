@@ -260,7 +260,7 @@ if(session.getAttribute("cart")==null){
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
 							src="themes/images/ico-cart.png" alt="cart"><%=cart.getTotalQuantity() %> Items in your
-							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
+							cart <span class="badge badge-warning pull-right">$<%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
