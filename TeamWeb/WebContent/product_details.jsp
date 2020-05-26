@@ -58,8 +58,6 @@ if(request.getParameter("prod")==null){
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
 					$("#addBtn").click(function(){
-							var htmlStr="";
-							console.log("2");
 							$.ajax({
 								url:"doCartServlet",
 								type:"post",
@@ -71,6 +69,7 @@ if(request.getParameter("prod")==null){
 									prod_price: $("#prod_price").val(),
 									prod_introduction: $("#prod_introduction").val(),
 									prod_size_stock: $("#prod_size_stock").val(),
+									fromWho: "product_details.jsp_ajax"	
 								},
 								success:function(result){
 									$("#numOfItemsHere").html(result.numOfItems);
@@ -162,7 +161,7 @@ if(request.getParameter("prod")==null){
 	<div class="row">
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart"><span id ="numOfItemsHere"><%=cart.getNumOfItems()%></span> Items in your cart  <span id="totalPriceHere" class="badge badge-warning pull-right">$<%=cart.getTotalPrice()%></span></a></div>
+		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart"><span id ="numOfItemsHere"><%=cart.getTotalQuantity()%></span> Items in your cart  <span id="totalPriceHere" class="badge badge-warning pull-right">$<%=cart.getTotalPrice()%></span></a></div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			<li class="subMenu open"><a> ELECTRONICS [230]</a>
 				<ul>

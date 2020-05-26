@@ -116,7 +116,7 @@ if(session.getAttribute("cart")==null){
 							href="product_summary.jsp"><span class="">$</span></a> <a
 							href="product_summary.jsp"><span
 							class="btn btn-mini btn-primary"><i
-								class="icon-shopping-cart icon-white"></i> [ <%=cart.getNumOfItems() %> ] Itemes in your
+								class="icon-shopping-cart icon-white"></i> [ <%=cart.getTotalQuantity() %> ] Itemes in your
 								cart </span> </a>
 					</div>
 				</div>
@@ -259,7 +259,7 @@ if(session.getAttribute("cart")==null){
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems() %> Items in your
+							src="themes/images/ico-cart.png" alt="cart"><%=cart.getTotalQuantity() %> Items in your
 							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">

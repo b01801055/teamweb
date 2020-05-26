@@ -21,10 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<script src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javasctipt" charset="utf-8">
-	
-</script>
+
 <!--Less styles -->
 <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -146,7 +143,7 @@
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems() %> Items in your
+							src="themes/images/ico-cart.png" alt="cart"><%=cart.getTotalQuantity() %> Items in your
 							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
@@ -261,7 +258,7 @@
 							Continue Shopping </a>
 					</h3>
 					<hr class="soft" />
-					<form action="">
+					<form action="doCartServlet">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -283,10 +280,10 @@
 								<tr>
 									<td><img width="60" src="uploadedIMG/<%=prod_id%>.jpg"
 										alt="" /></td>
-									<td><%=product.getProd_introduction()%></td>
+										<td><%=product.getProd_introduction()%></td>
 									<td>
 										<div class="input-append">
-											<input class="span1" id="Minus_id_<%=prod_id %>" style="max-width: 34px" value="1"
+											<input class="span1" name="quantity_<%=prod_id %>" style="max-width: 34px" value="<%=cart.getItemNum(prod_id) %>"
 												id="appendedInputButtons" size="16" type="text"
 												 />
 											<button class="btn" type="button" id="Minus_id_1" onclick="">
@@ -302,17 +299,18 @@
 										</div>
 									</td>
 									<td><%=product.getProd_price()%></td>
-									<td>$25.00</td>
+									<td><%="$"+cart.getTotalPrice() %></td>
 								</tr>
 								<%
 									}
 								%>
 								<tr>
 									<td colspan="6" style="text-align: right">Total Price:</td>
-									<td><%=cart.getTotalPrice()%></td>
+									<td><%="$"+cart.getTotalPrice()%></td>
 								</tr>
 							</tbody>
 						</table>
+						<input type="hidden" name="fromWho" value="product_summary.jsp">
 						<input type="submit" name="savingByn" id="savingBtn"  value="保存修改">
 					</form>
 					<a href="products.jsp" class="btn btn-large"><i

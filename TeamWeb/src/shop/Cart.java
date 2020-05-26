@@ -46,6 +46,10 @@ public class Cart implements Serializable{
 			item.setQuantity(quantity);
 		}
 	}
+	public synchronized int getItemNum(Integer prod_id) {
+		CartItem item = (CartItem)items.get(prod_id);
+		return item.getQuantity();
+	}
 	
 	public synchronized int getTotalPrice() {
 		int amount=0;
@@ -53,6 +57,15 @@ public class Cart implements Serializable{
 		while (it.hasNext()) {
 			CartItem item = (CartItem)it.next();
 			amount+=item.getItemPrice();
+		}
+		return amount;
+	}
+	public synchronized int getTotalQuantity() {
+		int amount=0;
+		Iterator<CartItem> it = items.values().iterator();
+		while (it.hasNext()) {
+			CartItem item = (CartItem)it.next();
+			amount+=item.getQuantity();
 		}
 		return amount;
 	}
