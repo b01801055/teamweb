@@ -4,10 +4,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	if(session.getAttribute("cart")!=null){
-		Cart cart =(Cart)session.getAttribute("cart");
+	Cart cart;
+	if(session.getAttribute("cart")!=null){		
+		cart =(Cart)session.getAttribute("cart");
+	}else{
+		cart=new Cart();
 	}
-%>	
+
+		ProductDb productDb = new ProductDb();
+%>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +21,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javasctipt" charset="utf-8">
+	
+</script>
 <!--Less styles -->
 <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -137,8 +146,8 @@
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart">3 Items in your
-							cart <span class="badge badge-warning pull-right">$155.00</span></a>
+							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems() %> Items in your
+							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
@@ -233,9 +242,6 @@
 				<!-- Sidebar end=============================================== -->
 				<%
 					request.setCharacterEncoding("utf-8");
-				String action = request.getParameter("action");
-				if (action != null && action.equals("保存修改")) {
-				}
 
 				Collection<CartItem> cl = cart.getItems();
 				if (cl.size() <= 0) {
@@ -275,17 +281,17 @@
 							%>
 							<tbody>
 								<tr>
-									<td><img width="60" src="themes/images/products/4.jpg"
+									<td><img width="60" src="uploadedIMG/<%=prod_id%>.jpg"
 										alt="" /></td>
 									<td><%=product.getProd_introduction()%></td>
 									<td>
 										<div class="input-append">
-											<input class="span1" style="max-width: 34px" placeholder="1"
+											<input class="span1" id="Minus_id_<%=prod_id %>" style="max-width: 34px" value="1"
 												id="appendedInputButtons" size="16" type="text"
-												value="<%=cartItem.getQuantity()%>" />
-											<button class="btn" type="button" onclick="">
+												 />
+											<button class="btn" type="button" id="Minus_id_1" onclick="">
 												<i class="icon-minus"></i>
-											</button>
+												</button>
 											<button class="btsn" type="button" onclick="">
 												<i class="icon-plus"></i>
 											</button>
@@ -307,7 +313,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="submit" name="action" value="保存修改">
+						<input type="submit" name="savingByn" id="savingBtn"  value="保存修改">
 					</form>
 					<a href="products.jsp" class="btn btn-large"><i
 						class="icon-arrow-left"></i> Continue Shopping </a> <a

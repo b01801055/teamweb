@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 
 
 
@@ -21,7 +23,7 @@ public class CartServlet extends HttpServlet {
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("text/html;charset=utf-8");
+		response.setContentType("apllication/json;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		
 		//=========
@@ -41,7 +43,13 @@ public class CartServlet extends HttpServlet {
 		}
 		cart.addItem(prod_id, product);
 		//====
-		response.sendRedirect("product_summary.jsp");
+//		response.sendRedirect("product_summary.jsp");
+		JSONObject json = new JSONObject();
+		json.put("prod_id",prod_id);
+		json.put("numOfItems", cart.getNumOfItems());
+		json.put("totalPrice", cart.getTotalPrice());
+		out.print(json);
+		
 	}
 
 }

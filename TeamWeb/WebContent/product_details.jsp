@@ -15,10 +15,12 @@ if(request.getParameter("prod")==null){
 	//括號"}"在</html>後面
 %>
 <%
-if(session.getAttribute("cart")==null){
-	Cart cart=new Cart();
-	session.setAttribute("cart", cart);
-}
+	Cart cart;
+	if(session.getAttribute("cart")!=null){
+		cart=(Cart)session.getAttribute("cart");
+	}else{
+		cart=new Cart();
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +54,34 @@ if(session.getAttribute("cart")==null){
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+					$("#addBtn").click(function(){
+							var htmlStr="";
+							console.log("2");
+							$.ajax({
+								url:"doCartServlet",
+								type:"post",
+								cache:"false",
+								dataType:"json",
+								data:{
+									prod_id: $("#prod_id").val(),
+									prod_name: $("#prod_name").val(),
+									prod_price: $("#prod_price").val(),
+									prod_introduction: $("#prod_introduction").val(),
+									prod_size_stock: $("#prod_size_stock").val(),
+								},
+								success:function(result){
+									$("#numOfItemsHere").html(result.numOfItems);
+									$("#totalPriceHere").html('$'+result.totalPrice);
+									
+								}
+								
+							});
+					});
+		});
+	</script>
   </head>
 <body>
 <div id="header">
@@ -132,7 +162,7 @@ if(session.getAttribute("cart")==null){
 	<div class="row">
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
+		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart"><span id ="numOfItemsHere"><%=cart.getNumOfItems()%></span> Items in your cart  <span id="totalPriceHere" class="badge badge-warning pull-right">$<%=cart.getTotalPrice()%></span></a></div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			<li class="subMenu open"><a> ELECTRONICS [230]</a>
 				<ul>
@@ -249,18 +279,18 @@ if(session.getAttribute("cart")==null){
 					<label class="control-label"><span>$<%= myProd.getProd_price() %></span></label>
 					<div class="controls">
 					<input type="number" class="span1" placeholder="Qty."/>
-					  <button type="submit" name="addBtn" id="addBtn" " class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
-					  <input type="hidden" name="prod_id" value="<%=myProd.getProd_id() %>">
-					  <input type="hidden" name="prod_name" value="<%=myProd.getProd_name() %>">
-					  <input type="hidden" name="prod_price" value="<%=myProd.getProd_price() %>">
-					  <input type="hidden" name="prod_introduction" value="<%=myProd.getProd_introduction() %>">
-					  <input type="hidden" name="prod_size_stock" value="<%=myProd.getProd_size_stock() %>">
+					  <button type="button" name="addBtn" id="addBtn" " class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					  <input type="hidden" name="prod_id" id="prod_id" value="<%=myProd.getProd_id() %>">
+					  <input type="hidden" name="prod_name" id="prod_name" value="<%=myProd.getProd_name() %>">
+					  <input type="hidden" name="prod_price" id="prod_price" value="<%=myProd.getProd_price() %>">
+					  <input type="hidden" name="prod_introduction" id="prod_introduction" value="<%=myProd.getProd_introduction() %>">
+					  <input type="hidden" name="prod_size_stock" id="prod_size_stock" value="<%=myProd.getProd_size_stock() %>">
 					</div>
 				  </div>
 				</form>
 				
 				<hr class="soft"/>
-				<h4><%=myProd.getProd_size_stock()%> items in stock</h4>
+				<h4>3 items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Color</span></label>

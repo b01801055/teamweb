@@ -4,11 +4,13 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Locale,java.util.ResourceBundle" %>
 <%
-	if (session.getAttribute("cart") != null) {
-		Cart cart = (Cart)session.getAttribute("cart");
-	}
-	Product product;
-	ProductDb productDb = new ProductDb();
+Cart cart;
+if(session.getAttribute("cart")==null){
+	cart=new Cart();
+	session.setAttribute("cart", cart);
+}else{
+	cart=(Cart)session.getAttribute("cart");
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,7 +116,7 @@
 							href="product_summary.jsp"><span class="">$</span></a> <a
 							href="product_summary.jsp"><span
 							class="btn btn-mini btn-primary"><i
-								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
+								class="icon-shopping-cart icon-white"></i> [ <%=cart.getNumOfItems() %> ] Itemes in your
 								cart </span> </a>
 					</div>
 				</div>
@@ -257,8 +259,8 @@
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
-							src="themes/images/ico-cart.png" alt="cart">3 Items in your
-							cart <span class="badge badge-warning pull-right">$155.00</span></a>
+							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems() %> Items in your
+							cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
