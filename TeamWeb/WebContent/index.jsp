@@ -366,20 +366,20 @@
 								>
 									<img src="uploadedIMG/<%=arrP.get(i).getProd_id()%>.jpg?sa=<%=(int)(Math.random()*10000)%>" alt="" /></a>
 								<div class="caption">
-									<h5><%=arrP.get(i).getProd_name()%></h5><!--name-->
-									<!--  <p><%=arrP.get(i).getProd_introduction()%></p>--><!--intro-->  
+									<h5><%=arrP.get(i).getProd_name()%> &nbsp&nbsp $<%=arrP.get(i).getProd_price()%></h5> 
+									<!--  <p><%=arrP.get(i).getProd_introduction()%></p>-->  
 
 									<h4 style="text-align: center">
-										<a class="btn" href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"> 
+<!--										<a class="btn" href="product_details.jsp?prod=<%=arrP.get(i).getProd_id()%>"> 
 											<i class="icon-zoom-in"></i>
-										</a> 
+ 										 </a> 
 										<a class="btn" href="#">Add to
 											<i class="icon-shopping-cart"></i>
 										</a> 
 										<a class="btn btn-primary" href="#">
-											$<%=arrP.get(i).getProd_price()%><!--price-->
+ 											$<%=arrP.get(i).getProd_price()%>
 										</a>
-									</h4>
+-->									</h4>
 								</div>
 							</div>
 						</li>

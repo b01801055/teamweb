@@ -2,20 +2,20 @@
 <%@page pageEncoding="utf-8"%>
 <%
 	if (session.getAttribute("mem_level") != null) {
-	String mem_name = (String) session.getAttribute("mem_name");
-	int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
-	if (mem_name == "" || mem_level < 9) {
-		request.setAttribute("msg", "3");
+		String mem_name = (String) session.getAttribute("mem_name");
+		int mem_level = Integer.parseInt(session.getAttribute("mem_level").toString());
+		if (mem_name == "" || mem_level < 9) {
+			request.setAttribute("msg", "3");
+			String url = "/login";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
+		}
+	}else{
+		request.setAttribute("msg", "2");
 		String url = "/login";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
-}else{
-	request.setAttribute("msg", "2");
-	String url = "/login";
-	RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-	dispatcher.forward(request, response);
-}
 %>
 <!DOCTYPE html>
 <html lang="en">

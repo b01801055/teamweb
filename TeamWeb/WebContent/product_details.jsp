@@ -1,3 +1,4 @@
+<%@page import="shop.Cart"%>
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
 <%@page import="java.util.ArrayList,shop.Product" %>
@@ -12,6 +13,12 @@ if(request.getParameter("prod")==null){
 	shop.ProductDb myBean = new shop.ProductDb();
 	Product myProd=myBean.getProduct(prod_id);
 	//括號"}"在</html>後面
+%>
+<%
+if(session.getAttribute("cart")==null){
+	Cart cart=new Cart();
+	session.setAttribute("cart", cart);
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -237,12 +244,17 @@ if(request.getParameter("prod")==null){
 				<h3><%=myProd.getProd_name() %>  </h3>
 				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
 				<hr class="soft"/>
-				<form class="form-horizontal qtyFrm">
+				<form class="form-horizontal qtyFrm" method="post" action="doCartServlet">
 				  <div class="control-group">
 					<label class="control-label"><span>$<%= myProd.getProd_price() %></span></label>
 					<div class="controls">
 					<input type="number" class="span1" placeholder="Qty."/>
-					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					  <button type="submit" name="addBtn" id="addBtn" " class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					  <input type="hidden" name="prod_id" value="<%=myProd.getProd_id() %>">
+					  <input type="hidden" name="prod_name" value="<%=myProd.getProd_name() %>">
+					  <input type="hidden" name="prod_price" value="<%=myProd.getProd_price() %>">
+					  <input type="hidden" name="prod_introduction" value="<%=myProd.getProd_introduction() %>">
+					  <input type="hidden" name="prod_size_stock" value="<%=myProd.getProd_size_stock() %>">
 					</div>
 				  </div>
 				</form>
@@ -317,272 +329,7 @@ if(request.getParameter("prod")==null){
 				<p>
 				Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm's Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.
 				</p>
-              </div>
-		<div class="tab-pane fade" id="profile">
-		<div id="myTab" class="pull-right">
-		 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-		 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-		</div>
-		<br class="clr"/>
-		<hr class="soft"/>
-		<div class="tab-content">
-			<div class="tab-pane" id="listView">
-				<div class="row">	  
-					<div class="span2">
-						<img src="themes/images/products/4.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-					<h3> $222.00</h3>
-					<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-					</label><br/>
-					<div class="btn-group">
-					  <a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-					  <a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-					 </div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft"/>
-			<div class="row">	  
-					<div class="span2">
-						<img src="themes/images/products/5.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br/>
-						<div class="btn-group">
-						<a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-					</form>
-					</div>
-			</div>
-			<hr class="soft"/>
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/6.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-					<h3> $222.00</h3>
-					<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-					</label><br/>
-				<div class="btn-group">
-				  <a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				  <a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				 </div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft"/>
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/7.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br/>
-						<div class="btn-group">
-						<a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
-			</div>
-			
-			<hr class="soft"/>
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/8.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br/>
-						<div class="btn-group">
-						<a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft"/>
-				<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/9.jpg" alt=""/>
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft"/>
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.jsp">View Details</a>
-						<br class="clr"/>
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br/>
-						<div class="btn-group">
-						<a href="product_details.jsp" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.jsp" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft"/>
-		</div>
-			<div class="tab-pane active" id="blockView">
-				<ul class="thumbnails">
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/10.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						  <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/11.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						  <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/12.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/13.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/1.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.jsp"><img src="themes/images/products/2.jpg" alt=""/></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-				  </ul>
-			<hr class="soft"/>
-			</div>
-		</div>
-				<br class="clr">
-					 </div>
+		
 		</div>
           </div>
 
