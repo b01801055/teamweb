@@ -46,7 +46,7 @@ public class Cart implements Serializable{
 			item.setQuantity(quantity);
 		}
 	}
-	public synchronized int getItemQuantity(Integer prod_id) {
+	public synchronized int getItemNum(Integer prod_id) {
 		CartItem item = (CartItem)items.get(prod_id);
 		return item.getQuantity();
 	}
