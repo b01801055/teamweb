@@ -311,7 +311,7 @@
 							</tbody>
 						</table>
 						<input type="hidden" name="fromWho" value="product_summary.jsp">
-						<input type="submit" name="savingByn" id="savingBtn"  value="保存修改">
+						
 					</form>
 					<a href="products.jsp" class="btn btn-large"><i
 						class="icon-arrow-left"></i> Continue Shopping </a> <a
