@@ -27,13 +27,13 @@ public class CartServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("apllication/json;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		Cart cart;
 		//=========
 		HttpSession session=request.getSession();
-		String fromWho = (String) request.getParameter("fromWho");
-		if (fromWho.equals("product_details.jsp_ajax")) {
+		if (String.valueOf(request.getParameter("fromWho")).equals("product_details.jsp_ajax")) {
+			response.setContentType("apllication/json;charset=utf-8");
+			
 			int prod_id = Integer.parseInt(request.getParameter("prod_id"));
 			String prod_name = request.getParameter("prod_name");
 			int prod_price = Integer.parseInt(request.getParameter("prod_price"));
@@ -53,7 +53,7 @@ public class CartServlet extends HttpServlet {
 			json.put("numOfItems", cart.getNumOfItems());
 			json.put("totalPrice", cart.getTotalPrice());
 			out.print(json);
-		}else if(fromWho.equals("product_summary.jsp")) {
+		}else if(String.valueOf(request.getParameter("fromWho")).equals("product_summary.jsp")) {
 			cart=(Cart)session.getAttribute("cart");
 			Collection<CartItem> cartItems=cart.getItems();
 			Iterator<CartItem> iter = cartItems.iterator();
@@ -62,6 +62,12 @@ public class CartServlet extends HttpServlet {
 				int quantity=Integer.parseInt((String) request.getParameter("quantity_"+prod_id));
 				cart.setItemNum(prod_id, quantity);
 			}
+			session.setAttribute("cart", cart);
+			response.sendRedirect("product_summary.jsp");
+		}else if(request.getParameter("del_id")!=null) {
+			int prod_id=Integer.parseInt(request.getParameter("del_id"));
+			cart=(Cart)session.getAttribute("cart");
+			cart.deleteItem(prod_id);
 			session.setAttribute("cart", cart);
 			response.sendRedirect("product_summary.jsp");
 		}
