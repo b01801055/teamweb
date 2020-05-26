@@ -286,10 +286,10 @@
 											<input class="span1" name="quantity_<%=prod_id %>" style="max-width: 34px" value="<%=cart.getItemQuantity(prod_id) %>"
 												id="appendedInputButtons" size="16" type="text"
 												 />
-											<button class="btn" type="button" onclick="">
+											<button class="btn" name="minusBtn" type="button" onclick="window.location.href='doCartServlet?minus_id=<%= prod_id %>'">
 												<i class="icon-minus"></i>
 												</button>
-											<button class="btn" type="button" onclick="">
+											<button class="btn" name="plusBtn" type="button" onclick="window.location.href='doCartServlet?plus_id=<%= prod_id %>'">
 												<i class="icon-plus"></i>
 											</button>
 											<button class="btn btn-danger" name="delBtn" id="delByn" value="<%=prod_id %>" type="button" onclick="window.location.href='doCartServlet?del_id=<%=prod_id %>'">
@@ -299,7 +299,7 @@
 										</div>
 									</td>
 									<td><%=product.getProd_price()%></td>
-									<td><%="$"+cart.getTotalPrice() %></td>
+									<td>$<%=cart.getItemQuantity(prod_id)*product.getProd_price() %></td>
 								</tr>
 								<%
 									}

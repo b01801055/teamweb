@@ -70,6 +70,18 @@ public class CartServlet extends HttpServlet {
 			cart.deleteItem(prod_id);
 			session.setAttribute("cart", cart);
 			response.sendRedirect("product_summary.jsp");
+		}else if(request.getParameter("minus_id")!=null) {
+			int prod_id=Integer.parseInt(request.getParameter("minus_id"));
+			cart=(Cart)session.getAttribute("cart");
+			cart.setItemNum(prod_id, cart.getItemQuantity(prod_id)-1);
+			session.setAttribute("cart", cart);
+			response.sendRedirect("product_summary.jsp");
+		}else if(request.getParameter("plus_id")!=null) {
+			int prod_id=Integer.parseInt(request.getParameter("plus_id"));
+			cart=(Cart)session.getAttribute("cart");
+			cart.setItemNum(prod_id, cart.getItemQuantity(prod_id)+1);
+			session.setAttribute("cart", cart);
+			response.sendRedirect("product_summary.jsp");
 		}
 	}
 
