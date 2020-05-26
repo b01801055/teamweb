@@ -11,7 +11,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>myProjectLocation</param-name>
-    <param-value>E:\teamweb\TeamWeb</param-value>
+    <param-value>D:\teamweb\TeamWeb</param-value>
   </context-param>
 
   

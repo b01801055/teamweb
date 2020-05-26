@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import conn.ConnQuery;
+import shop.*;
 
 @WebServlet("/logincheck")
 public class Mem_login_check extends HttpServlet {
@@ -52,10 +54,12 @@ public class Mem_login_check extends HttpServlet {
 			}
 			if (level >= 2) {//註冊且驗證
 				HttpSession session = request.getSession();
+				Cart cart = new Cart();
 				try {
 					session.setAttribute("mem_id", rs.getInt(1));
 					session.setAttribute("mem_name", rs.getString(2));
 					session.setAttribute("mem_level", rs.getInt(5));
+					session.setAttribute("cart", cart);
 					url = "index.jsp";
 					response.sendRedirect(url);
 				} catch (SQLException e) {

@@ -1,9 +1,15 @@
-﻿<%@page import="shop.ProductDb"%>
-<%@page import="shop.Product"%>
+﻿<%@page import="shop.*"%>
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page pageEncoding="utf-8"%>
-<%@page import="java.util.ArrayList,shop.Product" %>
+<%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Locale,java.util.ResourceBundle" %>
+<%
+	if (session.getAttribute("cart") != null) {
+		Cart cart = (Cart)session.getAttribute("cart");
+	}
+	Product product;
+	ProductDb productDb = new ProductDb();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head> 
