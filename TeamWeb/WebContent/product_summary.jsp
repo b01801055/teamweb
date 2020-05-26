@@ -258,7 +258,7 @@
 							Continue Shopping </a>
 					</h3>
 					<hr class="soft" />
-					<form name="mainForm" action="doCartServlet">
+					<form action="doCartServlet">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -283,16 +283,16 @@
 										<td><%=product.getProd_introduction()%></td>
 									<td>
 										<div class="input-append">
-											<input class="span1" name="quantity_<%=prod_id %>" style="max-width: 34px" value="<%=cart.getItemQuantity(prod_id) %>"
+											<input class="span1" name="quantity_<%=prod_id %>" style="max-width: 34px" value="<%=cart.getItemNum(prod_id) %>"
 												id="appendedInputButtons" size="16" type="text"
 												 />
-											<button class="btn" type="button" onclick="">
+											<button class="btn" type="button" id="Minus_id_1" onclick="">
 												<i class="icon-minus"></i>
 												</button>
-											<button class="btn" type="button" onclick="">
+											<button class="btsn" type="button" onclick="">
 												<i class="icon-plus"></i>
 											</button>
-											<button class="btn btn-danger" name="delBtn" id="delByn" value="<%=prod_id %>" type="button" onclick="window.location.href='doCartServlet?del_id=<%=prod_id %>'">
+											<button class="btn btn-danger" type="button" onclick="">
 												<i class="icon-remove icon-white"></i>
 											</button>
 											刪除
