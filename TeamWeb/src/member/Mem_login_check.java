@@ -60,10 +60,12 @@ public class Mem_login_check extends HttpServlet {
 					session.setAttribute("mem_level", rs.getInt(5));
 					if (session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")) {
 						url = "index.jsp";
+						response.sendRedirect(url);
 					}else {
 						url = "checkout.jsp";
+						response.sendRedirect(url);
 					}
-					response.sendRedirect(url);
+					
 				} catch (SQLException e) {
 					// session失敗
 					out.print("Session設參數失敗");
