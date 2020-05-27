@@ -54,13 +54,15 @@ public class Mem_login_check extends HttpServlet {
 			}
 			if (level >= 2) {//註冊且驗證
 				HttpSession session = request.getSession();
-				Cart cart = new Cart();
 				try {
 					session.setAttribute("mem_id", rs.getInt(1));
 					session.setAttribute("mem_name", rs.getString(2));
 					session.setAttribute("mem_level", rs.getInt(5));
-					session.setAttribute("cart", cart);
-					url = "index.jsp";
+					if (session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")) {
+						url = "index.jsp";
+					}else {
+						url = "checkout.jsp";
+					}
 					response.sendRedirect(url);
 				} catch (SQLException e) {
 					// session失敗

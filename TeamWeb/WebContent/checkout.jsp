@@ -1,9 +1,13 @@
 <%@page import="shop.*"%>
+<%@page import="conn.*" %>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Collection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")){
+		response.sendRedirect("login.jsp");
+	}
 	Cart cart;
 if (session.getAttribute("cart") != null) {
 	cart = (Cart) session.getAttribute("cart");
@@ -290,12 +294,13 @@ ProductDb productDb = new ProductDb();
 								<tr>
 									<td colspan="6" style="text-align: right">總計:</td>
 									<td><%=cart.getTotalPrice()%></td>
-								</tr>
-								
-			 
-								
+								</tr>								
 							</tbody>
 						</table>
+						<%
+							ConnQuery conn=new ConnQuery();
+							String sql = "";
+						%>
 						<hr class="soft" />
 						<form action="">
 						收件人姓名：
