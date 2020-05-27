@@ -1,6 +1,7 @@
 package shop;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -80,5 +81,25 @@ public class Cart implements Serializable{
 		}else {
 			return false;
 		}
+	}
+	
+	public synchronized int renewSizeStock(Integer prod_id) {
+		int prod_size_stock=-1;
+		if (items.containsKey(prod_id)) {
+			CartItem item = (CartItem) items.get(prod_id);
+			Product product = item.getProduct();
+			try {
+				ProductDb productDb = new ProductDb();
+				prod_size_stock = productDb.getProduct(prod_id).getProd_size_stock();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			product.setProd_size_stock(prod_size_stock);
+			item.setProduct(product);
+			items.put(prod_id, item);
+		}
+		return prod_size_stock;	
+		
 	}
 }

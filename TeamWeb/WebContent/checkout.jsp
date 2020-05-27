@@ -7,15 +7,17 @@
 <%
 	if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")){
 		response.sendRedirect("login.jsp");
-	}
-	Cart cart;
-if (session.getAttribute("cart") != null) {
-	cart = (Cart) session.getAttribute("cart");
-} else {
-	cart = new Cart();
-}
-
-ProductDb productDb = new ProductDb();
+	}else{//對應文末的}
+		Cart cart;
+		if (session.getAttribute("cart") != null) {
+			cart = (Cart) session.getAttribute("cart");
+		} else {
+			cart = new Cart();
+		}
+		if(cart.getTotalQuantity()<1){
+			response.sendRedirect("product_summary.jsp");
+		}else{//對應文末的}
+			ProductDb productDb = new ProductDb();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -151,7 +153,7 @@ ProductDb productDb = new ProductDb();
 					<div class="well well-small">
 						<a id="myCart" href="product_summary.jsp"><img
 							src="themes/images/ico-cart.png" alt="cart"><%=cart.getNumOfItems()%>
-							Items in your cart <span class="badge badge-warning pull-right"><%=cart.getTotalPrice()%></span></a>
+							Items in your cart <span class="badge badge-warning pull-right">$<%=cart.getTotalPrice()%></span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
@@ -285,15 +287,18 @@ ProductDb productDb = new ProductDb();
 										alt="" /></td>
 									<td><%=product.getProd_introduction()%></td>
 									<td><%=cartItem.getQuantity()%></td>
-									<td><%=product.getProd_price()%></td>
-									<td><%=cartItem.getItemPrice()%></td>
+									<td>$<%=product.getProd_price()%></td>
+									<td>$<%=cartItem.getItemPrice()%></td>
 								</tr>
 								<%
 									}
 								%>
 								<tr>
-									<td colspan="6" style="text-align: right">總計:</td>
-									<td><%=cart.getTotalPrice()%></td>
+								<td></td>
+								<td></td>
+								<td></td>
+									<td style="text-align: right;font-family:'微軟正黑體';" >總計:</td>
+									<td>$<%=cart.getTotalPrice()%></td>
 								</tr>								
 							</tbody>
 						</table>
@@ -302,7 +307,7 @@ ProductDb productDb = new ProductDb();
 							String sql = "";
 						%>
 						<hr class="soft" />
-						<form action="">
+						<form method="post" action="doCheckOut">
 						收件人姓名：
 						<input name="shop_name" type="text" value="">
 								<br>
@@ -312,21 +317,21 @@ ProductDb productDb = new ProductDb();
 						<input name="shop_mbphone" type="text" value="">
 								<br>
 								<br> 
-						收件地址：
+						收件地址：&nbsp&nbsp&nbsp
 								<input name="shop_address" type="text" value="">
 								<br>
 								<br>
-						聯絡信箱：
-						<input name="shop_address" type="email" value="">
+						聯絡信箱：&nbsp&nbsp&nbsp
+						<input name="shop_email" type="email" value="">
 								<br>
 								<br>
 								
 				
 							<a href="product_summary.jsp" class="btn btn-large"><i
 							class="icon-arrow-left"></i> 上一步 </a>
-							<a href="#"
+							<button type="submit"
 							class="btn btn-large pull-right">確定結帳<i
-							class="icon-arrow-right"></i></a>
+							class="icon-arrow-right"></i></button>
 						</form>
 					
 						
@@ -501,3 +506,6 @@ ProductDb productDb = new ProductDb();
 	<span id="themesBtn"></span>
 </body>
 </html>
+<%
+}}
+%>

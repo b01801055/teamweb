@@ -72,7 +72,7 @@ if(request.getParameter("prod")==null){
 									fromWho: "product_details.jsp_ajax"	
 								},
 								success:function(result){
-									$("#numOfItemsHere").html(result.numOfItems);
+									$("#numOfItemsHere").html(result.totalQuantity);
 									$("#totalPriceHere").html('$'+result.totalPrice);
 									
 								}

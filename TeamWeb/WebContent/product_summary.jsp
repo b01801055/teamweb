@@ -53,6 +53,17 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const msg = urlParams.get('msg');
+			if(msg==1){
+				alert("抱歉由於庫存商品不足，請重新填選商品數量!");
+			}
+	})
+</script>
 </head>
 <body>
 	<div id="header">
@@ -289,7 +300,7 @@
 											<button class="btn" name="minusBtn" type="button" onclick="window.location.href='doCartServlet?minus_id=<%= prod_id %>'">
 												<i class="icon-minus"></i>
 												</button>
-											<button class="btn" name="plusBtn" type="button" onclick="window.location.href='doCartServlet?plus_id=<%= prod_id %>'">
+											<button class="btn" name="plusBtn" type="button" onclick="window.location.href='doCartServlet?plus_id=<%= prod_id %>&plus_size_stock=<%=product.getProd_size_stock() %>'">
 												<i class="icon-plus"></i>
 											</button>
 											<button class="btn btn-danger" name="delBtn" id="delByn" value="<%=prod_id %>" type="button" onclick="window.location.href='doCartServlet?del_id=<%=prod_id %>'">

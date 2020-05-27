@@ -3,6 +3,7 @@ package shop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -47,10 +48,11 @@ public class CartServlet extends HttpServlet {
 				cart = (Cart) session.getAttribute("cart");
 			}
 			cart.addItem(prod_id, product);
+			session.setAttribute("cart", cart);
 			// ====
 			JSONObject json = new JSONObject();
 			json.put("prod_id", prod_id);
-			json.put("numOfItems", cart.getNumOfItems());
+			json.put("totalQuantity", cart.getTotalQuantity());
 			json.put("totalPrice", cart.getTotalPrice());
 			out.print(json);
 		}else if(String.valueOf(request.getParameter("fromWho")).equals("product_summary.jsp")) {
@@ -78,9 +80,12 @@ public class CartServlet extends HttpServlet {
 			response.sendRedirect("product_summary.jsp");
 		}else if(request.getParameter("plus_id")!=null) {
 			int prod_id=Integer.parseInt(request.getParameter("plus_id"));
+			int prod_stock_size=Integer.parseInt(request.getParameter("plus_size_stock"));
 			cart=(Cart)session.getAttribute("cart");
-			cart.setItemNum(prod_id, cart.getItemQuantity(prod_id)+1);
-			session.setAttribute("cart", cart);
+			if(cart.getItemQuantity(prod_id)+1<=prod_stock_size) {
+				cart.setItemNum(prod_id, cart.getItemQuantity(prod_id)+1);
+				session.setAttribute("cart", cart);
+			}
 			response.sendRedirect("product_summary.jsp");
 		}
 	}
