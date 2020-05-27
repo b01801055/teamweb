@@ -82,7 +82,7 @@ public class ProductDb implements Serializable{
 		return bEnough;
 	}
 	
-	public synchronized void buyProducts(Cart cart) throws SQLException{
+	public synchronized void buyProducts(int mem_id,Cart cart) throws SQLException{
 		ConnUpdate con = new ConnUpdate();
 		Iterator<CartItem> it = cart.getItems().iterator();
 			
@@ -93,9 +93,19 @@ public class ProductDb implements Serializable{
 				int prod_id = product.getProd_id();
 				int quantity = item.getQuantity();
 				sql="UPDATE teamweb2020.product SET prod_size_stock=prod_size_stock-"
-				+quantity+"WHERE prod_id ="+prod_id;
+				+quantity+" WHERE prod_id ="+prod_id;
 				con.setSql(sql);
 				
+				//寫入shop table=====
+				sql="INSERT INTO shop(mem_id) VALUES("+mem_id+");";
+				con.setSql(sql);
+				//寫入shoplist table====
+				sql="INSERT INTO shoplist(shop_id,prod_id,quanity)"
+				+" VALUES((SELECT shop_id FROM shop ORDER BY shop_date DESC LIMIT 1)"
+				+", "+prod_id
+				+", "+quantity
+				+" );";
+				con.setSql(sql);
 			}
 		
 	}

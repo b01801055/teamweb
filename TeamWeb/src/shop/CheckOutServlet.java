@@ -54,11 +54,13 @@ public class CheckOutServlet extends HttpServlet {
 		}
 		if (size_stock_enough) {//庫存足
 			try {
-				productDb.buyProducts(cart);
+				int mem_id=(int) session.getAttribute("mem_id");
+				productDb.buyProducts(mem_id,cart);
+				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		} else {//庫存不足
 			session.setAttribute("cart", cart);
 			response.sendRedirect("product_summary.jsp?msg=1");
