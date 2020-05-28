@@ -56,8 +56,6 @@ CREATE TABLE `member` (
   `mem_pwd` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `mem_level` int NOT NULL DEFAULT '1' COMMENT '1:申請未確認\n2:已認證會員\n9:管理者',
   `mem_chkcode` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'Null',
-  `mem_mphone` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '手機號碼',
-  `mem_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`mem_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -102,53 +100,55 @@ INSERT INTO `product` VALUES (1,'jyjy',20,'yjyjy',99,'E:	eamwebTeamWeb',1),(2,'j
 UNLOCK TABLES;
 
 --
--- Table structure for table `shop`
+-- Table structure for table `orderList`
 --
 
-DROP TABLE IF EXISTS `shop`;
+DROP TABLE IF EXISTS `orderList`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `shop` (
-  `shop_id` int NOT NULL COMMENT '訂單流水編號',
+CREATE TABLE `orderList` (
+  `orderList_id` int NOT NULL COMMENT '訂單流水編號',
   `mem_id` int NOT NULL COMMENT '會員id',
-  `shop_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單日期',
-  PRIMARY KEY (`shop_id`),
+  `orderList_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單日期',
+  `orderList_mphone` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '手機號碼',
+  `orderList_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '地址',
+  PRIMARY KEY (`orderList_id`),
   KEY `mem_id_idx` (`mem_id`),
   CONSTRAINT `mem_id` FOREIGN KEY (`mem_id`) REFERENCES `member` (`mem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='訂單資料';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `shop`
+-- Dumping data for table `orderList`
 --
 
-LOCK TABLES `shop` WRITE;
-/*!40000 ALTER TABLE `shop` DISABLE KEYS */;
-/*!40000 ALTER TABLE `shop` ENABLE KEYS */;
+LOCK TABLES `orderList` WRITE;
+/*!40000 ALTER TABLE `orderList` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderList` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `shoplist`
+-- Table structure for table `orderListDetail`
 --
 
-DROP TABLE IF EXISTS `shoplist`;
+DROP TABLE IF EXISTS `orderListDetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `shoplist` (
-  `shop_id` int NOT NULL COMMENT '訂單流水編號',
+CREATE TABLE `orderListDetail` (
+  `orderList_id` int NOT NULL COMMENT '訂單流水編號',
   `prod_id` int NOT NULL COMMENT '商品ID',
   `quantity` int NOT NULL DEFAULT '1' COMMENT '購買數量',
-  PRIMARY KEY (`shop_id`,`prod_id`)
+  PRIMARY KEY (`orderList_id`,`prod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='訂單明細';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `shoplist`
+-- Dumping data for table `orderListDetail`
 --
 
-LOCK TABLES `shoplist` WRITE;
-/*!40000 ALTER TABLE `shoplist` DISABLE KEYS */;
-/*!40000 ALTER TABLE `shoplist` ENABLE KEYS */;
+LOCK TABLES `orderListlist` WRITE;
+/*!40000 ALTER TABLE `orderListlist` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderListlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

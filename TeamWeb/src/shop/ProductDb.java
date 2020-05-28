@@ -87,17 +87,17 @@ public class ProductDb implements Serializable{
 		ConnQuery connQry = new ConnQuery();
 		Iterator<CartItem> it = cart.getItems().iterator();
 		
-		//寫入shop table 訂單主檔=====
-		sql="SELECT shop_id FROM teamweb2020.shop ORDER BY shop_id DESC LIMIT 1;";
+		//寫入orderList table 訂單主檔=====
+		sql="SELECT orderList_id FROM teamweb2020.orderList ORDER BY orderList_id DESC LIMIT 1;";
 		connQry.setSql(sql);
 		ResultSet rs=connQry.getRs();
-		int shop_id;
+		int orderList_id;
 		if(rs.next()==true) {
-			shop_id=rs.getInt(1)+1;
+			orderList_id=rs.getInt(1)+1;
 		}else {
-			shop_id=1;
+			orderList_id=1;
 		}
-		sql="INSERT INTO shop(shop_id,mem_id) VALUES("+shop_id+","+mem_id+");";
+		sql="INSERT INTO orderList(orderList_id,mem_id) VALUES("+orderList_id+","+mem_id+");";
 		connUp.setSql(sql);
 		
 			while (it.hasNext()) {		
@@ -110,10 +110,10 @@ public class ProductDb implements Serializable{
 						+quantity+" WHERE prod_id ="+prod_id;
 				connUp.setSql(sql);
 				
-				//每個商品寫入shoplist table 訂單明細====
-				sql="INSERT INTO shoplist(shop_id,prod_id,quantity)"
+				//每個商品寫入orderListDetail table 訂單明細====
+				sql="INSERT INTO orderListDetail(orderList_id,prod_id,quantity)"
 						+" VALUES("
-						+shop_id
+						+orderList_id
 						+", "+prod_id
 						+", "+quantity
 						+" );";

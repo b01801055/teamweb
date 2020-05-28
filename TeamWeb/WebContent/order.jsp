@@ -2,8 +2,8 @@
 <%@page pageEncoding="utf-8"%>
 <%@page import="shop.*"%>
 <%@page import="conn.*" %>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.Collection"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
 <%
 if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")){
 	response.sendRedirect("login.jsp");
@@ -121,17 +121,27 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 <h1>歷史訂單</h1>
 <hr class="soften"/>	
 <%
-	/* if(){
-		out.println("無任何歷史訂單<p>");
-		return;
-	} */
+	//  if(){
+	//	out.println("無任何歷史訂單<p>");
+	//	return;
+	//} 
+%>
+<%
+	    int mem_id=(Integer)session.getAttribute("mem_id");
+	  	OrderHistoryDB orderHistoryDB=new OrderHistoryDB();
+	  	ArrayList<ResultSet> arrL=orderHistoryDB.searchOrderHistoryById(mem_id);
+	  	ResultSet rs_orderList= arrL.get(0);//這是主單號 orderList_id(int)、mem_id(int)、orderList_date(timestamp/String)
+	  	int i=0;
+	  	while(rs_orderList.next()){
+	  		i++;
 %>
 <div class="accordion" id="accordion2">
 
 	<div class="accordion-group">
 	  <div class="accordion-heading">
 		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-		  Collapsible Group Item #1
+		  
+		   訂單單號  #<%= rs_orderList.getInt(1)%> &nbsp &nbsp 訂單時間: <%=rs_orderList.getString(3) %>
 		</a></h4>
 	  </div>
 	  <div id="collapseOne" class="accordion-body collapse"  >
@@ -146,7 +156,16 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 									<th>小計</th>
 								</tr>
 							</thead>
-							
+<%
+	ResultSet rs_orderListDetail=arrL.get(i);
+	int prod_id=rs_orderListDetail.getInt(1);
+	int quantity=rs_orderListDetail.getInt(2);
+	String prod_name=rs_orderListDetail.getString(3);
+	int prod_price=rs_orderListDetail.getInt(4);
+	String prod_introduction=rs_orderListDetail.getString(5);
+	int prod_size_stock=rs_orderListDetail.getInt(6);
+	while(rs_orderListDetail.next()){
+%>												
 							<tbody>
 								<tr>
 									<td><img width="60" src="uploadedIMG/<%-- <%=prod_id%> --%>.jpg"
@@ -164,12 +183,18 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 									<td><%-- <%=cart.getTotalPrice()%> --%></td>
 								</tr>								
 							</tbody>
-						</table>
+<%
+	} 
+%>
+			</table>
 
 		</div>
 	  </div>
 	</div>	
   </div>
+<%
+}
+%>
 </div>
 </div>
 <!-- MainBody End ============================= -->

@@ -309,20 +309,20 @@
 						<hr class="soft" />
 						<form method="post" action="doCheckOut">
 						收件人姓名：
-						<input name="shop_name" type="text" value="">
+						<input name="orderList_name" type="text" value="">
 								<br>
 								<br> 
 								
 						收件人手機：
-						<input name="shop_mbphone" type="text" value="">
+						<input name="orderList_mbphone" type="text" value="">
 								<br>
 								<br> 
 						收件地址：&nbsp&nbsp&nbsp
-								<input name="shop_address" type="text" value="">
+								<input name="orderList_address" type="text" value="">
 								<br>
 								<br>
 						聯絡信箱：&nbsp&nbsp&nbsp
-						<input name="shop_email" type="email" value="">
+						<input name="orderList_email" type="email" value="">
 								<br>
 								<br>
 								

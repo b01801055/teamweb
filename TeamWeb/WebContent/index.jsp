@@ -55,7 +55,7 @@ if(session.getAttribute("cart")==null){
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
 		if(new URLSearchParams(window.location.search).get('msg')==1){
-			alert("謝謝光臨!");
+			alert("購買完成!!謝謝光臨!");
 		}
 	});
 </script>
