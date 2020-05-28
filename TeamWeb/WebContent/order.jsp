@@ -7,7 +7,7 @@
 <%
 if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals("")){
 	response.sendRedirect("login.jsp");
-}
+}else{
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,63 +129,68 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 <%
 	    int mem_id=(Integer)session.getAttribute("mem_id");
 	  	OrderHistoryDB orderHistoryDB=new OrderHistoryDB();
-	  	ArrayList<ResultSet> arrL=orderHistoryDB.searchOrderHistoryById(mem_id);
-	  	ResultSet rs_orderList= arrL.get(0);//這是主單號 orderList_id(int)、mem_id(int)、orderList_date(timestamp/String)
+	  	orderHistoryDB.searchOrderHistoryById(mem_id);
+	  	ArrayList<OrderListObject> arrMain = orderHistoryDB.getArrMain();
+	  	ArrayList<ArrayList<OrderListDetailObject>> arrArrDetail = orderHistoryDB.getArrArrDetail();
+	  	
+	  	
 	  	int i=0;
-	  	while(rs_orderList.next()){
-	  		i++;
+	  	Iterator<OrderListObject> iterMain=arrMain.iterator();
+	  	while(iterMain.hasNext()){
+	  		int totalPrice=0;
+	  		OrderListObject olo = (OrderListObject)iterMain.next();
+	  		ArrayList<OrderListDetailObject> arrDetail = arrArrDetail.get(i);
+	  		
 %>
-<div class="accordion" id="accordion2">
+<div class="accordion">
 
 	<div class="accordion-group">
 	  <div class="accordion-heading">
-		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse_<%=olo.getOrderList_id()%>">
 		  
-		   訂單單號  #<%= rs_orderList.getInt(1)%> &nbsp &nbsp 訂單時間: <%=rs_orderList.getString(3) %>
+		   訂單單號  #<%= olo.getOrderList_id() %> &nbsp &nbsp 訂單時間: <%=olo.getOrderList_date() %>
 		</a></h4>
 	  </div>
-	  <div id="collapseOne" class="accordion-body collapse"  >
+	  <div id="collapse_<%=olo.getOrderList_id()%>" class="accordion-body collapse"  >
 		<div class="accordion-inner">
 			<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th>商品</th>
-									<th>簡介</th>
+									<th style="width:60%">簡介</th>
 									<th>數量</th>
 									<th>單價</th>
 									<th>小計</th>
 								</tr>
 							</thead>
-<%
-	ResultSet rs_orderListDetail=arrL.get(i);
-	int prod_id=rs_orderListDetail.getInt(1);
-	int quantity=rs_orderListDetail.getInt(2);
-	String prod_name=rs_orderListDetail.getString(3);
-	int prod_price=rs_orderListDetail.getInt(4);
-	String prod_introduction=rs_orderListDetail.getString(5);
-	int prod_size_stock=rs_orderListDetail.getInt(6);
-	while(rs_orderListDetail.next()){
-%>												
+
 							<tbody>
-								<tr>
-									<td><img width="60" src="uploadedIMG/<%-- <%=prod_id%> --%>.jpg"
-										alt="" /></td>
-									<td><%-- <%=product.getProd_introduction()%> --%></td>
-									<td><%-- <%=cartItem.getQuantity()%> --%></td>
-									<td><%-- <%=product.getProd_price()%> --%></td>
-									<td><%-- <%=cartItem.getItemPrice()%> --%></td>
-								</tr>
-								<%-- <%
-									}
-								%> --%>
-								<tr>
-									<td colspan="6" style="text-align: right">總計:</td>
-									<td><%-- <%=cart.getTotalPrice()%> --%></td>
-								</tr>								
-							</tbody>
 <%
+	Iterator<OrderListDetailObject> iterDetail=arrDetail.iterator();
+	int j=0;
+	while(iterDetail.hasNext()){
+		OrderListDetailObject oldl = (OrderListDetailObject)iterDetail.next();
+%>		
+								<tr>
+									<td><img width="40%" src="uploadedIMG/<%=oldl.getProd_id()%>.jpg"
+										alt="" /></td>
+									<td style="width:60%"><%=oldl.getProd_introduction()%></td>
+									<td><%=oldl.getQuantity()%></td>
+									<td><%=oldl.getProd_price() %></td>
+									<td>$<%= oldl.getQuantity()*oldl.getProd_price()%></td>
+								</tr>
+<%	
+											totalPrice+=oldl.getQuantity()*oldl.getProd_price();
 	} 
-%>
+%>	
+								<tr>
+								<td/><td/><td/>
+									<td style="text-align: right; font-family:'微軟正黑體'">總計:</td>
+									<td style="width:10%">$<%= totalPrice %></td>
+								</tr>
+															
+							</tbody>
+
 			</table>
 
 		</div>
@@ -193,6 +198,7 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 	</div>	
   </div>
 <%
+	i++;
 }
 %>
 </div>
@@ -301,3 +307,4 @@ if(session.getAttribute("mem_id")==null || session.getAttribute("mem_id").equals
 <span id="themesBtn"></span>
 </body>
 </html>
+<%}%>

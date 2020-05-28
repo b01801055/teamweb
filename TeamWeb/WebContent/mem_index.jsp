@@ -138,7 +138,7 @@
 				<img src="images/img00_title01.gif" width="230" height="25">
 			</div>
 			<ul>
-				<li><a href="#">查訂單</a></li>
+				<li><a href="order.jsp">查訂單</a></li>
 				<li><a href="#">退訂 / 退款查詢</a></li>
 				<li><a href="#">換貨 / 查詢</a></li>
 				<li><a href="#">買過商品清單</a></li>

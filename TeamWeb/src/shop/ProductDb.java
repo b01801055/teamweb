@@ -82,12 +82,13 @@ public class ProductDb implements Serializable{
 		return bEnough;
 	}
 	
-	public synchronized void buyProducts(int mem_id,Cart cart) throws SQLException{
+	public synchronized void buyProducts(int mem_id,Cart cart,String orderList_name,String orderList_mphone,String oderList_address,String orderList_email) throws SQLException{
 		ConnUpdate connUp = new ConnUpdate();
 		ConnQuery connQry = new ConnQuery();
 		Iterator<CartItem> it = cart.getItems().iterator();
 		
 		//寫入orderList table 訂單主檔=====
+		//先抓id製作流水號
 		sql="SELECT orderList_id FROM teamweb2020.orderList ORDER BY orderList_id DESC LIMIT 1;";
 		connQry.setSql(sql);
 		ResultSet rs=connQry.getRs();
@@ -97,7 +98,8 @@ public class ProductDb implements Serializable{
 		}else {
 			orderList_id=1;
 		}
-		sql="INSERT INTO orderList(orderList_id,mem_id) VALUES("+orderList_id+","+mem_id+");";
+		//寫入訂單主檔
+		sql=String.format("INSERT INTO orderList(orderList_id,mem_id,orderList_name,orderList_mphone,orderList_address,orderList_email) VALUES(%d,%d,'%s','%s','%s','%s');", orderList_id,mem_id,orderList_name,orderList_mphone,oderList_address,orderList_email);
 		connUp.setSql(sql);
 		
 			while (it.hasNext()) {		

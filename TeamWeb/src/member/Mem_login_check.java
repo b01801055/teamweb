@@ -58,7 +58,14 @@ public class Mem_login_check extends HttpServlet {
 					session.setAttribute("mem_id", rs.getInt(1));
 					session.setAttribute("mem_name", rs.getString(2));
 					session.setAttribute("mem_level", rs.getInt(5));
-					if(((Cart)session.getAttribute("cart")).getTotalQuantity()>0) {
+					
+					Cart cart;
+					if((Cart)session.getAttribute("cart")==null) {
+						cart=new Cart();
+					}else {
+						cart=(Cart) session.getAttribute("cart");
+					}
+					if(cart.getTotalQuantity()>0) {
 						url = "checkout.jsp";
 						response.sendRedirect(url);
 					}else {

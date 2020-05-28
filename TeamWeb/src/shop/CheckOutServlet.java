@@ -26,10 +26,10 @@ public class CheckOutServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		//=======
-		String shop_name=request.getParameter("shop_name");
-		String shop_mbphone=request.getParameter("shop_mbphone");
-		String shop_address=request.getParameter("shop_address");
-		String shop_email=request.getParameter("shop_email");
+		String orderList_name=request.getParameter("orderList_name");
+		String orderList_mphone=request.getParameter("orderList_mphone");
+		String orderList_address=request.getParameter("orderList_address");
+		String orderList_email=request.getParameter("orderList_email");
 		HttpSession session=request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
 		Collection<CartItem> cartItems =cart.getItems();
@@ -55,7 +55,7 @@ public class CheckOutServlet extends HttpServlet {
 		if (size_stock_enough) {//庫存足
 			try {
 				int mem_id=(int) session.getAttribute("mem_id");
-				productDb.buyProducts(mem_id,cart);
+				productDb.buyProducts(mem_id,cart,orderList_name,orderList_mphone,orderList_address,orderList_email);
 				session.setAttribute("cart", null);
 				response.sendRedirect("index.jsp?msg=1");
 				

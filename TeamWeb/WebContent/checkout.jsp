@@ -13,6 +13,7 @@
 			cart = (Cart) session.getAttribute("cart");
 		} else {
 			cart = new Cart();
+			session.setAttribute("cart", cart);
 		}
 		if(cart.getTotalQuantity()<1){
 			response.sendRedirect("product_summary.jsp");
@@ -314,7 +315,7 @@
 								<br> 
 								
 						收件人手機：
-						<input name="orderList_mbphone" type="text" value="">
+						<input name="orderList_mphone" type="text" value="">
 								<br>
 								<br> 
 						收件地址：&nbsp&nbsp&nbsp
