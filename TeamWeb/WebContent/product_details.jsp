@@ -78,6 +78,7 @@ if(request.getParameter("prod")==null){
 										console.log(result.msg);
 									}else{
 										$("#numOfItemsHere").html(result.totalQuantity);
+										$("#numOfItemsHereToo").html(result.totalQuantity);
 										$("#totalPriceHere").html('$'+result.totalPrice);
 									}
 									
@@ -101,7 +102,7 @@ if(request.getParameter("prod")==null){
 		<a href="product_summary.jsp"><span>&pound;</span></a>
 		<span class="btn btn-mini">$155.00</span>
 		<a href="product_summary.jsp"><span class="">$</span></a>
-		<a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
+		<a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ <span id="numOfItemsHereToo"><%=cart.getTotalQuantity() %></span> ] Itemes in your cart </span> </a> 
 	</div>
 	</div>
 </div>
@@ -295,7 +296,7 @@ if(request.getParameter("prod")==null){
 				</form>
 				
 				<hr class="soft"/>
-				<h4>3 items in stock</h4>
+				<h4><%=myProd.getProd_size_stock() %> items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Color</span></label>
