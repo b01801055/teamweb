@@ -58,6 +58,7 @@ if(request.getParameter("prod")==null){
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
 					$("#addBtn").click(function(){
+						
 							$.ajax({
 								url:"doCartServlet",
 								type:"post",
@@ -72,8 +73,13 @@ if(request.getParameter("prod")==null){
 									fromWho: "product_details.jsp_ajax"	
 								},
 								success:function(result){
-									$("#numOfItemsHere").html(result.totalQuantity);
-									$("#totalPriceHere").html('$'+result.totalPrice);
+									if(result.msg!=null){
+										alert(result.msg);
+										console.log(result.msg);
+									}else{
+										$("#numOfItemsHere").html(result.totalQuantity);
+										$("#totalPriceHere").html('$'+result.totalPrice);
+									}
 									
 								}
 								

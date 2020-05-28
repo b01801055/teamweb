@@ -28,6 +28,7 @@ public class CartServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out=response.getWriter();
 		Cart cart;
 		//=========
@@ -47,14 +48,20 @@ public class CartServlet extends HttpServlet {
 			} else {
 				cart = (Cart) session.getAttribute("cart");
 			}
-			cart.addItem(prod_id, product);
-			session.setAttribute("cart", cart);
-			// ====
-			JSONObject json = new JSONObject();
-			json.put("prod_id", prod_id);
-			json.put("totalQuantity", cart.getTotalQuantity());
-			json.put("totalPrice", cart.getTotalPrice());
-			out.print(json);
+			if(product.getProd_size_stock()<1) {
+				JSONObject json=new JSONObject();
+				json.put("msg","抱歉已售完");
+				out.print(json);
+			}else {
+				cart.addItem(prod_id, product);
+				session.setAttribute("cart", cart);
+				// ====
+				JSONObject json = new JSONObject();
+				json.put("prod_id", prod_id);
+				json.put("totalQuantity", cart.getTotalQuantity());
+				json.put("totalPrice", cart.getTotalPrice());
+				out.print(json);
+			}
 		}else if(String.valueOf(request.getParameter("fromWho")).equals("product_summary.jsp")) {
 			cart=(Cart)session.getAttribute("cart");
 			Collection<CartItem> cartItems=cart.getItems();

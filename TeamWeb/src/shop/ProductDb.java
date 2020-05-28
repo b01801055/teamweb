@@ -83,29 +83,41 @@ public class ProductDb implements Serializable{
 	}
 	
 	public synchronized void buyProducts(int mem_id,Cart cart) throws SQLException{
-		ConnUpdate con = new ConnUpdate();
+		ConnUpdate connUp = new ConnUpdate();
+		ConnQuery connQry = new ConnQuery();
 		Iterator<CartItem> it = cart.getItems().iterator();
-			
-			while (it.hasNext()) {
-				
+		
+		//寫入shop table 訂單主檔=====
+		sql="SELECT shop_id FROM teamweb2020.shop ORDER BY shop_id DESC LIMIT 1;";
+		connQry.setSql(sql);
+		ResultSet rs=connQry.getRs();
+		int shop_id;
+		if(rs.next()==true) {
+			shop_id=rs.getInt(1)+1;
+		}else {
+			shop_id=1;
+		}
+		sql="INSERT INTO shop(shop_id,mem_id) VALUES("+shop_id+","+mem_id+");";
+		connUp.setSql(sql);
+		
+			while (it.hasNext()) {		
 				CartItem item = (CartItem) it.next();
 				Product product = item.getProduct();
 				int prod_id = product.getProd_id();
 				int quantity = item.getQuantity();
+				//每個商品庫存減少
 				sql="UPDATE teamweb2020.product SET prod_size_stock=prod_size_stock-"
-				+quantity+" WHERE prod_id ="+prod_id;
-				con.setSql(sql);
+						+quantity+" WHERE prod_id ="+prod_id;
+				connUp.setSql(sql);
 				
-				//寫入shop table=====
-				sql="INSERT INTO shop(mem_id) VALUES("+mem_id+");";
-				con.setSql(sql);
-				//寫入shoplist table====
-				sql="INSERT INTO shoplist(shop_id,prod_id,quanity)"
-				+" VALUES((SELECT shop_id FROM shop ORDER BY shop_date DESC LIMIT 1)"
-				+", "+prod_id
-				+", "+quantity
-				+" );";
-				con.setSql(sql);
+				//每個商品寫入shoplist table 訂單明細====
+				sql="INSERT INTO shoplist(shop_id,prod_id,quantity)"
+						+" VALUES("
+						+shop_id
+						+", "+prod_id
+						+", "+quantity
+						+" );";
+				connUp.setSql(sql);
 			}
 		
 	}

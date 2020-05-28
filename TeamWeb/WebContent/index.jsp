@@ -51,6 +51,14 @@ if(session.getAttribute("cart")==null){
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+		if(new URLSearchParams(window.location.search).get('msg')==1){
+			alert("謝謝光臨!");
+		}
+	});
+</script>
 </head>
 <body>
 	<div id="header">

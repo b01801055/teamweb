@@ -56,6 +56,8 @@ public class CheckOutServlet extends HttpServlet {
 			try {
 				int mem_id=(int) session.getAttribute("mem_id");
 				productDb.buyProducts(mem_id,cart);
+				session.setAttribute("cart", null);
+				response.sendRedirect("index.jsp?msg=1");
 				
 				
 			} catch (SQLException e) {
