@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shop` (
-  `shop_id` int NOT NULL AUTO_INCREMENT COMMENT '訂單流水編號',
+  `shop_id` int NOT NULL COMMENT '訂單流水編號',
   `mem_id` int NOT NULL COMMENT '會員id',
   `shop_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單日期',
   PRIMARY KEY (`shop_id`),
