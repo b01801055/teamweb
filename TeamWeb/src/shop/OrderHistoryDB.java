@@ -20,7 +20,7 @@ public class OrderHistoryDB {
 		String sql;
 		
 		//先查訂單主單號
-		sql="SELECT * FROM orderList WHERE mem_id="+mem_id;
+		sql="SELECT * FROM orderList WHERE mem_id="+mem_id+" ORDER BY orderList_id DESC";
 		connQry.setSql(sql);
 		ResultSet rs1 = connQry.getRs();
 		ArrayList<OrderListDetailObject> arrDetail = null;
