@@ -70,7 +70,8 @@ public class UploadProducts extends HttpServlet {
     		//===
     		try {
     			InputStream is=img.getInputStream();
-    			OutputStream os=new FileOutputStream(mypath+"\\WebContent\\uploadedIMG\\"+imgNewName+".jpg");
+    			//OutputStream os=new FileOutputStream(mypath+"\\WebContent\\uploadedIMG\\"+imgNewName+".jpg");
+    			OutputStream os=new FileOutputStream(mypath+"\\uploadedIMG\\"+imgNewName+".jpg");
     			OutputStream ostmp=new FileOutputStream(tmppath+"\\uploadedIMG\\"+imgNewName+".jpg");
     			byte [] byteArr=new byte[(int) img.getSize()];
     			is.read(byteArr);
